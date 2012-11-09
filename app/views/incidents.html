@@ -1,0 +1,33 @@
+<div class="btn-group btn-tab">
+  <button class="btn btn-large"
+          ng-class="{'active': filter == 'myList' }"
+          ng-click="queryIncidents( 'myList' )">
+    My Todos
+  </button>
+  <button class="btn btn-large"
+          ng-class="{'active': filter == 'groupList' }"
+          ng-click="queryIncidents( 'groupList' )">
+    My Group's Todos
+  </button>
+</div>
+<ul class="nav nav-list list">
+  <li ng-repeat="incident in incidents.records" ng-class="{
+    'info': incident.Module == 'Work Order'}">
+    <a href="#">
+      <i class="icon-chevron-right"></i>
+      <div>
+        <span class="badge"
+              ng-class="{'badge-error': incident.Priority == 1,
+                         'badge-warning': incident.Priority == 2,
+                         'badge-info': incident.Priority == 3,
+                         'badge-success': incident.Priority == 4}"
+                         >{{incident.Priority}}</span>
+        <div>
+         <i class="icon icon-user"></i> {{incident.Contact}} -
+         <strong>{{incident.Title}}</strong>
+        </div>
+        <em>#{{incident.ID}}</em> - <span>{{incident.Status}}</span>
+      </div>
+    </a>
+  </li>
+</ul>
