@@ -32,7 +32,7 @@ module.exports = function( grunt ) {
         options: {
           css_dir: 'temp/styles',
           sass_dir: 'app/styles',
-          images_dir: 'images',
+          images_dir: 'app_images',
           javascripts_dir: 'temp/scripts',
           force: true
         }
@@ -125,8 +125,8 @@ module.exports = function( grunt ) {
     // versioning
     rev: {
       js: 'scripts/**/*.js',
-      css: 'styles/**/*.css',
-      img: 'images/**'
+      css: 'styles/**/*.css'
+      //img: 'images/**'
     },
 
     // usemin handler should point to the file containing
@@ -148,7 +148,7 @@ module.exports = function( grunt ) {
 
     // Optimizes JPGs and PNGs (with jpegtran & optipng)
     img: {
-      dist: '<config:rev.img>'
+      dist: 'images/**'
     },
 
     // rjs configuration. You don't necessarily need to specify the typical
