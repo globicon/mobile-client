@@ -5,8 +5,16 @@ body {
   padding: 0;
 }
 
+.container-fluid {
+  padding: 0;
+}
+
+.btn-large i {
+  margin-top: 3px;
+}
+
 .list {
-  margin: 40px 0 0;
+  margin: 50px 0 0;
   padding: 0;
   background-color: #fff;
   -webkit-border-radius: 6px;
@@ -71,12 +79,24 @@ body {
   opacity: 1;
 }
 
+.main {
+  font-weight: strong;
+}
+
+.secondary {
+  opacity: .70;
+
+  .icon {
+    opacity: .50;
+  }
+}
+
 .btn-tab {
   position: fixed;
   width: 100%;
 
   .btn {
-    width: 50%;
+    width: 33%;
   }
 }
 

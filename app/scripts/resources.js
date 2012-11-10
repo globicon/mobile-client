@@ -8,20 +8,23 @@
 
   var resources = angular.module('resources', []);
 
-  resources.factory( 'Incident', function( $http ) {
+  resources.factory( 'Incident',
+    [ '$http', '$q', function( $http, $q ) {
     return {
       query : function( filter, params ) {
-        var incidents = {records : []};
+        var deferred = $q.defer();
 
         $http({ method: 'JSONP',
                 url: urls[ filter || 'myList' ],
                 params : params || {}
               }).then(function(response) {
-                incidents.records = response.data.records.map( function( r ) { return r.row; } );
+                deferred.resolve(
+                  response.data.records.map(
+                    function(r) { return r.row; }));
               });
 
-        return incidents;
+        return deferred.promise;
       }
     };
-  });
+  }]);
 })( window.angular );
