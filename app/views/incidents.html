@@ -2,29 +2,29 @@
   <button class="btn btn-large btn-inverse"
           ng-class="{'active': filter == 'myList' }"
           ng-click="queryIncidents( 'myList' )">
-    <i class="icon icon-white icon-user"></i> Mine
+    Mine
   </button>
   <button class="btn btn-large btn-inverse"
           ng-class="{'active': filter == 'groupList' }"
           ng-click="queryIncidents( 'groupList' )">
-    <i class="icon icon-white icon-tasks"></i> Group
+    Group
   </button>
   <button class="btn btn-large btn-inverse">
     <i class="icon icon-white icon-search"></i> Search
   </button>
 </div>
 <ul class="nav nav-list list">
-  <li ng-repeat="incident in incidents" ng-class="{
-    'info': incident.Module == 'Work Order'}">
-    <a href="#">
+  <li ng-repeat="incident in incidents">
+    <a ng-click="details(incident.ID)">
       <i class="icon-chevron-right"></i>
       <div>
-        <span class="badge"
-              ng-class="{'badge-important': incident.Priority == 1,
-                         'badge-warning': incident.Priority == 2,
-                         'badge-info': incident.Priority == 3,
-                         'badge-success': incident.Priority == 4}"
-                         >{{incident.Priority}}</span>
+        <small ng-hide="incident.Priority == 'null'" class="pull-right"
+            ng-class="{'text-error': incident.Priority == 1,
+                       'text-warning': incident.Priority == 2,
+                       'text-info': incident.Priority == 3,
+                       'text-muted': incident.Priority == 4}">
+          Priority {{incident.Priority}}
+        </small>
         <div class="main">{{incident.Title}}</div>
         <div class="secondary">
           <i class="icon icon-tag"></i> {{incident.ID}} - <i class="icon icon-flag"></i> {{incident.Status}} - <i class="icon icon-user"></i> {{incident.Contact}}

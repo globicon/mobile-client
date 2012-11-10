@@ -16,7 +16,8 @@
   // Incidents Controller
   // --------------------
   app.controller('IncidentsController',
-    ['$scope', 'Incident', function($scope, Incident) {
+    ['$scope', '$location', 'Incident', function($scope, $location, Incident) {
+
     $scope.queryIncidents = function( filter ) {
       $scope.filter = filter;
       Incident.query( filter, { user: 'pk', pw: '' } )
@@ -26,6 +27,10 @@
     };
 
     $scope.queryIncidents( 'myList' );
+
+    $scope.details = function( id ) {
+      $location.path( '/details/' + id );
+    };
   }]);
 
 })(window.angular);
