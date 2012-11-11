@@ -13,21 +13,23 @@
     <i class="icon icon-white icon-search"></i> Search
   </button>
 </div>
+
 <ul class="nav nav-list list">
   <li ng-repeat="incident in incidents">
-    <a ng-click="details(incident.ID)">
+    <a ng-click="details(incident.id)">
       <i class="icon-chevron-right"></i>
       <div>
-        <small ng-hide="incident.Priority == 'null'" class="pull-right"
-            ng-class="{'text-error': incident.Priority == 1,
-                       'text-warning': incident.Priority == 2,
-                       'text-info': incident.Priority == 3,
-                       'text-muted': incident.Priority == 4}">
-          Priority {{incident.Priority}}
+        <small ng-hide="incident.priority == 'null'" class="pull-right"
+            ng-class="{'text-error': incident.priority == 1,
+                       'text-warning': incident.priority == 2,
+                       'text-info': incident.priority == 3,
+                       'text-muted': incident.priority == 4}">
+          Priority {{incident.priority}}
         </small>
-        <div class="main">{{incident.Title}}</div>
+        <strong>{{incident.title}}</strong>
         <div class="secondary">
-          <i class="icon icon-tag"></i> {{incident.ID}} - <i class="icon icon-flag"></i> {{incident.Status}} - <i class="icon icon-user"></i> {{incident.Contact}}
+          <i class="icon icon-tag"></i> {{incident.id}} - <i class="icon icon-flag"></i> {{incident.status}}<br>
+          <i class="icon icon-envelope"></i> {{incident.contactFullname}}
         </div>
       </div>
     </a>

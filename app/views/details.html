@@ -1,0 +1,57 @@
+<div class="btn-group btn-tab">
+  <button class="btn btn-large btn-inverse"
+          ng-class="{'active': filter == 'myList' }"
+          ng-click="back( )">
+    <i class="icon icon-white icon-chevron-left"></i> Back
+  </button>
+  <button class="btn btn-large btn-inverse"></button>
+  <button class="btn btn-large btn-inverse"></button>
+</div>
+<div class="content">
+  <section class="section">
+    <strong>{{incident.title}}</strong><br>
+    <p>{{incident.description}}<p>
+    <div class="secondary">
+      <i class="icon icon-tag"></i> {{incident.id}} - <i class="icon icon-flag"></i> {{incident.status}}<br>
+    </div>
+  </section>
+  <section class="section section-bordered">
+    <span class="section-title"><i class="icon icon-envelope"></i> Contact</span>
+    <address>
+      <div ng-show="incident.contactFullname"><strong>{{incident.contactFullname}}</strong></div>
+      <div ng-show="incident.contact">{{incident.contact}}</div>
+      <div ng-show="incident.contactEmail">**{{incident.contactEmail}}</div>
+      <div ng-show="incident.contactPhone">**{{incident.contactPhone}}</div>
+    </address>
+  </section>
+
+  <section class="section section-bordered" ng-show="incident.history">
+    <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
+    <ul class="nav nav-list list-no-nav">
+      <li ng-repeat="hist in incident.history">
+         <a>
+          <div>
+            <small ng-hide="incident.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
+            <strong>{{hist.title}}</strong><br>
+            {{hist.update}}
+            <div class="secondary">
+              {{hist.type}} - {{hist.time | date:'short'}}<br>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <hr/>
+
+    <form>
+      <input type="text" class="input-block-level" placeholder="Comment" rows="1"></textarea>
+      <textarea class="input-block-level" placeholder="Resolution" rows="3"></textarea>
+      <label class="checkbox">
+        <input type="checkbox"> Visible to Customer
+      </label>
+      <button class="btn btn-large btn-primary btn-block" type="button">Update</button>
+    </form>
+  </section>
+
+</div>

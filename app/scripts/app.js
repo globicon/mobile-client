@@ -10,6 +10,10 @@ var app = angular.module('kuMobileClientApp', ['resources'])
         templateUrl: 'views/incidents.html',
         controller: 'IncidentsController'
       } )
+      .when('/details/:id', {
+        templateUrl: 'views/details.html',
+        controller: 'DetailsController'
+      } )
       .when('/signin', {
         templateUrl: 'views/signin.html',
         controller: 'SignInController'

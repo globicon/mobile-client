@@ -215,7 +215,7 @@ blockquote:after {
 // Addresses
 address {
   display: block;
-  margin-bottom: $baseLineHeight;
+  margin-bottom: 0;
   font-style: normal;
   line-height: $baseLineHeight;
 }

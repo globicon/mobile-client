@@ -9,8 +9,23 @@ body {
   padding: 0;
 }
 
+.content {
+  margin-top: 50px;
+  padding: 0 10px;
+}
+
 .btn-large i {
   margin-top: 3px;
+}
+
+.list-no-nav {
+  margin: 0;
+  padding: 0;
+}
+
+.list-no-nav li > a, .list-no-nav li > a:hover {
+  display: block;
+  color: $grayDark;
 }
 
 .list {
@@ -83,10 +98,6 @@ body {
   opacity: 1;
 }
 
-.main {
-  font-weight: strong;
-}
-
 .secondary {
   color: $grayLight;
 
@@ -103,6 +114,36 @@ body {
   .btn {
     width: 34%;
     @include border-radius(0px);
+  }
+}
+
+.section {
+  position: relative;
+  margin: 10px 0 5px;
+  padding: 0 5px;
+}
+
+.section-bordered {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  border: 1px solid #ddd;
+  @include border-radius(4px);
+}
+
+.section-title {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  @include border-radius(0 4px 0 4px);
+
+  .icon {
+    opacity: .65;
   }
 }
 
