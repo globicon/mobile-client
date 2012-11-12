@@ -1,28 +1,30 @@
-(function( angular ) {
+(function( window, angular ) {
   'use strict';
 
-var app = angular.module('kuMobileClientApp', ['resources'])
-  .config(['$routeProvider', '$locationProvider',
-    function($routeProvider, $locationProvider) {
+  var app = angular.module('kuMobileClientApp', ['resources']);
 
+  app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/incidents.html',
         controller: 'IncidentsController'
-      } )
+      })
       .when('/details/:id', {
         templateUrl: 'views/details.html',
         controller: 'DetailsController'
-      } )
+      })
       .when('/signin', {
         templateUrl: 'views/signin.html',
         controller: 'SignInController'
       })
-      .when( )
-      .otherwise({
+      .when().otherwise({
         redirectTo: '/'
       });
-
-    //$locationProvider.html5Mode(true);
   }]);
-})( window.angular );
+
+  app.filter('vagueTime', function() {
+    return function(input) {
+      return window.vagueTime.get({ from : input, units:'ms' });
+    };
+  });
+})( window, window.angular );

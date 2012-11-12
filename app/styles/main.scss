@@ -26,6 +26,10 @@ body {
 .list-no-nav li > a, .list-no-nav li > a:hover {
   display: block;
   color: $grayDark;
+  background-color: white;
+  cursor: default;
+  padding: 5px 0;
+  margin: 0;
 }
 
 .list {
