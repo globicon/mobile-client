@@ -4,10 +4,10 @@
           ng-click="back( )">
     <i class="icon icon-white icon-chevron-left"></i> Back
   </button>
-  <button class="btn btn-large btn-inverse"></button>
-  <button class="btn btn-large btn-inverse"></button>
+  <button class="btn btn-large btn-inverse btn-dummy" tabindex="-1"></button>
+  <button class="btn btn-large btn-inverse btn-dummy" tabindex="-1"></button>
 </div>
-<div class="content">
+<div class="content"  ng-show="incident.ready">
   <section class="section">
     <strong>{{incident.title}}</strong><br>
     <p>{{incident.description}}<p>
@@ -20,8 +20,8 @@
     <address>
       <div ng-show="incident.contactFullname"><strong>{{incident.contactFullname}}</strong></div>
       <div ng-show="incident.contact">{{incident.contact}}</div>
-      <div ng-show="incident.contactEmail">**{{incident.contactEmail}}</div>
-      <div ng-show="incident.contactPhone">**{{incident.contactPhone}}</div>
+      <div ng-show="incident.contactEmail">{{incident.contactEmail}}</div>
+      <div ng-show="incident.contactPhone">{{incident.contactPhone}}</div>
     </address>
   </section>
 
@@ -29,7 +29,7 @@
     <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
     <ul class="nav nav-list list-no-nav">
       <li ng-repeat="hist in incident.history">
-         <a>
+         <a tabindex="-1">
           <div>
             <small ng-hide="incident.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
             <strong>{{hist.title}}</strong><br>

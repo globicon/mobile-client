@@ -46,7 +46,6 @@ body {
 .list li > a {
   display: block;
   color: $grayDark;
-  width: 190px \9;
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #e5e5e5;
@@ -71,14 +70,6 @@ body {
      -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
           box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
 }
-/* Badges */
-
-.list .badge {
-  float: right;
-  margin-top: 15px;
-  margin-right: 6px;
-}
-
 .list small {
   margin-right: 6px;
 }
@@ -113,9 +104,11 @@ body {
 .btn-tab {
   position: fixed;
   width: 100%;
-  @include border-radius(0px);
+  background-color: white;
+  z-index: 1000;
 
   .btn {
+    min-height: 40px;
     width: 34%;
     @include border-radius(0px);
   }

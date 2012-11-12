@@ -30,9 +30,8 @@
                 params : angular.extend( {id: id}, params || {} )
               }).then(function(response) {
                 var incident = response.data.attributes;
-                angular.extend( incident, { history : response.data.history } );
+                angular.extend( incident, { history : response.data.history, ready: true });
                 deferred.resolve( incident );
-                console.log( incident );
               });
 
         return deferred.promise;
