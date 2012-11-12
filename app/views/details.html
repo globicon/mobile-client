@@ -45,12 +45,18 @@
     <hr/>
 
     <form>
-      <input type="text" class="input-block-level" placeholder="Comment" rows="1"></textarea>
-      <textarea class="input-block-level" placeholder="Resolution" rows="3"></textarea>
+      <textarea class="input-block-level" placeholder="Comment" rows="3"></textarea>
       <label class="checkbox">
         <input type="checkbox"> Visible to Customer
       </label>
-      <button class="btn btn-large btn-primary btn-block" type="button">Update</button>
+      <select class="input-block-level">
+        <option value="1">User Error</option>
+        <option value="2">Software Malfunction</option>
+        <option value="3">Hardware Malfunction</option>
+        <option value="4">Support</option>
+      </select>
+      <button class="btn btn-large btn-info" type="button">Update</button>
+      <button class="btn btn-large btn-danger" type="button">Resolve</button>
     </form>
   </section>
 
