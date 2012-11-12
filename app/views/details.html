@@ -15,7 +15,7 @@
       <i class="icon icon-tag"></i> {{incident.id}} - <i class="icon icon-flag"></i> {{incident.status}}<br>
     </div>
   </section>
-  <section class="section section-bordered">
+  <section class="section">
     <span class="section-title"><i class="icon icon-envelope"></i> Contact</span>
     <address>
       <div ng-show="incident.contactFullname"><strong>{{incident.contactFullname}}</strong></div>
@@ -25,7 +25,7 @@
     </address>
   </section>
 
-  <section class="section section-bordered" ng-show="incident.history">
+  <section  class="section" ng-show="incident.history">
     <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
     <ul class="nav nav-list list-no-nav">
       <li ng-repeat="hist in incident.history">
@@ -42,21 +42,22 @@
       </li>
     </ul>
 
-    <hr/>
-
     <form>
-      <textarea class="input-block-level" placeholder="Comment" rows="3"></textarea>
+      <textarea class="input-block-level" ng-model="comment.text"
+                placeholder="Add comment" rows="3"></textarea>
       <label class="checkbox">
-        <input type="checkbox"> Visible to Customer
+        <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
       </label>
-      <select class="input-block-level">
+      <select class="input-block-level" ng-model="comment.closureCode">
         <option value="1">User Error</option>
         <option value="2">Software Malfunction</option>
         <option value="3">Hardware Malfunction</option>
         <option value="4">Support</option>
       </select>
-      <button class="btn btn-large btn-info" type="button">Update</button>
-      <button class="btn btn-large btn-danger" type="button">Resolve</button>
+      <button class="btn btn-large btn-block-half btn-info" type="button"
+              ng-click="update()">Update</button>
+      <button class="btn btn-large btn-block-half btn-danger pull-right" type="button"
+              ng-click="resolve()">Resolve</button>
     </form>
   </section>
 

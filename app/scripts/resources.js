@@ -4,7 +4,7 @@
   var urls = { myList: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ListMyTodo?callback=JSON_CALLBACK',
                groupList: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ListMyGroupTodo?callback=JSON_CALLBACK',
                getIncident: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ViewIncident?callback=JSON_CALLBACK',
-               update: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/TegJsonFacadeUpdateIncident?callback=JSON_CALLBACK' };
+               update: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/UpdateIncident' };
 
   var resources = angular.module('resources', []);
 
@@ -35,6 +35,14 @@
               });
 
         return deferred.promise;
+      },
+      update : function(update, params) {
+        $http({ method: 'POST',
+                 url : urls['update'],
+                 params : params,
+                 data:update }).then(function(response){
+                   console.log(response);
+                 });
       }
     };
   }]);
