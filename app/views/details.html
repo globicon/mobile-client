@@ -12,7 +12,10 @@
     <strong>{{todo.title}}</strong><br>
     <p>{{todo.description}}<p>
     <div class="secondary">
-      <i class="icon icon-tag"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
+      <i class="icon"
+         ng-class="{'icon-exclamation-sign' : module == 'incident',
+                    'icon-briefcase' : module == 'workorder',
+                    'icon-resize-horizontal' : module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
     </div>
   </section>
   <section class="section">
@@ -42,22 +45,22 @@
       </li>
     </ul>
 
-    <form>
+    <form name="commentForm">
       <textarea class="input-block-level" ng-model="comment.text"
-                placeholder="Add comment" rows="3"></textarea>
+                placeholder="Add comment" rows="3" required></textarea>
       <label class="checkbox">
         <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
       </label>
-      <select class="input-block-level" ng-model="comment.closureCode">
+      <select class="input-block-level" ng-model="comment.closureCode" required>
         <option value="1">User Error</option>
         <option value="2">Software Malfunction</option>
         <option value="3">Hardware Malfunction</option>
         <option value="4">Support</option>
       </select>
       <button class="btn btn-large btn-block-half btn-info" type="button"
-              ng-click="update()">Update</button>
+              ng-click="update()" ng-disabled="!commentForm.$valid">Update</button>
       <button class="btn btn-large btn-block-half btn-danger pull-right" type="button"
-              ng-click="resolve()">Resolve</button>
+              ng-click="resolve()" ng-disabled="!commentForm.$valid">Resolve</button>
     </form>
   </section>
 

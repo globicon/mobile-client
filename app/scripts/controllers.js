@@ -40,18 +40,18 @@
     ['$scope', '$routeParams', '$location', 'Resource',
      function( $scope, $routeParams, $location, Resource ) {
       var id = $routeParams.id,
-          type = $routeParams.module;
+          module = ( $scope.module = $routeParams.module );
 
       $scope.comment = {};
 
-      $scope.todo = Resource.get( type, id );
+      $scope.todo = Resource.get( module, id );
 
       $scope.update = function() {
         var update = { id: $scope.todo.id,
                        update: $scope.comment.text,
                        visibleToCustomer: $scope.comment.visibleToCustomer ? 'yes' : 'no',
                        closureCode : $scope.comment.closureCode };
-        Resource.update( type, update );
+        Resource.update( module, update );
       };
 
       $scope.resolve = function() {

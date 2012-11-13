@@ -30,7 +30,10 @@
         </small>
         <strong>{{todo.title}}</strong>
         <div class="secondary">
-          <i class="icon icon-tag"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
+          <i class="icon"
+             ng-class="{'icon-exclamation-sign' : todo.module == 'incident',
+                        'icon-briefcase' : todo.module == 'workorder',
+                        'icon-resize-horizontal' : todo.module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
           <i class="icon icon-envelope"></i> {{todo.contactFullname}}
         </div>
       </div>
