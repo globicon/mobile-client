@@ -1,20 +1,27 @@
 (function(angular) {
   'use strict';
 
-  var urls = { myList: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ListMyTodo?callback=JSON_CALLBACK',
-               groupList: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ListMyGroupTodo?callback=JSON_CALLBACK',
-               getIncident: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/ViewIncident?callback=JSON_CALLBACK',
-               update: 'http://expresso.globicon.dk:8580/TEGFacadeJSON/UpdateIncident' };
+  var baseUrl = 'http://expresso.globicon.dk:8580/TEGFacadeJSON/',
+      callback = '?callback=JSON_CALLBACK&user=pk&pw=';
+
+  var urls = { search:          baseUrl + 'SearchRecords'   + callback,
+               mylist:          baseUrl + 'ListMyTodo'      + callback,
+               grouplist:       baseUrl + 'ListMyGroupTodo' + callback,
+               incident:        baseUrl + 'ViewIncident'    + callback,
+               workorder:       baseUrl + 'ViewWorkorder'   + callback,
+               interaction:     baseUrl + 'ViewInteraction' + callback,
+               updateincident:  baseUrl + 'UpdateIncident'  + callback,
+               updateworkorder: baseUrl + 'UpdateWorkorder' + callback };
 
   var resources = angular.module('resources', []);
 
-  resources.factory('Incident', ['$http', '$q', function($http, $q) {
+  resources.factory('Resource', ['$http', '$q', function($http, $q) {
     return {
-      query : function( filter, params ) {
+      query : function( type, params ) {
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
-                url: urls[filter || 'myList'],
+                url: urls[type || 'mylist'],
                 params : params || {}
               }).then(function(response) {
                 deferred.resolve( response.data.records.map(function(r) { return r.row; }));
@@ -22,11 +29,11 @@
 
         return deferred.promise;
       },
-      get : function(id, params) {
+      get : function(type, id, params) {
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
-                url: urls[ 'getIncident' ],
+                url: urls[ type || 'incident' ],
                 params : angular.extend( {id: id}, params || {} )
               }).then(function(response) {
                 var incident = response.data.attributes;
@@ -36,11 +43,11 @@
 
         return deferred.promise;
       },
-      update : function(update, params) {
-        $http({ method: 'POST',
-                 url : urls['update'],
-                 params : params,
-                 data:update }).then(function(response){
+      update : function(type, data, params) {
+        $http({ method: 'JSONP',
+                 url : urls['update' + type || 'incident' ],
+                 params : angular.extend( { jsonReq : data }, params )
+               }).then(function(response){
                    console.log(response);
                  });
       }

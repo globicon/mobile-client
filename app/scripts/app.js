@@ -6,10 +6,10 @@
   app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/incidents.html',
-        controller: 'IncidentsController'
+        templateUrl: 'views/list.html',
+        controller: 'ListController'
       })
-      .when('/details/:id', {
+      .when('/details/:module/:id', {
         templateUrl: 'views/details.html',
         controller: 'DetailsController'
       })

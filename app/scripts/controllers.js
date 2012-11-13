@@ -3,7 +3,7 @@
 
   var app = angular.module('kuMobileClientApp');
 
-  // Signi n controller
+  // Sign in controller
   // -----------------
   app.controller('SignInController',
     ['$scope', '$location', function($scope, $location){
@@ -15,46 +15,46 @@
 
   // Incidents Controller
   // --------------------
-  app.controller('IncidentsController',
-    ['$scope', '$location', 'Incident', function($scope, $location, Incident) {
+  app.controller('ListController',
+    ['$scope', '$location', 'Resource', function($scope, $location, Resource) {
 
-    $scope.queryIncidents = function( filter ) {
+    $scope.query = function( filter ) {
       $location.hash( filter );
 
       $scope.filter = filter;
-      Incident.query( filter, { user: 'pk', pw: '' } )
-        .then( function( data ) {
-          $scope.incidents = data;
-        });
+      Resource.query( filter ).then( function( data ) {
+        $scope.todos = data;
+      });
     };
 
-    $scope.queryIncidents( $location.hash() || 'myList' );
+    $scope.query( $location.hash() || 'mylist' );
 
-    $scope.details = function( id ) {
-      $location.path( '/details/' + id );
+    $scope.details = function( module, id ) {
+      $location.path( '/details/' + module + '/' + id );
     };
   }]);
 
   // Details Controller
   // ------------------
   var DetailsController = app.controller( 'DetailsController',
-    ['$scope', '$routeParams', '$location', 'Incident',
-     function( $scope, $routeParams, $location, Incident ) {
+    ['$scope', '$routeParams', '$location', 'Resource',
+     function( $scope, $routeParams, $location, Resource ) {
+      var id = $routeParams.id,
+          type = $routeParams.module;
 
       $scope.comment = {};
 
-      $scope.incident = Incident.get( $routeParams.id, { user: 'pk', pw: '' } );
+      $scope.todo = Resource.get( type, id );
 
       $scope.update = function() {
-        var update = { id: $scope.incident.id,
+        var update = { id: $scope.todo.id,
                        update: $scope.comment.text,
                        visibleToCustomer: $scope.comment.visibleToCustomer ? 'yes' : 'no',
                        closureCode : $scope.comment.closureCode };
-        Incident.update( update, { user: 'pk', pw: '' } );
+        Resource.update( type, update );
       };
 
       $scope.resolve = function() {
-        console.log( 'resolve:', $scope.comment );
       };
 
       $scope.back = function( ) {
