@@ -18,16 +18,43 @@
   app.controller('ListController',
     ['$scope', '$location', 'Resource', function($scope, $location, Resource) {
 
-    $scope.query = function( filter ) {
+    function prepareQuery( filter, params ) {
       $location.hash( filter );
-
+      if ( params ) {
+        $location.search( params );
+      }
       $scope.filter = filter;
-      Resource.query( filter ).then( function( data ) {
+    }
+
+    $scope.filter = $location.hash();
+    $scope.search = { id : $location.search( ).id || '',
+                      contact : $location.search( ).contact || '',
+                      assignmentGroup : $location.search( ).assignmentGroup || '' };
+
+    $scope.query = function( filter, params ) {
+      prepareQuery( filter, params );
+
+      if ( $scope.filter === 'search' &&
+           !params.id &&
+           !params.contact &&
+           !params.assignmentGroup ) {
+
+        $scope.todos = undefined;
+        return;
+      }
+
+      Resource.query( filter, params ).then( function( data ) {
         $scope.todos = data;
       });
     };
 
-    $scope.query( $location.hash() || 'mylist' );
+    $scope.query( $scope.filter || 'mylist', $scope.search );
+
+    $scope.clearSearch = function() {
+      $scope.search = {};
+      prepareQuery( 'search', {} );
+      $scope.todos = undefined;
+    };
 
     $scope.details = function( module, id ) {
       $location.path( '/details/' + module + '/' + id );
@@ -56,7 +83,7 @@
 
         Resource.update( module, update ).then( function() {
           $scope.todo = Resource.get( module, id );
-          $scope.comment = {}
+          $scope.comment = {};
         });
       };
 

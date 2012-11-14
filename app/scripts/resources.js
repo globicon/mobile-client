@@ -25,7 +25,7 @@
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
-                url: urls[type || 'mylist'],
+                url: urls[type || 'mylist'] || urls['mylist'],
                 params : params || {}
               }).then(function(resp) {
                 if ( success(resp) ) {
@@ -41,7 +41,7 @@
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
-                url: urls[ type || 'incident' ],
+                url: urls[ type || 'incident' ] || urls['incident'],
                 params : angular.extend( {id: id}, params || {} )
               }).then(function(resp) {
                 if (success(resp)) {
@@ -57,7 +57,7 @@
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
-                url : urls['update' + type || 'incident' ],
+                url : urls['update' + type || 'incident' ] || urls['updateincident'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
                   if (success(resp)) {

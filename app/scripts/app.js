@@ -7,11 +7,13 @@
     $routeProvider
       .when('/', {
         templateUrl: 'views/list.html',
-        controller: 'ListController'
+        controller: 'ListController',
+        reloadOnSearch:false
       })
       .when('/details/:module/:id', {
         templateUrl: 'views/details.html',
-        controller: 'DetailsController'
+        controller: 'DetailsController',
+        reloadOnSearch:false
       })
       .when('/signin', {
         templateUrl: 'views/signin.html',

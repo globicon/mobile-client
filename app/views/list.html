@@ -11,12 +11,37 @@
   </button>
   <button class="btn btn-large btn-inverse"
           ng-class="{'active': filter == 'search' }"
-          ng-click="query( 'search' )">
+          ng-click="query( 'search', search )" default>
     <i class="icon icon-white icon-search"></i> Search
   </button>
 </div>
 
-<ul class="nav nav-list list">
+<div ng-show="filter == 'search'" class="content">
+  <form >
+    <input type="text" ng-model="search.id" class="input-block-level"
+           placeholder="Search for ticket id" />
+    <input type="text" ng-model="search.contact" class="input-block-level"
+           placeholder="Search for contact initials" />
+    <input type="text" ng-model="search.assignmentGroup" class="input-block-level"
+           placeholder="Search for assignment group" />
+
+    <button type="reset" class="btn btn-block-half"
+            ng-click="clearSearch()">
+      Clear
+    </button>
+    <!-- Search button is enabled if any search field has a value -->
+
+    <button type="submit" class="btn btn-primary btn-block-half"
+            ng-click="query( 'search', search )"
+            ng-disabled="(search.id == null || search.id == '') &&
+                         (search.contact == null || search.contact == '') &&
+                         (search.assignmentGroup == null || search.ssignmentGroup == '')">
+       Search
+    </button>
+  </form>
+</div>
+
+<ul class="nav nav-list list" ng-class="{'content': filter != 'search'}">
   <li ng-repeat="todo in todos">
     <a ng-click="details(todo.module, todo.id)">
       <i class="icon-chevron-right"></i>
