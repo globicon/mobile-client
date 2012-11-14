@@ -16,6 +16,10 @@
   var resources = angular.module('resources', []);
 
   resources.factory('Resource', ['$http', '$q', function($http, $q) {
+    function success(resp) {
+      return resp.data.rc === "0";
+    }
+
     return {
       query : function( type, params ) {
         var deferred = $q.defer();
@@ -23,8 +27,12 @@
         $http({ method: 'JSONP',
                 url: urls[type || 'mylist'],
                 params : params || {}
-              }).then(function(response) {
-                deferred.resolve( response.data.records.map(function(r) { return r.row; }));
+              }).then(function(resp) {
+                if ( success(resp) ) {
+                  // unwrap objects from row wrapper
+                  // [{row: {id:5,..}}, {row...}] -> [{id:5,..},..]
+                  deferred.resolve( resp.data.records.map(function(r) { return r.row; }));
+                }
               });
 
         return deferred.promise;
@@ -35,21 +43,28 @@
         $http({ method: 'JSONP',
                 url: urls[ type || 'incident' ],
                 params : angular.extend( {id: id}, params || {} )
-              }).then(function(response) {
-                var incident = response.data.attributes;
-                angular.extend( incident, { history : response.data.history, ready: true });
-                deferred.resolve( incident );
+              }).then(function(resp) {
+                if (success(resp)) {
+                  var todo = resp.data.attributes;
+                  angular.extend( todo, { history : resp.data.history, ready: true });
+                  deferred.resolve( todo );
+                }
               });
 
         return deferred.promise;
       },
       update : function(type, data, params) {
+        var deferred = $q.defer();
+
         $http({ method: 'JSONP',
-                 url : urls['update' + type || 'incident' ],
-                 params : angular.extend( { jsonReq : data }, params )
-               }).then(function(response){
-                   console.log(response);
-                 });
+                url : urls['update' + type || 'incident' ],
+                params : angular.extend( { jsonReq : data }, params )
+               }).then(function(resp){
+                  if (success(resp)) {
+                    deferred.resolve(resp.data);
+                  }
+              });
+        return deferred.promise;
       }
     };
   }]);

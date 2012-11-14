@@ -46,7 +46,7 @@
     </ul>
 
     <form name="commentForm">
-      <textarea class="input-block-level" ng-model="comment.text"
+      <textarea class="input-block-level" ng-model="comment.text" name="comment"
                 placeholder="Add comment" rows="3" required></textarea>
       <label class="checkbox">
         <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
@@ -58,9 +58,9 @@
         <option value="4">Support</option>
       </select>
       <button class="btn btn-large btn-block-half btn-info" type="button"
-              ng-click="update()" ng-disabled="!commentForm.$valid">Update</button>
+              ng-click="update('update')" ng-disabled="!commentForm.comment.$valid">Update</button>
       <button class="btn btn-large btn-block-half btn-danger pull-right" type="button"
-              ng-click="resolve()" ng-disabled="!commentForm.$valid">Resolve</button>
+              ng-click="update('resolution')" ng-disabled="!commentForm.$valid">Resolve</button>
     </form>
   </section>
 

@@ -46,15 +46,18 @@
 
       $scope.todo = Resource.get( module, id );
 
-      $scope.update = function() {
-        var update = { id: $scope.todo.id,
-                       update: $scope.comment.text,
+      $scope.update = function( kind ) {
+        var update = { id: id,
                        visibleToCustomer: $scope.comment.visibleToCustomer ? 'yes' : 'no',
                        closureCode : $scope.comment.closureCode };
-        Resource.update( module, update );
-      };
+        // update kind can be 'update' or 'resolution', same API is called
+        // with different object
+        update[kind] = $scope.comment.text;
 
-      $scope.resolve = function() {
+        Resource.update( module, update ).then( function() {
+          $scope.todo = Resource.get( module, id );
+          $scope.comment = {}
+        });
       };
 
       $scope.back = function( ) {
