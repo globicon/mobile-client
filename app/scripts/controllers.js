@@ -13,7 +13,7 @@
     };
   }]);
 
-  // Incidents Controller
+  // Todos Controller
   // --------------------
   app.controller('ListController',
     ['$scope', '$location', 'Resource', function($scope, $location, Resource) {

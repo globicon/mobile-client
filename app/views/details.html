@@ -10,7 +10,7 @@
 <div class="content"  ng-show="todo.ready">
   <section class="section">
     <strong>{{todo.title}}</strong><br>
-    <p>{{todo.description}}<p>
+    <p ng-bind-html="todo.description | newline" />
     <div class="secondary">
       <i class="icon"
          ng-class="{'icon-exclamation-sign' : module == 'incident',
@@ -35,8 +35,8 @@
          <a tabindex="-1">
           <div>
             <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
-            <strong>{{hist.title}}</strong><br>
-            {{hist.update}}
+            <strong>{{hist.title}}</strong>
+            <div ng-bind-html="hist.update | newline"/>
             <div class="secondary">
               {{hist.type}} - {{hist.time | vagueTime}}<br>
             </div>

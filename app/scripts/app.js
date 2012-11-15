@@ -1,9 +1,10 @@
 (function( window, angular ) {
   'use strict';
 
-  var app = angular.module('kuMobileClientApp', ['resources']);
+  var app = angular.module('kuMobileClientApp', ['resources', 'ngSanitize']);
 
-  app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  app.config(['$routeProvider', '$locationProvider',
+              function($routeProvider, $locationProvider ) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/list.html',
@@ -27,6 +28,15 @@
   app.filter('vagueTime', function() {
     return function(input) {
       return window.vagueTime.get({ from : input, units:'ms' });
+    };
+  });
+
+  app.filter( 'newline', function() {
+    return function(input) {
+      return input && input
+        .replace( '<', '&lt;' )
+        .replace( '>', '&gt;' )
+        .replace(/\n/g, '<br/>');
     };
   });
 })( window, window.angular );
