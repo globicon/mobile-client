@@ -45,13 +45,14 @@
       </li>
     </ul>
 
-    <form name="commentForm">
+    <form name="commentForm" ng-hide="module == 'interaction'">
       <textarea class="input-block-level" ng-model="comment.text" name="comment"
                 placeholder="Add comment" rows="3" required></textarea>
       <label class="checkbox">
         <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
       </label>
-      <select class="input-block-level" ng-model="comment.closureCode" required>
+      <select class="input-block-level" ng-model="comment.closureCode" required
+              ng-show="module == 'incident'">
         <option value="1">User Error</option>
         <option value="2">Software Malfunction</option>
         <option value="3">Hardware Malfunction</option>
@@ -62,7 +63,8 @@
               ng-disabled="!commentForm.comment.$valid">Update</button>
       <button class="btn btn-large btn-block-half btn-danger pull-right" type="button"
               ng-click="update('resolution')"
-              ng-disabled="!commentForm.$valid">Resolve</button>
+              ng-disabled="!commentForm.$valid"
+              ng-show="module == 'incident'">Resolve</button>
     </form>
   </section>
 
