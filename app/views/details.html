@@ -35,10 +35,10 @@
          <a tabindex="-1">
           <div>
             <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
-            <strong>{{hist.title}}</strong>
-            <div ng-bind-html="hist.update | newline"/>
+            <strong>{{hist.type}}</strong>
+            <div ng-bind-html="hist.update | newline"></div>
             <div class="secondary">
-              {{hist.type}} - {{hist.time | vagueTime}}<br>
+             {{hist.time | vagueTime}}<br>
             </div>
           </div>
         </a>
