@@ -50,9 +50,10 @@
         <option value="3">Hardware Malfunction</option>
         <option value="4">Support</option>
       </select>
-      <button class="btn btn-large btn-50 btn-info" type="button"
+      <button class="btn btn-large btn-50" type="button"
               ng-click="update('update')"
               ng-disabled="!commentForm.comment.$valid">Update</button>
+
       <button class="btn btn-large btn-50 btn-danger pull-right" type="button"
               ng-click="update('resolution')"
               ng-disabled="!commentForm.$valid"

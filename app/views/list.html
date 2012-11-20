@@ -12,7 +12,6 @@
       Clear
     </button>
     <!-- Search button is enabled if any search field has a value -->
-
     <button type="submit" class="btn btn-primary btn-50"
             ng-click="query( 'search', search )"
             ng-disabled="($root.search.id == null || search.id == '') &&
@@ -21,6 +20,10 @@
        Search
     </button>
   </form>
+
+  <div class="progress progress-striped active" ng-show="loading">
+    <div class="bar" style="width:100%"></div>
+  </div>
 
   <ul class="nav nav-list list">
     <li ng-repeat="todo in todos">

@@ -45,8 +45,10 @@
         }
       }
 
+      $scope.loading = true;
       Resource.query( $routeParams.type, params ).then( function( data ) {
         $scope.todos = data;
+        $scope.loading = false;
       });
     };
 
