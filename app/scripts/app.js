@@ -11,6 +11,10 @@
         controller: 'ListController',
         reloadOnSearch:false
       })
+      .when('/new', {
+        templateUrl: 'views/new.html',
+        controller: 'NewController'
+      })
       .when('/details/:module/:id', {
         templateUrl: 'views/details.html',
         controller: 'DetailsController',

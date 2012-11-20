@@ -1,13 +1,12 @@
 <div class="btn-group btn-tab">
-  <button class="btn btn-large btn-inverse"
+  <button class="btn btn-large btn-inverse btn-30"
           ng-class="{'active': filter == 'myList' }"
           ng-click="back( )">
     <i class="icon icon-white icon-chevron-left"></i> Back
   </button>
-  <button class="btn btn-large btn-inverse btn-dummy" tabindex="-1"></button>
-  <button class="btn btn-large btn-inverse btn-dummy" tabindex="-1"></button>
+  <button class="btn btn-large btn-inverse btn-dummy btn-70" tabindex="-1"></button>
 </div>
-<div class="content"  ng-show="todo.ready">
+<div class="content" ng-show="todo.ready">
   <section class="section">
     <strong>{{todo.title}}</strong><br>
     <p ng-bind-html="todo.description | newline" />
@@ -15,7 +14,8 @@
       <i class="icon"
          ng-class="{'icon-exclamation-sign' : module == 'incident',
                     'icon-briefcase' : module == 'workorder',
-                    'icon-resize-horizontal' : module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
+                    'icon-resize-horizontal' : module == 'interaction' }"></i> {{todo.id}} -
+      <i class="icon icon-flag"></i> {{todo.status}}<br>
     </div>
   </section>
   <section class="section">
@@ -28,7 +28,7 @@
     </address>
   </section>
 
-  <section  class="section" ng-show="todo.history">
+  <section class="section" ng-show="todo.history">
     <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
     <ul class="nav nav-list list-no-nav">
       <li ng-repeat="hist in todo.history">
@@ -58,10 +58,10 @@
         <option value="3">Hardware Malfunction</option>
         <option value="4">Support</option>
       </select>
-      <button class="btn btn-large btn-block-half btn-info" type="button"
+      <button class="btn btn-large btn-50 btn-info" type="button"
               ng-click="update('update')"
               ng-disabled="!commentForm.comment.$valid">Update</button>
-      <button class="btn btn-large btn-block-half btn-danger pull-right" type="button"
+      <button class="btn btn-large btn-50 btn-danger pull-right" type="button"
               ng-click="update('resolution')"
               ng-disabled="!commentForm.$valid"
               ng-show="module == 'incident'">Resolve</button>

@@ -11,7 +11,8 @@
                workorder:       baseUrl + 'ViewWorkorder'   + callback,
                interaction:     baseUrl + 'ViewInteraction' + callback,
                updateincident:  baseUrl + 'UpdateIncident'  + callback,
-               updateworkorder: baseUrl + 'UpdateWorkorder' + callback };
+               updateworkorder: baseUrl + 'UpdateWorkorder' + callback,
+               newinteraction:  baseUrl + 'NewInteraction'  + callback };
 
   var resources = angular.module('resources', []);
 
@@ -58,6 +59,19 @@
 
         $http({ method: 'JSONP',
                 url : urls['update' + type || 'incident' ] || urls['updateincident'],
+                params : angular.extend( { jsonReq : data }, params )
+               }).then(function(resp){
+                  if (success(resp)) {
+                    deferred.resolve(resp.data);
+                  }
+              });
+        return deferred.promise;
+      },
+      create : function(data, params) {
+          var deferred = $q.defer();
+
+        $http({ method: 'JSONP',
+                url : urls['newinteraction'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
                   if (success(resp)) {

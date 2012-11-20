@@ -14,20 +14,12 @@ body {
   padding: 0 10px;
 }
 
-.btn-large i {
-  margin-top: 3px;
-}
-
-.btn-block-half {
-  width: 49%;
-}
-
 .list-no-nav {
   margin: 0 0 20px;
   padding: 0;
 }
 
-.list-no-nav li > a, .list-no-nav li > a:hover {
+.list-no-nav li a, .list-no-nav li a:hover {
   display: block;
   color: $grayDark;
   background-color: white;
@@ -113,9 +105,36 @@ body {
 
   .btn {
     min-height: 40px;
-    width: 34%;
     @include border-radius(0px);
   }
+}
+
+.btn-30 {
+  width: 30.5%;
+}
+
+.btn-70 {
+  width: 70%;
+}
+
+.btn-40 {
+  width: 40%;
+}
+
+.btn-20 {
+  width: 20%;
+}
+
+.btn-100 {
+  width: 100%;
+}
+
+.btn-50 {
+  width: 49%;
+}
+
+.btn-large i {
+  margin-top: 3px;
 }
 
 .section {
@@ -148,6 +167,10 @@ body {
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+
+input[type="checkbox"] {
+  margin-top: 5px;
 }
 
 .info {

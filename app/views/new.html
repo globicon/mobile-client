@@ -1,0 +1,44 @@
+<div class="btn-group btn-tab">
+  <button class="btn btn-large btn-inverse btn-30"
+          ng-class="{'active': filter == 'myList' }"
+          ng-click="back( )">
+    Cancel
+  </button>
+  <button class="btn btn-large btn-inverse btn-dummy btn-70" tabindex="-1"></button>
+</div>
+<div class="content">
+  <form name="newForm" ng-hide="module == 'interaction'">
+    <input type="text" class="input-block-level" ng-model="newInteraction.contact"
+           placeholder="Contact" required></input>
+
+    <label class="checkbox">
+      <input type="checkbox"> Me
+    </label>
+
+    <textarea class="input-block-level" ng-model="newInteraction.description"
+              placeholder="Description" rows="3" required></textarea>
+
+    <label for="template">Template</label>
+    <select class="input-block-level" ng-model="newInteraction.template">
+      <option value="1">Password Reset</option>
+      <option value="2">User Authentication Error</option>
+      <option value="3">Request for Software</option>
+      <option value="4">Request for Hardware</option>
+      <option value="5">Request for Server</option>
+    </select>
+
+    <textarea class="input-block-level" ng-model="newInteraction.solution"
+              placeholder="Solution" rows="3"></textarea>
+
+    <button class="btn btn-large btn-block btn-primary" type="button"
+            ng-click="create()"
+            ng-disabled="!newForm.$valid">Create</button>
+  </form>
+
+  <div class="alert"
+       ng-show="creationResult"
+       ng-class="{'alert-success' : creationResult.rc == 0,
+                  'alert-error' : creationResult.rc != 0}">
+  {{creationResult.rcMsg}}
+  </div>
+</div>

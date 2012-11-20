@@ -1,18 +1,21 @@
 <div class="btn-group btn-tab">
-  <button class="btn btn-large btn-inverse"
+  <button class="btn btn-large btn-inverse btn-20" ng-click="newInteraction()"/>
+    <i class="icon icon-white icon-edit"></i>
+  </button>
+  <button class="btn btn-large btn-inverse btn-30"
           ng-class="{'active': filter == 'mylist' }"
           ng-click="query( 'mylist' )">
-    Mine
+    My
   </button>
-  <button class="btn btn-large btn-inverse"
+  <button class="btn btn-large btn-inverse btn-30"
           ng-class="{'active': filter == 'grouplist' }"
           ng-click="query( 'grouplist' )">
     Group
   </button>
-  <button class="btn btn-large btn-inverse"
+  <button class="btn btn-large btn-inverse btn-20"
           ng-class="{'active': filter == 'search' }"
           ng-click="query( 'search', search )" default>
-    <i class="icon icon-white icon-search"></i> Search
+    <i class="icon icon-white icon-search"></i>
   </button>
 </div>
 

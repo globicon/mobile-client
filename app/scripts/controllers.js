@@ -59,6 +59,10 @@
     $scope.details = function( module, id ) {
       $location.path( '/details/' + module + '/' + id );
     };
+
+    $scope.newInteraction = function() {
+      $location.path( '/new' );
+    };
   }]);
 
   // Details Controller
@@ -91,5 +95,21 @@
         $location.path( '/' );
       };
    }]);
+
+  // New Controller
+  // ------------------
+ var NewController = app.controller( 'NewController',
+    ['$scope', '$location', 'Resource', function( $scope, $location, Resource ) {
+
+      $scope.create = function() {
+        Resource.create( $scope.newInteraction ).then( function( data ) {
+          $scope.creationResult = data;
+        } );
+      };
+
+      $scope.back = function( ) {
+        $location.path( '/' );
+      };
+    }]);
 
 })(window.angular);
