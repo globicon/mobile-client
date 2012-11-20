@@ -64,6 +64,12 @@
     </div>
   </div>
 
+  <div class="alert-fixed" ng-cloak>
+    <div class="alert alert-error" ng-class="{hide: !errorMsg}">
+      <strong>Error</strong> {{errorMsg}} <button type="button" class="close" ng-click="errorMsg=''" >×</button>
+    </div>
+  </div>
+
   <!-- Add your site or application content here -->
   <div class="container-fluid" ng-view></div>
 

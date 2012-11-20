@@ -5,6 +5,25 @@ body {
   padding: 0;
 }
 
+.alert-fixed {
+  position:fixed;
+  width: 100%;
+  top: 20px;
+  z-index: 9000;
+
+  .alert {
+    margin: 0 10px;
+    opacity: 1;
+
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease;
+  }
+  .alert.hide {
+    opacity: 0;
+  }
+}
+
 .container-fluid {
   padding: 0;
 }

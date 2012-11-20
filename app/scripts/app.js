@@ -43,4 +43,16 @@
         .replace(/\n/g, '<br/>');
     };
   });
+
+  app.factory( 'notify', ['$rootScope', function( $rootScope ) {
+    return function( msg, fadeIn ) {
+      $rootScope.errorMsg = msg;
+      if ( fadeIn && fadeIn > 0 ) {
+        setTimeout( function() {
+          $rootScope.errorMsg = '';
+          $rootScope.$apply(); },
+        fadeIn );
+      }
+    };
+  }]);
 })( window, window.angular );

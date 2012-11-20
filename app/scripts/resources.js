@@ -16,7 +16,35 @@
 
   var resources = angular.module('resources', []);
 
-  resources.factory('Resource', ['$http', '$q', function($http, $q) {
+  resources.config( ['$httpProvider', function($httpProvider) {
+
+    // inject error handling into $q, TODO: do more with 401s AUTH
+    var interceptor = ['$rootScope', '$q', 'notify', function (scope, $q, notify) {
+      function success(resp) {
+        if ( resp.data.rc !== '0' ) {
+          notify( resp.data.rcMsg, 5000 );
+        }
+        return resp;
+      }
+
+      function error(resp) {
+        if (resp.status !== 404) {
+          notify( 'Error resolving request. Contact your System Administrator' );
+        }
+        return $q.reject(resp);
+      }
+
+      return function (promise) {
+        return promise.then(success, error);
+      };
+    }];
+
+    $httpProvider.responseInterceptors.push(interceptor);
+  } ] );
+
+  resources.factory('Resource',
+    ['$http', '$q', 'notify', function($http, $q, notify) {
+
     function success(resp) {
       return resp.data.rc === "0";
     }
