@@ -11,9 +11,11 @@ body {
 
 .content {
   margin-top: 50px;
+  margin-bottom: 40px;
   padding: 0 10px;
 }
 
+// fake nav list of no clickable items
 .list-no-nav {
   margin: 0 0 20px;
   padding: 0;
@@ -29,12 +31,19 @@ body {
   border-bottom: 1px $grayLighter solid;
 }
 
+// fade icons in navbar when inactive
+.nav > li i {
+  opacity: .75;
+}
+
+.nav > li.active i {
+  opacity: 1;
+}
+
 .list {
+  margin: 0 -15px;
   padding: 0;
   background-color: #fff;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
   -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
@@ -45,16 +54,6 @@ body {
   margin: 0 0 -1px;
   padding: 8px 14px;
   border: 1px solid #e5e5e5;
-}
-.list > li:first-child > a {
-  -webkit-border-radius: 6px 6px 0 0;
-     -moz-border-radius: 6px 6px 0 0;
-          border-radius: 6px 6px 0 0;
-}
-.list > li:last-child > a {
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
 }
 .list > .active > a {
   position: relative;
@@ -97,44 +96,8 @@ body {
   }
 }
 
-.btn-tab {
-  position: fixed;
-  width: 100%;
-  background-color: white;
-  z-index: 1000;
-
-  .btn {
-    min-height: 40px;
-    @include border-radius(0px);
-  }
-}
-
-.btn-30 {
-  width: 30.5%;
-}
-
-.btn-70 {
-  width: 70%;
-}
-
-.btn-40 {
-  width: 40%;
-}
-
-.btn-20 {
-  width: 20%;
-}
-
-.btn-100 {
-  width: 100%;
-}
-
 .btn-50 {
   width: 49%;
-}
-
-.btn-large i {
-  margin-top: 3px;
 }
 
 .section {

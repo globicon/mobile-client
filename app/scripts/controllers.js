@@ -1,7 +1,15 @@
 (function(angular) {
   'use strict';
 
-  var app = angular.module('kuMobileClientApp');
+  var app = angular.module('mobileClientApp');
+
+  app.controller( 'NavController',
+    ['$scope', '$routeParams', function( $scope, $routeParams ) {
+
+      $scope.$on( '$routeChangeSuccess', function () {
+        $scope.active = $routeParams.type || $scope.active;
+      } );
+    }]);
 
   // Sign in controller
   // -----------------
@@ -16,52 +24,41 @@
   // Todos Controller
   // --------------------
   app.controller('ListController',
-    ['$scope', '$location', 'Resource', function($scope, $location, Resource) {
+    ['$scope', '$location', '$routeParams', 'Resource',
+     function($scope, $location, $routeParams, Resource) {
 
-    function prepareQuery( filter, params ) {
-      $location.hash( filter );
-      if ( params ) {
-        $location.search( params );
-      }
-      $scope.filter = filter;
-    }
+    $scope.$root.search = $scope.$root.search || {};
 
-    $scope.filter = $location.hash();
-    $scope.search = { id : $location.search( ).id || '',
-                      contact : $location.search( ).contact || '',
-                      assignmentGroup : $location.search( ).assignmentGroup || '' };
+    $scope.query = function( filter ) {
+      var params = {};
 
-    $scope.query = function( filter, params ) {
-      prepareQuery( filter, params );
+      if ( $routeParams.type === 'search' ) {
+        params = $scope.$root.search;
 
-      if ( $scope.filter === 'search' &&
-           !params.id &&
-           !params.contact &&
-           !params.assignmentGroup ) {
+        // do not search if no search term is specified
+        if ( !$scope.$root.search.id &&
+             !$scope.$root.search.contact &&
+             !$scope.$root.search.assignmentGroup ) {
 
-        $scope.todos = undefined;
-        return;
+          $scope.todos = undefined;
+          return;
+        }
       }
 
-      Resource.query( filter, params ).then( function( data ) {
+      Resource.query( $routeParams.type, params ).then( function( data ) {
         $scope.todos = data;
       });
     };
 
-    $scope.query( $scope.filter || 'mylist', $scope.search );
+    $scope.query( $routeParams.type || 'my', $scope.search );
 
     $scope.clearSearch = function() {
-      $scope.search = {};
-      prepareQuery( 'search', {} );
+      $scope.$root.search = {};
       $scope.todos = undefined;
     };
 
     $scope.details = function( module, id ) {
       $location.path( '/details/' + module + '/' + id );
-    };
-
-    $scope.newInteraction = function() {
-      $location.path( '/new' );
     };
   }]);
 
@@ -100,6 +97,8 @@
   // ------------------
  var NewController = app.controller( 'NewController',
     ['$scope', '$location', 'Resource', function( $scope, $location, Resource ) {
+
+      $scope.$parent.active = 'new';
 
       $scope.create = function() {
         Resource.create( $scope.newInteraction ).then( function( data ) {

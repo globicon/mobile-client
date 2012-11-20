@@ -5,8 +5,8 @@
       callback = '?callback=JSON_CALLBACK&user=pk&pw=';
 
   var urls = { search:          baseUrl + 'SearchRecords'   + callback,
-               mylist:          baseUrl + 'ListMyTodo'      + callback,
-               grouplist:       baseUrl + 'ListMyGroupTodo' + callback,
+               my:              baseUrl + 'ListMyTodo'      + callback,
+               group:           baseUrl + 'ListMyGroupTodo' + callback,
                incident:        baseUrl + 'ViewIncident'    + callback,
                workorder:       baseUrl + 'ViewWorkorder'   + callback,
                interaction:     baseUrl + 'ViewInteraction' + callback,

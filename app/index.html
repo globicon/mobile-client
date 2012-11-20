@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/app-icon-57x57.png">
   <link rel="stylesheet" href="styles/main.css"/>
 </head>
-<body ng-app="kuMobileClientApp">
+<body ng-app="mobileClientApp" ng-controller="NavController">
 
 <!--[if lt IE 7]>
   <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -29,6 +29,40 @@
   <script src="scripts/vendor/es5-shim.min.js"></script>
   <script src="scripts/vendor/json3.min.js"></script>
   <![endif]-->
+
+  <!-- Main Nav -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <ul class="nav">
+          <li ng-class="{active: active == 'new'}">
+            <a href="#todos/new">
+              <i class="icon icon-white icon-edit"></i> New
+            </a>
+          </li>
+          <li ng-class="{active: active == 'my'}">
+            <a href="#todos/my">My</a>
+          </li>
+          <li ng-class="{active: active == 'group'}">
+            <a href="#todos/group">Group</a>
+          <li>
+          <li ng-class="{active: active == 'search'}">
+            <a href="#todos/search">
+              <i class="icon icon-white icon-search"></i> Search
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a href="http://www.globicon.biz/" class="brand"> Globicon</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Add your site or application content here -->
   <div class="container-fluid" ng-view></div>

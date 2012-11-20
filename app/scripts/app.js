@@ -1,19 +1,19 @@
 (function( window, angular ) {
   'use strict';
 
-  var app = angular.module('kuMobileClientApp', ['resources', 'ngSanitize']);
+  var app = angular.module('mobileClientApp', ['resources', 'ngSanitize']);
 
   app.config(['$routeProvider', '$locationProvider',
               function($routeProvider, $locationProvider ) {
     $routeProvider
-      .when('/', {
+      .when('/todos/new', {
+        templateUrl: 'views/new.html',
+        controller: 'NewController'
+      })
+      .when('/todos/:type', {
         templateUrl: 'views/list.html',
         controller: 'ListController',
         reloadOnSearch:false
-      })
-      .when('/new', {
-        templateUrl: 'views/new.html',
-        controller: 'NewController'
       })
       .when('/details/:module/:id', {
         templateUrl: 'views/details.html',
@@ -25,7 +25,7 @@
         controller: 'SignInController'
       })
       .when().otherwise({
-        redirectTo: '/'
+        redirectTo: '/todos/my'
       });
   }]);
 

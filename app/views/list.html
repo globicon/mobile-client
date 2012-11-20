@@ -1,70 +1,49 @@
-<div class="btn-group btn-tab">
-  <button class="btn btn-large btn-inverse btn-20" ng-click="newInteraction()"/>
-    <i class="icon icon-white icon-edit"></i>
-  </button>
-  <button class="btn btn-large btn-inverse btn-30"
-          ng-class="{'active': filter == 'mylist' }"
-          ng-click="query( 'mylist' )">
-    My
-  </button>
-  <button class="btn btn-large btn-inverse btn-30"
-          ng-class="{'active': filter == 'grouplist' }"
-          ng-click="query( 'grouplist' )">
-    Group
-  </button>
-  <button class="btn btn-large btn-inverse btn-20"
-          ng-class="{'active': filter == 'search' }"
-          ng-click="query( 'search', search )" default>
-    <i class="icon icon-white icon-search"></i>
-  </button>
-</div>
-
-<div ng-show="filter == 'search'" class="content">
-  <form >
-    <input type="text" ng-model="search.id" class="input-block-level"
+<div class="content">
+  <form ng-show="active == 'search'" >
+    <input type="text" ng-model="$root.search.id" class="input-block-level"
            placeholder="Search for ticket id" />
-    <input type="text" ng-model="search.contact" class="input-block-level"
+    <input type="text" ng-model="$root.search.contact" class="input-block-level"
            placeholder="Search for contact initials" />
-    <input type="text" ng-model="search.assignmentGroup" class="input-block-level"
+    <input type="text" ng-model="$root.search.assignmentGroup" class="input-block-level"
            placeholder="Search for assignment group" />
 
-    <button type="reset" class="btn btn-block-half"
+    <button type="reset" class="btn btn-50"
             ng-click="clearSearch()">
       Clear
     </button>
     <!-- Search button is enabled if any search field has a value -->
 
-    <button type="submit" class="btn btn-primary btn-block-half"
+    <button type="submit" class="btn btn-primary btn-50"
             ng-click="query( 'search', search )"
-            ng-disabled="(search.id == null || search.id == '') &&
-                         (search.contact == null || search.contact == '') &&
-                         (search.assignmentGroup == null || search.ssignmentGroup == '')">
+            ng-disabled="($root.search.id == null || search.id == '') &&
+                         ($root.search.contact == null || search.contact == '') &&
+                         ($root.search.assignmentGroup == null || search.ssignmentGroup == '')">
        Search
     </button>
   </form>
-</div>
 
-<ul class="nav nav-list list" ng-class="{'content': filter != 'search'}">
-  <li ng-repeat="todo in todos">
-    <a ng-click="details(todo.module, todo.id)">
-      <i class="icon-chevron-right"></i>
-      <div>
-        <small ng-hide="todo.priority == 'null'" class="pull-right"
-               ng-class="{'text-error': todo.priority == 1,
-                          'text-warning': todo.priority == 2,
-                          'text-info': todo.priority == 3,
-                          'text-muted': todo.priority == 4}">
-          Priority {{todo.priority}}
-        </small>
-        <strong>{{todo.title}}</strong>
-        <div class="secondary">
-          <i class="icon"
-             ng-class="{'icon-exclamation-sign' : todo.module == 'incident',
-                        'icon-briefcase' : todo.module == 'workorder',
-                        'icon-resize-horizontal' : todo.module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
-          <i class="icon icon-envelope"></i> {{todo.contactFullname}}
+  <ul class="nav nav-list list">
+    <li ng-repeat="todo in todos">
+      <a ng-click="details(todo.module, todo.id)">
+        <i class="icon-chevron-right"></i>
+        <div>
+          <small ng-hide="todo.priority == 'null'" class="pull-right"
+                 ng-class="{'text-error': todo.priority == 1,
+                            'text-warning': todo.priority == 2,
+                            'text-info': todo.priority == 3,
+                            'text-muted': todo.priority == 4}">
+            Priority {{todo.priority}}
+          </small>
+          <strong>{{todo.title}}</strong>
+          <div class="secondary">
+            <i class="icon"
+               ng-class="{'icon-exclamation-sign' : todo.module == 'incident',
+                          'icon-briefcase' : todo.module == 'workorder',
+                          'icon-resize-horizontal' : todo.module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
+            <i class="icon icon-envelope"></i> {{todo.contactFullname}}
+          </div>
         </div>
-      </div>
-    </a>
-  </li>
-</ul>
+      </a>
+    </li>
+  </ul>
+</div>
