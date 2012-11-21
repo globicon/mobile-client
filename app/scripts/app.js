@@ -29,12 +29,6 @@
       });
   }]);
 
-  app.filter('vagueTime', function() {
-    return function(input) {
-      return window.vagueTime.get({ from : input, units:'ms' });
-    };
-  });
-
   app.filter( 'newline', function() {
     return function(input) {
       return input && input

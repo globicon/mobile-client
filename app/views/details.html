@@ -57,7 +57,7 @@
             <strong>{{hist.type}}</strong>
             <div ng-bind-html="hist.update | newline"></div>
             <div class="secondary">
-             {{hist.time | vagueTime}}<br>
+             {{hist.time | date:'dd/MM/yyyy HH:mm:ss'}}<br>
             </div>
           </div>
         </a>
