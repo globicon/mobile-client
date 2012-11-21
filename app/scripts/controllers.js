@@ -105,6 +105,9 @@
       $scope.create = function() {
         Resource.create( $scope.newInteraction ).then( function( data ) {
           $scope.creationResult = data;
+          if ( data.rc === '0' ) {
+            $scope.newInteraction = {};
+          }
         } );
       };
 
