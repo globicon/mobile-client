@@ -21,15 +21,15 @@
     // inject error handling into $q, TODO: do more with 401s AUTH
     var interceptor = ['$rootScope', '$q', 'notify', function (scope, $q, notify) {
       function success(resp) {
-        if ( resp.data.rc !== '0' ) {
-          notify( resp.data.rcMsg, 5000 );
+        if ( resp.data.rc && resp.data.rc !== '0') {
+          notify( { msg: resp.data.rcMsg, error: true }, 5000 );
         }
         return resp;
       }
 
       function error(resp) {
         if (resp.status !== 404) {
-          notify( 'Error resolving request. Contact your System Administrator' );
+          notify( { msg: 'Error resolving request. Contact your System Administrator', error: true }, true );
         }
         return $q.reject(resp);
       }
@@ -58,6 +58,7 @@
                 params : params || {}
               }).then(function(resp) {
                 if ( success(resp) ) {
+                  notify( { msg : resp.data.rcMsg, error: false }, 5000 );
                   // unwrap objects from row wrapper
                   // [{row: {id:5,..}}, {row...}] -> [{id:5,..},..]
                   deferred.resolve( resp.data.records.map(function(r) { return r.row; }));
@@ -89,9 +90,10 @@
                 url : urls['update' + type || 'incident' ] || urls['updateincident'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
-                  if (success(resp)) {
-                    deferred.resolve(resp.data);
-                  }
+                if (success(resp) ) {
+                  notify( { msg : resp.data.rcMsg, error: false }, 5000 );
+                  deferred.resolve(resp.data);
+                }
               });
         return deferred.promise;
       },
@@ -102,9 +104,10 @@
                 url : urls['newinteraction'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
-                  if (success(resp)) {
-                    deferred.resolve(resp.data);
-                  }
+                if (success(resp) ) {
+                  notify( { msg : resp.data.rcMsg, error: false }, 5000 );
+                  deferred.resolve(resp.data);
+               }
               });
         return deferred.promise;
       }

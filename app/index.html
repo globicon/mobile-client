@@ -65,8 +65,11 @@
   </div>
 
   <div class="alert-fixed" ng-cloak>
-    <div class="alert alert-error" ng-class="{hide: !errorMsg}">
-      <strong>Error</strong> {{errorMsg}} <button type="button" class="close" ng-click="errorMsg=''" >×</button>
+    <div class="alert" ng-class="{ 'hide': !notification,
+                                   'alert-success' : !notification.error,
+                                   'alert-error' : notification.error}">
+      {{notification.msg}}
+      <button type="button" class="close" ng-click="notification=''" >×</button>
     </div>
   </div>
 

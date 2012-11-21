@@ -74,7 +74,11 @@
 
       $scope.comment = {};
 
-      $scope.todo = Resource.get( module, id );
+      $scope.todo = {};
+
+      Resource.get( module, id ).then( function( todo ) {
+        $scope.todo = todo;
+      });
 
       $scope.update = function( kind ) {
         var update = { id: id,
@@ -84,9 +88,12 @@
         // with different object
         update[kind] = $scope.comment.text;
 
-        Resource.update( module, update ).then( function() {
-          $scope.todo = Resource.get( module, id );
-          $scope.comment = {};
+        Resource.update( module, update ).then( function( data ) {
+          // reload list of history if update was successful
+          Resource.get( module, id ).then( function( todo ) {
+            $scope.todo.history = todo.history;
+            $scope.comment = {};
+          });
         });
       };
 
@@ -97,17 +104,15 @@
 
   // New Controller
   // ------------------
- var NewController = app.controller( 'NewController',
-    ['$scope', '$location', 'Resource', function( $scope, $location, Resource ) {
+  var NewController = app.controller( 'NewController',
+    ['$scope', '$location', 'Resource',
+      function( $scope, $location, Resource ) {
 
       $scope.$parent.active = 'new';
 
       $scope.create = function() {
         Resource.create( $scope.newInteraction ).then( function( data ) {
-          $scope.creationResult = data;
-          if ( data.rc === '0' ) {
-            $scope.newInteraction = {};
-          }
+          $scope.newInteraction = {};
         } );
       };
 

@@ -20,23 +20,10 @@
     </address>
   </section>
 
-  <section class="section" ng-show="todo.history">
-    <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
-    <ul class="nav nav-list list-no-nav">
-      <li ng-repeat="hist in todo.history">
-         <a tabindex="-1">
-          <div>
-            <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
-            <strong>{{hist.type}}</strong>
-            <div ng-bind-html="hist.update | newline"></div>
-            <div class="secondary">
-             {{hist.time | vagueTime}}<br>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+  <hr/>
 
+  <section class="section" ng-show="todo.history">
+    <!-- comment form, for updating and resolving  -->
     <form name="commentForm" ng-hide="module == 'interaction'">
       <textarea class="input-block-level" ng-model="comment.text" name="comment"
                 placeholder="Add comment" rows="3" required></textarea>
@@ -59,6 +46,23 @@
               ng-disabled="!commentForm.$valid"
               ng-show="module == 'incident'">Resolve</button>
     </form>
+
+    <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
+
+    <ul class="nav nav-list list-no-nav">
+      <li ng-repeat="hist in todo.history">
+         <a tabindex="-1">
+          <div>
+            <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
+            <strong>{{hist.type}}</strong>
+            <div ng-bind-html="hist.update | newline"></div>
+            <div class="secondary">
+             {{hist.time | vagueTime}}<br>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
   </section>
 
 </div>

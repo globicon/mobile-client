@@ -26,11 +26,4 @@
             ng-click="create()"
             ng-disabled="!newForm.$valid">Submit</button>
   </form>
-
-  <div class="alert"
-       ng-show="creationResult"
-       ng-class="{'alert-success' : creationResult.rc == 0,
-                  'alert-error' : creationResult.rc != 0}">
-  {{creationResult.rcMsg}}
-  </div>
 </div>

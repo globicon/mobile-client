@@ -45,11 +45,13 @@
   });
 
   app.factory( 'notify', ['$rootScope', function( $rootScope ) {
-    return function( msg, fadeIn ) {
-      $rootScope.errorMsg = msg;
+    return function( notification, fadeIn ) {
+      $rootScope.notification = notification;
+
+      // remove notification after fadeIn millis
       if ( fadeIn && fadeIn > 0 ) {
         setTimeout( function() {
-          $rootScope.errorMsg = '';
+          $rootScope.notification = undefined;
           $rootScope.$apply(); },
         fadeIn );
       }
