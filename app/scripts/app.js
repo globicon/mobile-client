@@ -39,14 +39,16 @@
   });
 
   app.factory( 'notify', ['$rootScope', function( $rootScope ) {
+    $rootScope.notification = { hide : true };
     return function( notification, fadeIn ) {
       $rootScope.notification = notification;
 
       // remove notification after fadeIn millis
       if ( fadeIn && fadeIn > 0 ) {
         setTimeout( function() {
-          $rootScope.notification = undefined;
-          $rootScope.$apply(); },
+          $rootScope.notification.hide = true;
+          $rootScope.$apply();
+        },
         fadeIn );
       }
     };

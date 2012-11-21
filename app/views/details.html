@@ -22,7 +22,7 @@
 
   <hr/>
 
-  <section class="section" ng-show="todo.history">
+  <section class="section">
     <!-- comment form, for updating and resolving  -->
     <form name="commentForm" ng-hide="module == 'interaction'">
       <textarea class="input-block-level" ng-model="comment.text" name="comment"
@@ -47,22 +47,27 @@
               ng-show="module == 'incident'">Resolve</button>
     </form>
 
-    <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
+    <div ng-show="todo.history.length > 0">
+      <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
 
-    <ul class="nav nav-list list-no-nav">
-      <li ng-repeat="hist in todo.history">
-         <a tabindex="-1">
-          <div>
-            <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
-            <strong>{{hist.type}}</strong>
-            <div ng-bind-html="hist.update | newline"></div>
-            <div class="secondary">
-             {{hist.time | date:'dd/MM/yyyy HH:mm:ss'}}<br>
+      <ul class="nav nav-list list-no-nav">
+        <li ng-repeat="hist in todo.history">
+           <a tabindex="-1">
+            <div>
+              <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
+              <strong>{{hist.type}}</strong>
+              <div ng-bind-html="hist.update | newline"></div>
+              <div class="secondary">
+               {{hist.time | date:'dd/MM/yyyy HH:mm:ss'}}<br>
+              </div>
             </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div ng-show="todo.history.length == 0">
+      No history available
+    </div>
   </section>
 
 </div>

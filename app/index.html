@@ -65,11 +65,11 @@
   </div>
 
   <div class="alert-fixed" ng-cloak>
-    <div class="alert" ng-class="{ 'hide': !notification,
+    <div class="alert" ng-class="{ 'hide': notification.hide,
                                    'alert-success' : !notification.error,
                                    'alert-error' : notification.error}">
       {{notification.msg}}
-      <button type="button" class="close" ng-click="notification=''" >×</button>
+      <button type="button" class="close" ng-click="notification.hide=true">×</button>
     </div>
   </div>
 

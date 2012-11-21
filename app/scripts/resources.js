@@ -76,7 +76,18 @@
               }).then(function(resp) {
                 if (success(resp)) {
                   var todo = resp.data.attributes;
-                  angular.extend( todo, { history : resp.data.history, ready: true });
+                  todo.history = [];
+
+                  // Normalize history - ignore entries with no time
+                  var history = resp.data.history;
+                  angular.forEach( history, function( entry ) {
+                    if ( entry.time ) {
+                      todo.history.push( entry );
+                    }
+                  } );
+
+                  angular.extend( todo, { ready: true } );
+
                   deferred.resolve( todo );
                 }
               });
