@@ -1,7 +1,6 @@
 <div class="content" ng-show="todo.ready">
   <section class="section">
     <strong>{{todo.title}}</strong><br>
-    <p ng-bind-html="todo.description | newline" />
     <div class="secondary">
       <i class="icon"
          ng-class="{'icon-exclamation-sign' : module == 'incident',
@@ -9,6 +8,7 @@
                     'icon-resize-horizontal' : module == 'interaction' }"></i> {{todo.id}} -
       <i class="icon icon-flag"></i> {{todo.status}}<br>
     </div>
+    <p ng-bind-html="todo.description | newline" />
   </section>
   <section class="section">
     <span class="section-title"><i class="icon icon-envelope"></i> Contact</span>
@@ -25,13 +25,16 @@
   <section class="section">
     <!-- comment form, for updating and resolving  -->
     <form name="commentForm" ng-hide="module == 'interaction'">
+      <label>Update/Resolution:</label>
       <textarea class="input-block-level" ng-model="comment.text" name="comment"
                 placeholder="Add comment" rows="3" required></textarea>
       <label class="checkbox">
         <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
       </label>
+      <label>Resolution Code:</label>
       <select class="input-block-level" ng-model="comment.closureCode" required
               ng-show="module == 'incident'">
+        <option value=""></option>
         <option value="1">User Error</option>
         <option value="2">Software Malfunction</option>
         <option value="3">Hardware Malfunction</option>
