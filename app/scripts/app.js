@@ -6,6 +6,10 @@
   app.config(['$routeProvider', '$locationProvider',
               function($routeProvider, $locationProvider ) {
     $routeProvider
+      .when( '/', {
+        templateUrl: 'views/index.html',
+        controller: 'IndexController'
+      } )
       .when('/todos/new', {
         templateUrl: 'views/new.html',
         controller: 'NewController'
@@ -15,7 +19,7 @@
         controller: 'ListController',
         reloadOnSearch:false
       })
-      .when('/details/:module/:id', {
+      .when('/todos/:type/:module/:id', {
         templateUrl: 'views/details.html',
         controller: 'DetailsController',
         reloadOnSearch:false
@@ -25,7 +29,7 @@
         controller: 'SignInController'
       })
       .when().otherwise({
-        redirectTo: '/todos/my'
+        redirectTo: '/'
       });
   }]);
 
