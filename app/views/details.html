@@ -1,4 +1,4 @@
-<div class="content" ng-show="todo.ready">
+<div class="content" ng-hide="loading">
   <section class="section">
     <strong>{{todo.title}}</strong><br>
     <div class="secondary">
@@ -72,5 +72,11 @@
       No history available
     </div>
   </section>
+</div>
 
+<div class="content" ng-show="loading">
+  <p class="lead">Loading {{id}}</p>
+  <div class="progress progress-striped active">
+    <div class="bar" style="width:100%"></div>
+  </div>
 </div>

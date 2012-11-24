@@ -1,19 +1,28 @@
-<div class="content" >
+<div class="content" ng-hide="loading">
   <p class="lead">Todos
-    <a href="#todos/new" class="pull-right btn btn-wide"><i class="icon icon-refresh"></i></a>
+    <button class="pull-right btn btn-wide" ng-click="refresh()">
+      <i class="icon icon-refresh"></i>
+    </button>
   </p>
 
   <ul class="nav nav-tabs nav-stacked">
     <li>
-      <a href="#todos/my"><i class="icon icon-user"></i> My Todos</a>
-      <span class="pull-right badge">5</span>
+      <span class="pull-right badge">{{my.length}}</span>
+      <a href="#/todos/my"><i class="icon icon-user"></i> My Todos</a>
     </li>
     <li>
-      <a href="#todos/group"><i class="icon icon-users"></i> My Group Todos</a>
-      <span class="pull-right badge">42</span>
+      <span class="pull-right badge">{{group.length}}</span>
+      <a href="#/todos/group"><i class="icon icon-users"></i> My Group Todos</a>
     </li>
-    <li><a href="#todos/search"><i class="icon icon-search"></i> Search Todos</a></li>
+    <li><a href="#/todos/search"><i class="icon icon-search"></i> Search Todos</a></li>
   </ul>
 
-  <a href="#todos/new" class="btn btn-wide"><i class="icon icon-edit"></i> New</a>
+  <a href="#/todos/new" class="btn btn-wide"><i class="icon icon-edit"></i> New</a>
+</div>
+
+<div class="content" ng-show="loading">
+  <p class="lead">Loading Todos</p>
+  <div class="progress progress-striped active">
+    <div class="bar" style="width:100%"></div>
+  </div>
 </div>

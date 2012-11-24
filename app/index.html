@@ -32,7 +32,7 @@
 
   <header class="bar-title">
     <a class="button-prev" href="{{header.prev.href}}" ng-show="header.prev">{{header.prev.title}}</a>
-    <h1 class="title">{{header.title}}</span></h1>
+    <h1 class="title" ng-bind-html="header.title"></h1>
   </header>
 
   <div class="navbar navbar-inverse navbar-fixed-bottom">
