@@ -30,6 +30,11 @@
             '';
         }
 
+        function detailHeader( id, type ) {
+          return { title : id, prev : { title: capitalize( type ), href: '#/todos/' + type } };
+        }
+
+        // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
           var home = { href: '#', title: 'Home' },
               headers = {
@@ -42,9 +47,8 @@
               type = $routeParams.type,
               id = $routeParams.id;
 
-            $scope.header = id ?
-              { title : id,
-                prev : { title: capitalize( type ), href: '#/todos/' + type } } :
+            //
+            $scope.header = id ? detailHeader(id, type ) :
               headers[type] || headers[ $location.path() ] || headers['home'];
         } );
 
@@ -96,12 +100,24 @@
     });
 
     $scope.query = function( ) {
-      var params = {};
+      var params = $scope.$root.search;
+
+      $scope.todos = undefined;
+      $scope.noResults = false;
+
+      // do not search if no search term is specified
+      if ( !$scope.$root.search.id &&
+           !$scope.$root.search.contact &&
+           !$scope.$root.search.assignmentGroup ) {
+
+        return;
+      }
 
       $scope.loading = true;
       Resource.query( $scope.type, params ).then( function( data ) {
         $scope.todos = data;
         $scope.loading = false;
+        $scope.noResults = ($scope.todos||[]).length === 0;
       });
     };
 

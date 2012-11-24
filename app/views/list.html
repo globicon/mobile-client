@@ -25,6 +25,10 @@
     <div class="bar" style="width:100%"></div>
   </div>
 
+  <div class="alert alert-warning" ng-show="noResults">
+    <h4>No Results</h4> Search yield no results.
+  </div>
+
   <ul class="nav nav-list list">
     <li ng-repeat="todo in todos">
       <a ng-click="details(todo.module, todo.id)">
