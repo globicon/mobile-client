@@ -155,6 +155,9 @@
          var update = { id: id,
                         visibleToCustomer: $scope.comment.visibleToCustomer ? 'yes' : 'no',
                         closureCode : $scope.comment.closureCode };
+         $scope.updating = true;
+         $scope.alert = undefined;
+
          // update kind can be 'update' or 'resolution', same API is called
          // with different object
          update[kind] = $scope.comment.text;
@@ -162,6 +165,10 @@
          Resource.update( module, update ).then( function( data ) {
            // reload list of history if update was successful
            Resource.get( module, id ).then( function( todo ) {
+             if ( data.rc === '0' ) {
+               $scope.alert = data.rcMsg;
+             }
+             $scope.updating = false;
              $scope.todo.history = todo.history;
              $scope.comment = {};
            });

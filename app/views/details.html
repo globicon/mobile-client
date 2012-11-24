@@ -50,6 +50,14 @@
               ng-show="module == 'incident'">Resolve</button>
     </form>
 
+    <div class="alert alert-success" ng-show="alert">
+      {{alert}}
+    </div>
+
+    <div class="progress progress-striped active" ng-show="updating">
+      <div class="bar" style="width:100%"></div>
+    </div>
+
     <div ng-show="todo.history.length > 0">
       <span class="section-title"><i class="icon icon-list-alt"></i> History</span>
 
