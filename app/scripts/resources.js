@@ -100,10 +100,7 @@
                 url : urls['update' + type || 'incident' ] || urls['updateincident'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
-                if (success(resp) ) {
-                  notify( { msg : resp.data.rcMsg, error: false }, 5000 );
-                  deferred.resolve(resp.data);
-                }
+                deferred.resolve(resp.data);
               });
         return deferred.promise;
       },
@@ -114,10 +111,7 @@
                 url : urls['newinteraction'],
                 params : angular.extend( { jsonReq : data }, params )
                }).then(function(resp){
-                if (success(resp) ) {
-                  notify( { msg : resp.data.rcMsg, error: false }, 5000 );
-                  deferred.resolve(resp.data);
-               }
+                 deferred.resolve(resp.data);
               });
         return deferred.promise;
       }

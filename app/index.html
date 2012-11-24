@@ -47,8 +47,9 @@
     <div class="alert" ng-class="{ 'hide': notification.hide,
                                    'alert-success' : !notification.error,
                                    'alert-error' : notification.error}">
-      {{notification.msg}}
       <button type="button" class="close" ng-click="notification.hide=true">×</button>
+
+      {{notification.msg}}
     </div>
   </div>
 

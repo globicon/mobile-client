@@ -176,8 +176,15 @@
       function( $scope, $location, Resource ) {
 
       $scope.create = function() {
+        $scope.loading = true;
+        $scope.alert = undefined;
+
         Resource.create( $scope.newInteraction ).then( function( data ) {
+          if ( data.rc === '0' ) {
+            $scope.alert = data.rcMsg;
+          }
           $scope.newInteraction = {};
+          $scope.loading = false;
         } );
       };
 
