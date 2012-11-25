@@ -39,6 +39,11 @@
   background-image: url("#{$iconWhiteSpritePath}");
 }
 
+.icon-users {
+  background-image: url("../images/glyphicons_024_parents.png");
+  background-position: 0 0;
+}
+
 .icon-glass              { background-position: 0      0; }
 .icon-music              { background-position: -24px  0; }
 .icon-search             { background-position: -48px  0; }
