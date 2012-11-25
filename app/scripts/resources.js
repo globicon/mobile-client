@@ -60,7 +60,7 @@
                 if ( success(resp) ) {
                   // unwrap objects from row wrapper
                   // [{row: {id:5,..}}, {row...}] -> [{id:5,..},..]
-                  deferred.resolve( resp.data.records.map(function(r) { return r.row; }));
+                  deferred.resolve( (resp.data.records || []).map(function(r) { return r.row; }));
                 }
               });
 
