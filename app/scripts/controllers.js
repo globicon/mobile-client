@@ -42,7 +42,7 @@
                 '/todos/new' : { title : 'New', prev: home },
                 my: { title: 'My Todos' + count( 'my' ), prev: home },
                 group: { title: 'My Group Todos' + count( 'group' ), prev: home },
-                search: { title: 'Search', prev: home }
+                search: { title: 'Search' + count( 'search' ), prev: home }
               },
               type = $routeParams.type,
               id = $routeParams.id;
@@ -90,7 +90,7 @@
      function($scope, $location, $routeParams, Resource) {
 
     $scope.type = $routeParams.type || 'my';
-    $scope.$root.search = $scope.$root.search || {};
+    $scope.$root.searchParams = $scope.$root.searchParams || {};
 
     // watch if the current type of todo changes then update todos
     // to update binding
@@ -99,30 +99,36 @@
       $scope.todos = angular.isArray( todos ) ? todos : [];
     });
 
-    $scope.query = function( ) {
-      var params = $scope.$root.search;
+    $scope.search = function( ) {
+      var params = $scope.$root.searchParams;
 
       $scope.todos = undefined;
       $scope.noResults = false;
 
       // do not search if no search term is specified
-      if ( !$scope.$root.search.id &&
-           !$scope.$root.search.contact &&
-           !$scope.$root.search.assignmentGroup ) {
+      if ( !params.id &&
+           !params.contact &&
+           !params.assignmentGroup ) {
 
         return;
       }
 
       $scope.loading = true;
       Resource.query( $scope.type, params ).then( function( data ) {
-        $scope.todos = data;
+        var searchCount = (data||[]).length;
+
+        $scope.$root.search = $scope.todos = data;
+        $scope.noResults = searchCount === 0;
+        $scope.$parent.header.title = 'Search';
+        if ( !$scope.noResults ) {
+          $scope.$parent.header.title += '<span class="badge">' + searchCount + '</span>';
+        }
         $scope.loading = false;
-        $scope.noResults = ($scope.todos||[]).length === 0;
       });
     };
 
     $scope.clearSearch = function() {
-      $scope.$root.search = {};
+      $scope.$root.searchParams = {};
       $scope.todos = undefined;
     };
 

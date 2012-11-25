@@ -1,10 +1,10 @@
 <div class="content">
   <form ng-show="type == 'search'" >
-    <input type="text" ng-model="$root.search.id" class="input-block-level"
+    <input type="text" ng-model="$root.searchParams.id" class="input-block-level"
            placeholder="Search for ticket id" />
-    <input type="text" ng-model="$root.search.contact" class="input-block-level"
+    <input type="text" ng-model="$root.searchParams.contact" class="input-block-level"
            placeholder="Search for contact initials" />
-    <input type="text" ng-model="$root.search.assignmentGroup" class="input-block-level"
+    <input type="text" ng-model="$root.searchParams.assignmentGroup" class="input-block-level"
            placeholder="Search for assignment group" />
 
     <button type="reset" class="btn btn-50"
@@ -13,10 +13,10 @@
     </button>
     <!-- Search button is enabled if any search field has a value -->
     <button type="submit" class="btn btn-primary btn-50"
-            ng-click="query( 'search', search )"
-            ng-disabled="($root.search.id == null || search.id == '') &&
-                         ($root.search.contact == null || search.contact == '') &&
-                         ($root.search.assignmentGroup == null || search.ssignmentGroup == '')">
+            ng-click="search( )"
+            ng-disabled="($root.searchParams.id == null || searchParams.id == '') &&
+                         ($root.searchParams.contact == null || searchParams.contact == '') &&
+                         ($root.searchParams.assignmentGroup == null || searchParams.ssignmentGroup == '')">
        Search
     </button>
   </form>
