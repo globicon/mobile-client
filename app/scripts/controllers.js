@@ -41,14 +41,19 @@
                 '/todos/new' : { title : 'New', prev: home },
                 'my': { title: 'My Todos' + count( 'my' ), prev: home },
                 'group': { title: 'My Group Todos' + count( 'group' ), prev: home },
-                'search': { title: 'Search' + count( 'search' ), prev: home }
+                'search': { title: 'Search' + count( 'search' ), prev: home },
+                '/signin' : { title: 'Sign in' }
               },
               type = $routeParams.type,
               id = $routeParams.id;
 
-            //
             $scope.header = id ? detailHeader(id, type ) :
               headers[type] || headers[ $location.path() ] || headers['home'];
+
+            // call refresh on startup when my and group hasn't been loaded
+            if ( !$scope.$root.my && !$scope.$root.group ) {
+              refresh();
+            }
         } );
 
         // refresh loading todos
@@ -63,14 +68,13 @@
             });
           }
 
-          // fetch my and group todos on refresh
-          query( 'my' );
-          query( 'group' );
-        }
-
-        // call refresh on startup when my and group hasn't been loaded
-        if ( !$scope.$root.my && !$scope.$root.group ) {
-          refresh();
+          if ( $location.path() === '/signin' ) {
+            $scope.$root.my = $scope.$root.group = $scope.$root.search = undefined;
+          } else {
+            // fetch my and group todos on refresh
+            query( 'my' );
+            query( 'group' );
+          }
         }
 
         $scope.refresh = refresh;
@@ -193,10 +197,6 @@
           }
           $scope.newInteraction = {};
         } );
-      };
-
-      $scope.back = function( ) {
-        $location.path( '/' );
       };
     }]);
 

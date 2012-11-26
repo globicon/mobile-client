@@ -12,7 +12,8 @@
                interaction:     baseUrl + 'ViewInteraction' + callback,
                updateincident:  baseUrl + 'UpdateIncident'  + callback,
                updateworkorder: baseUrl + 'UpdateWorkorder' + callback,
-               newinteraction:  baseUrl + 'NewInteraction'  + callback };
+               newinteraction:  baseUrl + 'NewInteraction'  + callback,
+               login:           baseUrl + 'Login2' };
 
   var resources = angular.module('resources', []);
 
@@ -28,7 +29,10 @@
       }
 
       function error( resp ) {
-        if ( resp.status !== 404 ) {
+        if ( resp.status === 401 ) {
+          window.location.href = '#/signin';
+        }
+        else if ( resp.status !== 404 ) {
           notify( { msg: 'Error resolving request. Contact your System Administrator', error: true } );
         }
         return $q.reject( resp );
@@ -48,6 +52,18 @@
     // TODO: rewrite to use transformResponse instead of using custom deferred object
 
     return {
+      login : function( user, pass ) {
+        var deferred = $q.defer();
+
+        $http({ method: 'GET',
+                url: urls['login'],
+                params : { user: user, pw: pass }
+              }).success(function(data) {
+                deferred.resolve( true );
+              });
+
+        return deferred.promise;
+      },
       query : function( type, params ) {
         var deferred = $q.defer();
 
