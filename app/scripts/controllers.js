@@ -29,7 +29,6 @@
             '<span class="badge">' + $scope.$root[type].length + '</span>' :
             '';
         }
-
         function detailHeader( id, type ) {
           return { title : id, prev : { title: capitalize( type ), href: '#/todos/' + type } };
         }
@@ -38,11 +37,11 @@
         $scope.$on( '$routeChangeSuccess', function () {
           var home = { href: '#', title: 'Home' },
               headers = {
-                home : { title: 'User', prev: undefined },
+                'home' : { title: 'User', prev: undefined },
                 '/todos/new' : { title : 'New', prev: home },
-                my: { title: 'My Todos' + count( 'my' ), prev: home },
-                group: { title: 'My Group Todos' + count( 'group' ), prev: home },
-                search: { title: 'Search' + count( 'search' ), prev: home }
+                'my': { title: 'My Todos' + count( 'my' ), prev: home },
+                'group': { title: 'My Group Todos' + count( 'group' ), prev: home },
+                'search': { title: 'Search' + count( 'search' ), prev: home }
               },
               type = $routeParams.type,
               id = $routeParams.id;
@@ -52,23 +51,24 @@
               headers[type] || headers[ $location.path() ] || headers['home'];
         } );
 
+        // refresh loading todos
         function refresh() {
-          $scope.$root.loading = 2;
 
           function query( type ) {
             Resource.query( type ).then( function( data ) {
               $scope.$root[type] = data;
-              $scope.$root.loading--;
               if ( $routeParams.type === type ) {
                 $scope.header.title += '<span class="badge">' + data.length + '</span>';
               }
             });
           }
 
+          // fetch my and group todos on refresh
           query( 'my' );
           query( 'group' );
         }
 
+        // call refresh on startup when my and group hasn't been loaded
         if ( !$scope.$root.my && !$scope.$root.group ) {
           refresh();
         }
@@ -113,7 +113,6 @@
         return;
       }
 
-      $scope.loading = true;
       Resource.query( $scope.type, params ).then( function( data ) {
         var searchCount = (data||[]).length;
 
@@ -123,7 +122,6 @@
         if ( !$scope.noResults ) {
           $scope.$parent.header.title += '<span class="badge">' + searchCount + '</span>';
         }
-        $scope.loading = false;
       });
     };
 
@@ -150,11 +148,9 @@
        $scope.comment = {};
        $scope.todo = {};
 
-       $scope.loading = true;
 
        Resource.get( module, id ).then( function( todo ) {
          $scope.todo = todo;
-        $scope.loading = false;
        });
 
        $scope.update = function( kind ) {
@@ -169,8 +165,8 @@
          update[kind] = $scope.comment.text;
 
          Resource.update( module, update ).then( function( data ) {
-           // reload list of history if update was successful
-           Resource.get( module, id ).then( function( todo ) {
+           // reload list of history silently if update was successful
+           Resource.get( module, id, {}, true ).then( function( todo ) {
              if ( data.rc === '0' ) {
                $scope.alert = data.rcMsg;
              }
@@ -189,7 +185,6 @@
       function( $scope, $location, Resource ) {
 
       $scope.create = function() {
-        $scope.loading = true;
         $scope.alert = undefined;
 
         Resource.create( $scope.newInteraction ).then( function( data ) {
@@ -197,7 +192,6 @@
             $scope.alert = data.rcMsg;
           }
           $scope.newInteraction = {};
-          $scope.loading = false;
         } );
       };
 

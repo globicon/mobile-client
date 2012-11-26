@@ -35,14 +35,6 @@
     <h1 class="title" ng-bind-html="header.title"></h1>
   </header>
 
-  <div class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-        <a href="http://www.globicon.biz/" class="brand"> Globicon</a>
-      </div>
-    </div>
-  </div>
-
   <div class="alert-fixed" ng-cloak>
     <div class="alert" ng-class="{ 'hide': notification.hide,
                                    'alert-success' : !notification.error,
@@ -55,6 +47,14 @@
 
   <!-- Add your site or application content here -->
   <div class="container-fluid" ng-view></div>
+
+  <!--<footer class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a href="http://www.globicon.biz/" class="brand"> Globicon</a>
+      </div>
+    </div>
+  </footer>-->
 
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/vendor/angular.js"></script>

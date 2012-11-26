@@ -19,7 +19,7 @@
   resources.config( ['$httpProvider', function($httpProvider) {
 
     // inject error handling into $q, TODO: do more with 401s AUTH
-    var interceptor = ['$rootScope', '$q', 'notify', function (scope, $q, notify) {
+    var interceptor = ['$q', 'notify', function ($q, notify) {
       function success( resp ) {
         if ( resp.data.rc && resp.data.rc !== '0') {
           notify( { msg: resp.data.rcMsg, error: true }, 5000 );
@@ -29,7 +29,7 @@
 
       function error( resp ) {
         if ( resp.status !== 404 ) {
-          notify( { msg: 'Error resolving request. Contact your System Administrator', error: true }, true );
+          notify( { msg: 'Error resolving request. Contact your System Administrator', error: true } );
         }
         return $q.reject( resp );
       }
@@ -45,9 +45,7 @@
   resources.factory('Resource',
     ['$http', '$q', 'notify', function($http, $q, notify) {
 
-    function success(resp) {
-      return resp.data.rc === "0";
-    }
+    // TODO: rewrite to use transformResponse instead of using custom deferred object
 
     return {
       query : function( type, params ) {
@@ -56,29 +54,26 @@
         $http({ method: 'JSONP',
                 url: urls[type || 'mylist'] || urls['mylist'],
                 params : params || {}
-              }).then(function(resp) {
-                if ( success(resp) ) {
-                  // unwrap objects from row wrapper
-                  // [{row: {id:5,..}}, {row...}] -> [{id:5,..},..]
-                  deferred.resolve( (resp.data.records || []).map(function(r) { return r.row; }));
-                }
+              }).success(function(data) {
+                var records = (data || { } ).records || [];
+                deferred.resolve( records.map(function(r) { return r.row; }));
               });
 
         return deferred.promise;
       },
-      get : function(type, id, params) {
+      get : function(type, id, params, silent) {
         var deferred = $q.defer();
 
         $http({ method: 'JSONP',
                 url: urls[ type || 'incident' ] || urls['incident'],
-                params : angular.extend( {id: id}, params || {} )
-              }).then(function(resp) {
-                if (success(resp)) {
-                  var todo = resp.data.attributes;
+                params : angular.extend( {id: id}, params || {} ),
+                silent: silent
+              }).success(function(data) {
+                  var todo = ( data || { } ).attributes || [];
                   todo.history = [];
 
                   // Normalize history - ignore entries with no time
-                  var history = resp.data.history;
+                  var history = data.history || [];
                   angular.forEach( history, function( entry ) {
                     if ( entry.time ) {
                       todo.history.push( entry );
@@ -88,31 +83,32 @@
                   angular.extend( todo, { ready: true } );
 
                   deferred.resolve( todo );
-                }
               });
 
         return deferred.promise;
       },
-      update : function(type, data, params) {
+      update : function( type, data, params ) {
         var deferred = $q.defer();
 
-        $http({ method: 'JSONP',
+        $http( { method: 'JSONP',
                 url : urls['update' + type || 'incident' ] || urls['updateincident'],
-                params : angular.extend( { jsonReq : data }, params )
-               }).then(function(resp){
-                deferred.resolve(resp.data);
-              });
+                params : angular.extend( { jsonReq : data }, params ),
+                silent : true
+               } ).success( function( data ){
+                deferred.resolve( data );
+              } );
         return deferred.promise;
       },
-      create : function(data, params) {
-          var deferred = $q.defer();
+      create : function( data, params ) {
+        var deferred = $q.defer();
 
-        $http({ method: 'JSONP',
+        $http( { method: 'JSONP',
                 url : urls['newinteraction'],
-                params : angular.extend( { jsonReq : data }, params )
-               }).then(function(resp){
-                 deferred.resolve(resp.data);
-              });
+                params : angular.extend( { jsonReq : data }, params ),
+                silent : true
+               } ).success( function( data ) {
+                 deferred.resolve( data );
+              } );
         return deferred.promise;
       }
     };

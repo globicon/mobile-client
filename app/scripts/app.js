@@ -57,4 +57,53 @@
       }
     };
   }]);
+
+  app.directive( 'hideWhenLoading', ['$http', function( $http ) {
+   return {
+      replace : true,
+      restrict: 'A',
+      link : function( scope, element, attr ) {
+        function totalActiveAjaxRequests() {
+          var activeRequests = 0;
+          angular.forEach( $http.pendingRequests, function( r ) {
+            // filter out requests marked as silent
+            if ( !r.silent ) {
+              activeRequests++;
+            }
+          } );
+          return activeRequests;
+        }
+
+        scope.$watch( totalActiveAjaxRequests, function() {
+          element.css( 'display', totalActiveAjaxRequests() === 0 ? 'block' : 'none' );
+        } );
+      }
+    };
+  }]);
+
+  app.directive( 'loadingProgress', ['$http', function( $http ) {
+    return {
+      replace : true,
+      restrict: 'E',
+      scope : {
+        lead : '@'
+      },
+      link : function( scope, element, attrs ) {
+        function totalActiveAjaxRequests() {
+           return $http.pendingRequests.length;
+        }
+
+        scope.$watch( totalActiveAjaxRequests, function() {
+          scope.loading = totalActiveAjaxRequests();
+        } );
+      },
+      template : '<div ng-show="loading">' +
+                  '<p class="lead" ng-show="lead">{{lead}}</p>' +
+                  '<div class="progress progress-striped active">' +
+                    '<div class="bar" style="width:100%"></div>' +
+                  '</div>' +
+                '</div>'
+
+    };
+  }]);
 })( window, window.angular );

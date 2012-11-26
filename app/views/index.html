@@ -1,4 +1,4 @@
-<div class="content" ng-hide="loading">
+<div class="content" hide-when-loading>
   <p class="lead">Todos
     <button class="pull-right btn btn-wide" ng-click="refresh()">
       <i class="icon icon-refresh"></i>
@@ -19,9 +19,4 @@
   </ul>
 </div>
 
-<div class="content" ng-show="loading">
-  <p class="lead">Loading Todos</p>
-  <div class="progress progress-striped active">
-    <div class="bar" style="width:100%"></div>
-  </div>
-</div>
+<loading-progress class="content" lead="Loading Todos"></loading-progress>

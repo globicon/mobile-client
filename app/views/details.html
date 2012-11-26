@@ -1,4 +1,4 @@
-<div class="content" ng-hide="loading">
+<div class="content" hide-when-loading>
   <section class="section">
     <strong>{{todo.title}}</strong><br>
     <div class="secondary">
@@ -82,9 +82,5 @@
   </section>
 </div>
 
-<div class="content" ng-show="loading">
-  <p class="lead">Loading {{id}}</p>
-  <div class="progress progress-striped active">
-    <div class="bar" style="width:100%"></div>
-  </div>
-</div>
+
+<loading-progress class="content" lead="Loading {{id}}"></loading-progress>

@@ -6,7 +6,7 @@ body {
 }
 
 .alert-fixed {
-  position:fixed;
+  position:absolute;
   width: 100%;
   top: 50px;
   z-index: 9000;
@@ -29,8 +29,7 @@ body {
 }
 
 .content {
-  margin-top: 50px;
-  margin-bottom: 80px;
+  margin-top: 10px;
   padding: 0 10px;
   -webkit-overflow-scrolling: touch;
 }
@@ -178,7 +177,6 @@ a {
 /* Title bar
 -------------------------------------------------- */
 [class*="bar-"] {
-  position: fixed;
   right: 0;
   left: 0;
   z-index: 10;
