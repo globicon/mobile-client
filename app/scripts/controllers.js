@@ -10,6 +10,17 @@
     ['$scope', '$location', 'Resource', '$cookies', '$filter',
      function( $scope, $location, Resource, $cookies, $filter ){
 
+    function clearCookies() {
+      $cookies.user = undefined;
+      $cookies.loginDate = undefined;
+    }
+
+    if ( $cookies.user ) {
+      Resource.logout().success( function() {
+        clearCookies();
+      });
+    }
+
     $scope.$root.isSigningIn = true;
 
     $scope.signIn = function() {
@@ -24,8 +35,7 @@
         $scope.$root.isSigningIn = false;
       }).error( function( msg ) {
         $scope.loginError = msg;
-        $cookies.user = undefined;
-        $cookies.loginDate = undefined;
+        clearCookies();
       });
     };
   }]);

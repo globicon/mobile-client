@@ -12,7 +12,8 @@
                updateincident:  baseUrl + 'UpdateIncident'  ,
                updateworkorder: baseUrl + 'UpdateWorkorder' ,
                newinteraction:  baseUrl + 'NewInteraction'  ,
-               login:           baseUrl + 'Login' };
+               login:           baseUrl + 'Login',
+               logout:          baseUrl + 'Logout' };
 
   var resources = angular.module('resources', []);
 
@@ -55,6 +56,11 @@
         return $http({ method: 'GET',
                 url: urls['login'],
                 params : { user: user, pw: pass }
+              });
+      },
+      logout : function( ) {
+        return $http({ method: 'GET',
+                url: urls['logout']
               });
       },
       query : function( type, params ) {
