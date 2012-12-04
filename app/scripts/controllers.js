@@ -61,6 +61,10 @@
 
         // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
+          if ( !$cookies.user && $location.path() != '/signin' ) {
+            $location.path( '/signin' );
+            return;
+          }
           var home = { href: '#', title: 'Home' },
               loginTitle = $cookies.user + ' - ' + $cookies.loginDate,
               headers = {
@@ -212,8 +216,16 @@
   // New Controller
   // ------------------
   var NewController = app.controller( 'NewController',
-    ['$scope', '$location', 'Resource',
-      function( $scope, $location, Resource ) {
+    ['$scope', '$location', '$cookies', 'Resource',
+      function( $scope, $location, $cookies, Resource ) {
+
+      $scope.newInteraction = {};
+
+      $scope.$watch( 'me', function() {
+        $scope.newInteraction.contact = $scope.me ? $cookies.user : undefined;
+      } );
+
+      $scope.me = true;
 
       $scope.create = function() {
         $scope.alert = undefined;

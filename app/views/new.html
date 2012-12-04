@@ -1,11 +1,15 @@
 <div class="content">
   <form name="newForm" ng-hide="module == 'interaction'">
-    <input type="text" class="input-block-level" ng-model="newInteraction.contact"
+    <label class="checkbox pull-right">
+      <input type="checkbox" ng-model="me"> Me
+    </label>
+
+    <label for="contact">Contact</label>
+
+    <input id="contact" type="text" class="input-block-level" ng-model="newInteraction.contact"
            placeholder="Contact" required></input>
 
-    <label class="checkbox">
-      <input type="checkbox"> Me
-    </label>
+
 
     <textarea class="input-block-level" ng-model="newInteraction.description"
               placeholder="Description" rows="3" required></textarea>
