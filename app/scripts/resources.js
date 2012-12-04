@@ -1,19 +1,18 @@
 (function(angular) {
   'use strict';
 
-  var baseUrl = 'http://expresso.globicon.dk:8580/TEGFacadeJSON/',
-      callback = '?callback=JSON_CALLBACK&user=pk&pw=';
+  var baseUrl = 'http://expresso.globicon.dk:8580/TEGFacadeJSON/';
 
-  var urls = { search:          baseUrl + 'SearchRecords'   + callback,
-               my:              baseUrl + 'ListMyTodo'      + callback,
-               group:           baseUrl + 'ListMyGroupTodo' + callback,
-               incident:        baseUrl + 'ViewIncident'    + callback,
-               workorder:       baseUrl + 'ViewWorkorder'   + callback,
-               interaction:     baseUrl + 'ViewInteraction' + callback,
-               updateincident:  baseUrl + 'UpdateIncident'  + callback,
-               updateworkorder: baseUrl + 'UpdateWorkorder' + callback,
-               newinteraction:  baseUrl + 'NewInteraction'  + callback,
-               login:           baseUrl + 'Login2' };
+  var urls = { search:          baseUrl + 'SearchRecords'   ,
+               my:              baseUrl + 'ListMyTodo'      ,
+               group:           baseUrl + 'ListMyGroupTodo' ,
+               incident:        baseUrl + 'ViewIncident'    ,
+               workorder:       baseUrl + 'ViewWorkorder'   ,
+               interaction:     baseUrl + 'ViewInteraction' ,
+               updateincident:  baseUrl + 'UpdateIncident'  ,
+               updateworkorder: baseUrl + 'UpdateWorkorder' ,
+               newinteraction:  baseUrl + 'NewInteraction'  ,
+               login:           baseUrl + 'Login' };
 
   var resources = angular.module('resources', []);
 
@@ -31,6 +30,7 @@
       function error( resp ) {
         if ( resp.status === 401 ) {
           window.location.href = '#/signin';
+          notify( { msg: 'Unauthorized access. Please signin', error: true } );
         }
         else if ( resp.status !== 404 ) {
           notify( { msg: 'Error resolving request. Contact your System Administrator', error: true } );
@@ -50,24 +50,17 @@
     ['$http', '$q', 'notify', function($http, $q, notify) {
 
     // TODO: rewrite to use transformResponse instead of using custom deferred object
-
     return {
       login : function( user, pass ) {
-        var deferred = $q.defer();
-
-        $http({ method: 'GET',
+        return $http({ method: 'GET',
                 url: urls['login'],
                 params : { user: user, pw: pass }
-              }).success(function(data) {
-                deferred.resolve( true );
               });
-
-        return deferred.promise;
       },
       query : function( type, params ) {
         var deferred = $q.defer();
 
-        $http({ method: 'JSONP',
+        $http({ method: 'GET',
                 url: urls[type || 'mylist'] || urls['mylist'],
                 params : params || {}
               }).success(function(data) {
@@ -80,7 +73,7 @@
       get : function(type, id, params, silent) {
         var deferred = $q.defer();
 
-        $http({ method: 'JSONP',
+        $http({ method: 'GET',
                 url: urls[ type || 'incident' ] || urls['incident'],
                 params : angular.extend( {id: id}, params || {} ),
                 silent: silent
@@ -106,9 +99,10 @@
       update : function( type, data, params ) {
         var deferred = $q.defer();
 
-        $http( { method: 'JSONP',
+        $http( { method: 'POST',
                 url : urls['update' + type || 'incident' ] || urls['updateincident'],
-                params : angular.extend( { jsonReq : data }, params ),
+                params : params,
+                data : data,
                 silent : true
                } ).success( function( data ){
                 deferred.resolve( data );
@@ -118,10 +112,11 @@
       create : function( data, params ) {
         var deferred = $q.defer();
 
-        $http( { method: 'JSONP',
+        $http( { method: 'POST',
                 url : urls['newinteraction'],
-                params : angular.extend( { jsonReq : data }, params ),
-                silent : true
+                params : params,
+                silent : true,
+                data : data
                } ).success( function( data ) {
                  deferred.resolve( data );
               } );

@@ -7,10 +7,26 @@
   // Sign in controller
   // -----------------
   app.controller('SignInController',
-    ['$scope', '$location', function($scope, $location){
+    ['$scope', '$location', 'Resource', '$cookies', '$filter',
+     function( $scope, $location, Resource, $cookies, $filter ){
+
+    $scope.$root.isSigningIn = true;
 
     $scope.signIn = function() {
-      $location.path( '/' );
+      $scope.$root.my = $scope.$root.group = undefined;
+
+      var login = Resource.login( $scope.user, $scope.pass || '' )
+        .success( function() {
+        $cookies.user = $scope.user;
+        $cookies.loginDate = $filter( 'date')( new Date(), 'HH:MM' );
+        $scope.loginError = undefined;
+        $location.path( '/' );
+        $scope.$root.isSigningIn = false;
+      }).error( function( msg ) {
+        $scope.loginError = msg;
+        $cookies.user = undefined;
+        $cookies.loginDate = undefined;
+      });
     };
   }]);
 
@@ -18,8 +34,8 @@
   // NavController
   // -------------
   app.controller( 'NavController',
-    ['$scope', '$routeParams', '$location', 'Resource',
-      function( $scope, $routeParams, $location, Resource ) {
+    ['$scope', '$routeParams', '$location', '$filter', '$cookies', 'Resource',
+      function( $scope, $routeParams, $location, $filter, $cookies, Resource ) {
 
         function capitalize( str ) {
           return angular.uppercase( str[0] ) + str.slice( 1 );
@@ -36,8 +52,9 @@
         // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
           var home = { href: '#', title: 'Home' },
+              loginTitle = $cookies.user + ' - ' + $cookies.loginDate,
               headers = {
-                'home' : { title: 'User', prev: undefined },
+                'home' : { title: loginTitle, prev: undefined },
                 '/todos/new' : { title : 'New', prev: home },
                 'my': { title: 'My Todos' + count( 'my' ), prev: home },
                 'group': { title: 'My Group Todos' + count( 'group' ), prev: home },
@@ -51,7 +68,7 @@
               headers[type] || headers[ $location.path() ] || headers['home'];
 
             // call refresh on startup when my and group hasn't been loaded
-            if ( !$scope.$root.my && !$scope.$root.group ) {
+            if ( $cookies.user && !$scope.$root.my && !$scope.$root.group ) {
               refresh();
             }
         } );

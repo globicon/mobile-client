@@ -1,10 +1,10 @@
 (function( window, angular ) {
   'use strict';
 
-  var app = angular.module('mobileClientApp', ['resources', 'ngSanitize']);
+  var app = angular.module('mobileClientApp', ['resources', 'ngSanitize', 'ngCookies']);
 
   app.config(['$routeProvider', '$locationProvider',
-              function($routeProvider, $locationProvider ) {
+              function($routeProvider, $locationProvider) {
     $routeProvider
       .when( '/', {
         templateUrl: 'views/index.html',

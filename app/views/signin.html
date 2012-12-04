@@ -1,8 +1,11 @@
 <div class="content">
+   <div class="alert alert-error" ng-show="loginError">
+    <h4>Cannot signin</h4> Invalid username/password combination
+  </div>
   <form class="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="text" class="input-block-level" placeholder="Username">
-    <input type="password" class="input-block-level" placeholder="Password">
+    <input type="text" class="input-block-level" placeholder="Username" ng-model="user">
+    <input type="password" class="input-block-level" placeholder="Password" ng-model="pass">
     <button class="btn btn-large btn-primary btn-block" type="button"
             ng-click="signIn()">Sign in</button>
   </form>

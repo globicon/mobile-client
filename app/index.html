@@ -31,8 +31,9 @@
   <![endif]-->
 
   <header class="bar-title">
-    <a class="button-prev" href="{{header.prev.href}}" ng-show="header.prev">{{header.prev.title}}</a>
+    <a class="button" href="{{header.prev.href}}" ng-show="header.prev">{{header.prev.title}}</a>
     <h1 class="title" ng-bind-html="header.title"></h1>
+    <a class="button" href="#/signIn" ng-hide="isSigningIn">Sign out</a>
   </header>
 
   <div class="alert-fixed" ng-cloak>
@@ -40,7 +41,6 @@
                                    'alert-success' : !notification.error,
                                    'alert-error' : notification.error}">
       <button type="button" class="close" ng-click="notification.hide=true">×</button>
-
       {{notification.msg}}
     </div>
   </div>
@@ -58,6 +58,7 @@
 
   <!-- build:js scripts/scripts.js -->
   <script src="scripts/vendor/angular.js"></script>
+  <script src="scripts/vendor/angular-cookies.js"></script>
   <script src="scripts/vendor/angular-sanitize.js"></script>
   <script src="scripts/app.js"></script>
 
