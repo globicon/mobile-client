@@ -1,7 +1,7 @@
 (function( window, angular ) {
   'use strict';
 
-  var app = angular.module('mobileClientApp', ['resources', 'ngSanitize', 'ngCookies']);
+  var app = angular.module('mobileClientApp', ['resources', 'ngCookies']);
 
   app.config(['$routeProvider', '$locationProvider',
               function($routeProvider, $locationProvider) {
@@ -35,10 +35,7 @@
 
   app.filter( 'newline', function() {
     return function(input) {
-      return input && input
-        .replace( '<', '&lt;' )
-        .replace( '>', '&gt;' )
-        .replace(/\n/g, '<br/>');
+      return input && input.split( '\n' );
     };
   });
 

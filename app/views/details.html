@@ -8,7 +8,7 @@
                     'icon-resize-horizontal' : module == 'interaction' }"></i> {{todo.id}} -
       <i class="icon icon-flag"></i> {{todo.status}}<br>
     </div>
-    <p ng-bind-html="todo.description | newline" />
+    <div ng-repeat="line in todo.description | newline" >{{line}}<br/></div>
   </section>
   <section class="section">
     <span class="section-title"><i class="icon icon-envelope"></i> Contact</span>
@@ -67,7 +67,7 @@
             <div>
               <small ng-hide="todo.priority == 'null'" class="pull-right">Origin {{hist.origin}}</small>
               <strong>{{hist.type}}</strong>
-              <div ng-bind-html="hist.update | newline"></div>
+              <div ng-repeat="line in hist.update | newline">{{line}}</div>
               <div class="secondary">
                {{hist.time | date:'dd/MM/yyyy HH:mm:ss'}}<br>
               </div>

@@ -22,9 +22,9 @@
     }
 
     $scope.$root.isSigningIn = true;
+    $scope.$root.my = $scope.$root.group = undefined;
 
     $scope.signIn = function() {
-      $scope.$root.my = $scope.$root.group = undefined;
 
       var login = Resource.login( $scope.user, $scope.pass || '' )
         .success( function() {
@@ -78,7 +78,7 @@
               headers[type] || headers[ $location.path() ] || headers['home'];
 
             // call refresh on startup when my and group hasn't been loaded
-            if ( $cookies.user && !$scope.$root.my && !$scope.$root.group ) {
+            if ( !$scope.$root.my && !$scope.$root.group ) {
               refresh();
             }
         } );
