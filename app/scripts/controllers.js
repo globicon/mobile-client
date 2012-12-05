@@ -219,11 +219,13 @@
     ['$scope', '$location', '$cookies', 'Resource',
       function( $scope, $location, $cookies, Resource ) {
 
+      function resetContact() {
+        $scope.newInteraction.contact = $scope.me ? $cookies.user : undefined;
+      }
+
       $scope.newInteraction = {};
 
-      $scope.$watch( 'me', function() {
-        $scope.newInteraction.contact = $scope.me ? $cookies.user : undefined;
-      } );
+      $scope.$watch( 'me', resetContact );
 
       $scope.me = true;
 
@@ -235,6 +237,7 @@
             $scope.alert = data.rcMsg;
           }
           $scope.newInteraction = {};
+          resetContact();
         } );
       };
     }]);
