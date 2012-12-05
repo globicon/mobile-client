@@ -61,6 +61,8 @@
 
         // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
+          $scope.$root.search = undefined;
+
           if ( !$cookies.user && $location.path() != '/signin' ) {
             $location.path( '/signin' );
             return;
@@ -162,12 +164,14 @@
 
     $scope.clearSearch = function() {
       $scope.$root.searchParams = {};
-      $scope.todos = undefined;
+      $scope.todos = $scope.$root.search = undefined;
     };
 
     $scope.details = function( module, id ) {
       $location.path( '/todos/' + $scope.type + '/' + module + '/' + id );
     };
+
+    $scope.clearSearch();
   }]);
 
   //
