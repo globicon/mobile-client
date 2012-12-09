@@ -17,6 +17,10 @@
     <li><a href="#/todos/search"><i class="icon icon-search"></i> Search Todos</a></li>
     <li><a href="#/todos/new"><i class="icon icon-edit"></i> New</a></li>
   </ul>
+
+  <div class="alert alert-success" ng-show="alert">
+    {{alert}}
+  </div>
 </div>
 
 <loading-progress class="content" lead="Loading Todos"></loading-progress>

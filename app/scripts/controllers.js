@@ -63,7 +63,7 @@
         $scope.$on( '$routeChangeSuccess', function () {
           $scope.$root.search = undefined;
 
-          if ( !$cookies.user && $location.path() != '/signin' ) {
+          if ( !$cookies.user && $location.path() !== '/signin' ) {
             $location.path( '/signin' );
             return;
           }
@@ -81,7 +81,7 @@
               id = $routeParams.id;
 
             $scope.header = id ? detailHeader(id, type ) :
-              headers[type] || headers[ $location.path() ] || headers['home'];
+              headers[type] || headers[ $location.path() ] || headers.home;
 
             // call refresh on startup when my and group hasn't been loaded
             if ( !$scope.$root.my && !$scope.$root.group ) {
@@ -115,7 +115,10 @@
 
   app.controller( 'IndexController',
     ['$scope',  function( $scope, Resource ) {
-
+      if ( $scope.$root.alert ) {
+        $scope.alert = $scope.$root.alert;
+         $scope.$root.alert = null;
+      }
 
     }]);
 
@@ -231,17 +234,16 @@
 
       $scope.$watch( 'me', resetContact );
 
-      $scope.me = true;
+      $scope.me = false;
 
       $scope.create = function() {
         $scope.alert = undefined;
 
         Resource.create( $scope.newInteraction ).then( function( data ) {
           if ( data.rc === '0' ) {
-            $scope.alert = data.rcMsg;
+            $scope.$root.alert = data.rcMsg;
+            $location.path( '/' );
           }
-          $scope.newInteraction = {};
-          resetContact();
         } );
       };
     }]);
