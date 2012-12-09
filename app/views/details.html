@@ -19,6 +19,16 @@
       <div ng-show="todo.contactPhone"><a href="tel:{{todo.contactPhone}}">{{todo.contactPhone}}</a></div>
     </address>
   </section>
+  <section class="section" ng-show="module == 'incident' || module == 'workorder'">
+    <span class="section-title"><i class="icon icon-envelope"></i> Assignment Contact</span>
+    <address>
+      <div ng-show="todo.assignmentGroup">{{todo.assignmentGroup}}</div>
+      <div ng-show="todo.assignmentOperatorFullname"><strong>{{todo.assignmentOperatorFullname}}</strong></div>
+      <div ng-show="todo.assignmentOperator">{{todo.assignmentOperator}}</div>
+      <div ng-show="todo.assignmentOperatorEmail"><a href="mailto:{{todo.assignmentOperatorEmail}}">{{todo.assignmentOperatorEmail}}</a></div>
+      <div ng-show="todo.assignmentOperatorPhone"><a href="tel:{{todo.assignmentOperatorPhone}}">{{todo.assignmentOperatorPhone}}</a></div>
+    </address>
+  </section>
 
   <hr/>
 
