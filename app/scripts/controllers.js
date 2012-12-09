@@ -231,7 +231,7 @@
 
       $scope.$watch( 'me', resetContact );
 
-      $scope.me = true;
+      $scope.me = false;
 
       $scope.create = function() {
         $scope.alert = undefined;
