@@ -44,8 +44,8 @@
   // NavController
   // -------------
   app.controller( 'NavController',
-    ['$scope', '$routeParams', '$location', '$filter', '$cookies', 'Resource',
-      function( $scope, $routeParams, $location, $filter, $cookies, Resource ) {
+    ['$scope', '$routeParams', '$location', '$filter', '$cookies', 'notify', 'Resource',
+      function( $scope, $routeParams, $location, $filter, $cookies, notify, Resource ) {
 
         function capitalize( str ) {
           return angular.uppercase( str[0] ) + str.slice( 1 );
@@ -61,6 +61,7 @@
 
         // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
+          notify( 'hide' );
           $scope.$root.search = undefined;
 
           if ( !$cookies.user && $location.path() !== '/signin' ) {

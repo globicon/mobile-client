@@ -42,6 +42,10 @@
   app.factory( 'notify', ['$rootScope', function( $rootScope ) {
     $rootScope.notification = { hide : true };
     return function( notification, fadeIn ) {
+      if ( notification === 'hide' ) {
+        $rootScope.notification.hide = true;
+        return;
+      }
       $rootScope.notification = notification;
 
       // remove notification after fadeIn millis

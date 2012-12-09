@@ -23,7 +23,7 @@
     var interceptor = ['$q', 'notify', function ($q, notify) {
       function success( resp ) {
         if ( resp.data.rc && resp.data.rc !== '0') {
-          notify( { msg: resp.data.rcMsg, error: true }, 5000 );
+          notify( { msg: resp.data.rcMsg, error: true }, 3000 );
         }
         return resp;
       }
