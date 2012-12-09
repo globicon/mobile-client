@@ -15,8 +15,8 @@
     <address>
       <div ng-show="todo.contactFullname"><strong>{{todo.contactFullname}}</strong></div>
       <div ng-show="todo.contact">{{todo.contact}}</div>
-      <div ng-show="todo.contactEmail">{{todo.contactEmail}}</div>
-      <div ng-show="todo.contactPhone">{{todo.contactPhone}}</div>
+      <div ng-show="todo.contactEmail"><a href="mailto:{{todo.contactEmail}}">{{todo.contactEmail}}</a></div>
+      <div ng-show="todo.contactPhone"><a href="tel:{{todo.contactPhone}}">{{todo.contactPhone}}</a></div>
     </address>
   </section>
 
