@@ -6,13 +6,12 @@
 // Global values
 // --------------------------------------------------
 
-
 // Grays
 // -------------------------
 $black:                 #000 !default;
 $grayDarker:            #222 !default;
 $grayDark:              #333 !default;
-$gray:                  #555 !default;
+$gray:                  #666666 !default;
 $grayLight:             #999 !default;
 $grayLighter:           #eee !default;
 $white:                 #fff !default;
@@ -33,12 +32,12 @@ $purple:                #7a43b6 !default;
 // Scaffolding
 // -------------------------
 $bodyBackground:        $white !default;
-$textColor:             $grayDark !default;
+$textColor:             $gray !default;
 
 
 // Links
 // -------------------------
-$linkColor:             #08c !default;
+$linkColor:             #901A1E !default;
 $linkColorHover:        darken($linkColor, 15%) !default;
 
 
@@ -72,8 +71,8 @@ $btnBackground:                     $white !default;
 $btnBackgroundHighlight:            darken($white, 10%) !default;
 $btnBorder:                         #bbb !default;
 
-$btnPrimaryBackground:              $linkColor !default;
-$btnPrimaryBackgroundHighlight:     adjust-hue($btnPrimaryBackground, 20%) !default;
+$btnPrimaryBackground:              #901A1E !default;
+$btnPrimaryBackgroundHighlight:     darken($btnPrimaryBackground, 5%) !default;
 
 $btnInfoBackground:                 #5bc0de !default;
 $btnInfoBackgroundHighlight:        #2f96b4 !default;
@@ -171,9 +170,9 @@ $navbarLinkBackgroundActive:      darken($navbarBackground, 5.25%) !default;
 $navbarBrandColor:                $navbarLinkColor !default;
 
 // Inverted navbar
-$navbarInverseBackground:                #111111 !default;
-$navbarInverseBackgroundHighlight:       #222222 !default;
-$navbarInverseBorder:                    #252525 !default;
+$navbarInverseBackground:                #901A1E !default;
+$navbarInverseBackgroundHighlight:       darken($navbarInverseBackground, 5%) !default;
+$navbarInverseBorder:                    darken($navbarInverseBackground, 12%) !default;
 
 $navbarInverseText:                      $grayLight !default;
 $navbarInverseLinkColor:                 $grayLight !default;
@@ -239,6 +238,9 @@ $popoverTitleBackground:  darken($popoverBackground, 3%) !default;
 $popoverArrowOuterWidth:  $popoverArrowWidth + 1 !default;
 $popoverArrowOuterColor:  rgba(0,0,0,.25) !default;
 
+// Progress
+$progress-from: #666666;
+$progress-to:   #000000;
 
 
 // GRID

@@ -100,7 +100,7 @@
       },
       template : '<div ng-show="loading">' +
                   '<p class="lead" ng-show="lead">{{lead}}</p>' +
-                  '<div class="progress progress-striped active">' +
+                  '<div class="progress progress-striped progress-plain active">' +
                     '<div class="bar" style="width:100%"></div>' +
                   '</div>' +
                 '</div>'

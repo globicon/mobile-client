@@ -89,6 +89,14 @@
 // COLORS
 // ------
 
+// Plain (gray)
+.progress-plain .bar, .progress-plain .bar {
+  @include gradient-vertical($progress-from, $progress-to);
+}
+.progress-plain.progress-striped .bar, .progress-striped .bar-plain {
+  @include gradient-striped($progress-from);
+}
+
 // Danger (red)
 .progress-danger .bar, .progress .bar-danger {
   @include gradient-vertical(#ee5f5b, #c43c35);
