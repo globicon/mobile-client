@@ -41,7 +41,7 @@
       <label class="checkbox">
         <input type="checkbox" ng-model="comment.visibleToCustomer"> Visible to Customer
       </label>
-      <label>Resolution Code:</label>
+      <label ng-show="module == 'incident'">Resolution Code:</label>
       <select class="input-block-level" ng-model="comment.closureCode" required
               ng-show="module == 'incident'">
         <option value=""></option>
