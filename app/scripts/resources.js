@@ -20,7 +20,7 @@
   resources.config( ['$httpProvider', function($httpProvider) {
 
     // inject error handling into $q, TODO: do more with 401s AUTH
-    var interceptor = ['$q', 'notify', function ($q, notify) {
+    var interceptor = ['$q', 'notify', '$location', function ( $q, notify, $location ) {
       function success( resp ) {
         if ( resp.data.rc && resp.data.rc !== '0') {
           notify( { msg: resp.data.rcMsg, error: true }, 3000 );
@@ -30,8 +30,11 @@
 
       function error( resp ) {
         if ( resp.status === 401 ) {
-          window.location.href = '#/signin';
-          notify( { msg: 'Unauthorized access. Please signin', error: true } );
+          $location.path();
+          if ( $location.path() !== '/signin' ) {
+            window.location.href = '#/signin';
+            notify( { msg: 'Unauthorized access. Please signin', error: true } );
+          }
         }
         else if ( resp.status !== 404 ) {
           notify( { msg: 'Error resolving request. Contact your System Administrator', error: true } );
