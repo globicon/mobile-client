@@ -62,7 +62,6 @@
         // When route changes - update page header
         $scope.$on( '$routeChangeSuccess', function () {
           notify( 'hide' );
-          $scope.$root.search = undefined;
 
           if ( !$cookies.user && $location.path() !== '/signin' ) {
             $location.path( '/signin' );
@@ -118,9 +117,10 @@
     ['$scope',  function( $scope, Resource ) {
       if ( $scope.$root.alert ) {
         $scope.alert = $scope.$root.alert;
-         $scope.$root.alert = null;
+        $scope.$root.alert = null;
       }
-
+      $scope.$root.search = undefined;
+      $scope.$root.searchParams = {};
     }]);
 
   //
@@ -174,8 +174,6 @@
     $scope.details = function( module, id ) {
       $location.path( '/todos/' + $scope.type + '/' + module + '/' + id );
     };
-
-    $scope.clearSearch();
   }]);
 
   //
