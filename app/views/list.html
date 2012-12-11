@@ -46,6 +46,7 @@
                           'icon-briefcase' : todo.module == 'workorder',
                           'icon-resize-horizontal' : todo.module == 'interaction' }"></i> {{todo.id}} - <i class="icon icon-flag"></i> {{todo.status}}<br>
             <i class="icon icon-envelope"></i> {{todo.contactFullname}}
+            <div ng-hide="todo.assignee == '' || todo.assignee == 'N/A'"><i class="icon icon-eye-open"></i> {{todo.assignmentGroup}} - {{todo.assignee}}</div>
           </div>
         </div>
       </a>
