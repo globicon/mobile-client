@@ -45,10 +45,7 @@
       <select class="input-block-level" ng-model="comment.closureCode" required
               ng-show="module == 'incident'">
         <option value=""></option>
-        <option value="1">User Error</option>
-        <option value="2">Software Malfunction</option>
-        <option value="3">Hardware Malfunction</option>
-        <option value="4">Support</option>
+        <option ng-repeat="rc in resolutionCodeList" value="{{rc.key}}">{{rc.value}}</option>
       </select>
       <button class="btn btn-large btn-50" type="button"
               ng-click="update('update')"

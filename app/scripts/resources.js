@@ -12,8 +12,10 @@
                updateincident:  baseUrl + 'UpdateIncident'  ,
                updateworkorder: baseUrl + 'UpdateWorkorder' ,
                newinteraction:  baseUrl + 'NewInteraction'  ,
-               login:           baseUrl + 'Login',
-               logout:          baseUrl + 'Logout' };
+               login:           baseUrl + 'Login'           ,
+               logout:          baseUrl + 'Logout'          ,
+               resolutionCodeList: baseUrl + 'GeneralData?action=resolutionCodeList',
+               templateList:    baseUrl + 'GeneralData?action=templateList' };
 
   var resources = angular.module('resources', []);
 

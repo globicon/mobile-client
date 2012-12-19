@@ -16,11 +16,8 @@
 
     <label for="template">Template</label>
     <select class="input-block-level" ng-model="newInteraction.template">
-      <option value="1">Password Reset</option>
-      <option value="2">User Authentication Error</option>
-      <option value="3">Request for Software</option>
-      <option value="4">Request for Hardware</option>
-      <option value="5">Request for Server</option>
+      <option value=""></option>
+      <option ng-repeat="template in templateList" value="{{template.key}}">{{template.value}}</option>
     </select>
 
     <textarea class="input-block-level" ng-model="newInteraction.solution"

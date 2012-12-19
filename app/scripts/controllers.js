@@ -107,6 +107,8 @@
             // fetch my and group todos on refresh
             query( 'my' );
             query( 'group' );
+            query( 'resolutionCodeList' );
+            query( 'templateList' );
           }
         }
 
