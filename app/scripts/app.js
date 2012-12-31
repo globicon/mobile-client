@@ -1,7 +1,7 @@
 (function( window, angular ) {
   'use strict';
 
-  var app = angular.module('mobileClientApp', ['resources', 'ngSanitize', 'ngCookies']);
+  var app = angular.module( 'mobileClientApp', ['resources', 'ngSanitize', 'ngCookies']);
 
   app.config(['$routeProvider', '$locationProvider',
               function($routeProvider, $locationProvider) {

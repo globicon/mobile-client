@@ -1,22 +1,6 @@
 (function(angular) {
   'use strict';
 
-  var baseUrl = 'http://expresso.globicon.dk:8580/TEGFacadeJSON/';
-
-  var urls = { search:          baseUrl + 'SearchRecords'   ,
-               my:              baseUrl + 'ListMyTodo'      ,
-               group:           baseUrl + 'ListMyGroupTodo' ,
-               incident:        baseUrl + 'ViewIncident'    ,
-               workorder:       baseUrl + 'ViewWorkorder'   ,
-               interaction:     baseUrl + 'ViewInteraction' ,
-               updateincident:  baseUrl + 'UpdateIncident'  ,
-               updateworkorder: baseUrl + 'UpdateWorkorder' ,
-               newinteraction:  baseUrl + 'NewInteraction'  ,
-               login:           baseUrl + 'Login'           ,
-               logout:          baseUrl + 'Logout'          ,
-               resolutionCodeList: baseUrl + 'GeneralData?action=resolutionCodeList',
-               templateList:    baseUrl + 'GeneralData?action=templateList' };
-
   var resources = angular.module('resources', []);
 
   resources.config( ['$httpProvider', function($httpProvider) {
@@ -39,7 +23,10 @@
           }
         }
         else if ( resp.status !== 404 ) {
-          notify( { msg: 'Error resolving request. Contact your System Administrator', error: true }, 4000 );
+          notify( { msg: 'Error resolving request. Contact your System Administrator', error: true } );
+        }
+        else {
+          notify( { msg: 'Error resolving request. <small>' +  resp.config.url + '</small> cannot be found.<br/> Contact your System Administrator', error: true } );
         }
         return $q.reject( resp );
       }
@@ -53,7 +40,12 @@
   } ] );
 
   resources.factory('Resource',
-    ['$http', '$q', 'notify', function($http, $q, notify) {
+    ['$http', '$q', 'notify', 'config', function($http, $q, notify, config) {
+
+    var urls = config.urls;
+    if ( !urls ) {
+      throw new Error( 'Server Urls are not configured. Edit config.js' );
+    }
 
     // TODO: rewrite to use transformResponse instead of using custom deferred object
     return {
