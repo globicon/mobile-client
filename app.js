@@ -12,10 +12,10 @@ Ext.application({
     'Ext.MessageBox'
   ],
 
-  views: ['Signin', 'Main'],
+  views: ['Signin'],
   controllers : ['Signin','Todos'],
   models : ['Todo'],
-  stores : ['Todos'],
+  stores : ['MyTodos', 'GroupTodos'],
 
   icon: {
     '57': 'resources/icons/Icon.png',
@@ -45,7 +45,6 @@ Ext.application({
 
     // Initialize the main view
     Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
-    Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
   },
 
   onUpdated: function() {

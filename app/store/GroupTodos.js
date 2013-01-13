@@ -1,4 +1,4 @@
-Ext.define( 'MobileClient.store.Todos', {
+Ext.define( 'MobileClient.store.GroupTodos', {
   extend : 'Ext.data.Store',
 
   config : {
@@ -6,7 +6,11 @@ Ext.define( 'MobileClient.store.Todos', {
     proxy : {
       type : 'ajax',
       url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyGroupTodo',
-      reader: 'json'
+      reader: {
+        type: 'json',
+        record : 'row',
+        rootProperty : 'records'
+      }
     }
   }
 } );
