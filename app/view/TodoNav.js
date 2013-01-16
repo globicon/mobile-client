@@ -4,5 +4,15 @@ Ext.define( 'MobileClient.view.TodoNav', {
 
   requires: [
     'MobileClient.view.TodoList'
-  ]
+  ],
+
+  config : {
+    navigationBar: {
+      items: [{
+        xtype: 'button',
+        text: 'New',
+        align: 'right'
+      }]
+    }
+  }
 });

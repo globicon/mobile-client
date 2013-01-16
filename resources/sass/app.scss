@@ -15,6 +15,7 @@
 @include sencha-carousel;
 @include sencha-form;
 @include sencha-msgbox;
+@include sencha-loading-spinner;
 
 // Your custom code goes here...
 $warningText:             #c09853 !default;
@@ -33,18 +34,8 @@ $infoText:                #3a87ad !default;
 $infoBackground:          #d9edf7 !default;
 $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 
-.error {
-  color: $alert-color;
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
+/* Alerts
+ * ----------- */
 .alert {
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
@@ -70,4 +61,59 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
   background-color: $infoBackground;
   border-color: $infoBorder;
   color: $infoText;
+}
+
+/* Shapes
+ * --------------- */
+.rect {
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 64px;
+  width: 64px;
+  line-height: 64px;
+  font-size: 22px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.rect-gray {
+  color: #999;
+  background-color: #eee;
+}
+
+.rect-blue {
+  color: #eee;
+  background-color: #839CB5;
+}
+
+.rect-green {
+  color: #eee;
+  background-color: #43B3AE;
+}
+
+/* Lists
+ * --------------- */
+.list-item {
+  overflow: hidden;
+  zoom: 1;
+}
+
+/* Utils
+ * ---------------- */
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
 }

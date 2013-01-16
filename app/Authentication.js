@@ -37,14 +37,17 @@ Ext.define( 'MobileClient.Authentication', {
              date : new Date( Cookies.get( 'loginTime' ) ) };
   },
 
-
   isAuthenticated : function() {
     return Cookies.get( 'user' );
   },
 
-  logout : function() {
+  clear : function() {
     Cookies.set( 'user' );
     Cookies.set( 'loginTime' );
+  },
+
+  logout : function() {
     // TODO: call logout service
+    this.clear();
   }
 } );

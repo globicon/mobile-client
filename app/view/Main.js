@@ -18,6 +18,10 @@ Ext.define('MobileClient.view.Main', {
       title: 'Group Todos',
       iconCls: 'team1',
       xtype : 'groupTodoNav'
+    },
+    {
+      title: 'Search Todos',
+      iconCls: 'search'
     }
     ]
   }

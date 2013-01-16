@@ -29,7 +29,7 @@ Ext.define('MobileClient.controller.Signin', {
       pass: values.pass,
       success : function( ) {
         Ext.select( '.alert-error' ).addCls( 'hide' );
-        ctrl.redirectTo('todos');
+        ctrl.redirectTo( 'todos' );
       },
       failure : function() {
         Ext.select( '.alert-error' ).removeCls( 'hide' );

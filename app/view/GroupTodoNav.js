@@ -7,7 +7,8 @@ Ext.define( 'MobileClient.view.GroupTodoNav', {
   config : {
     items : [ {
       xtype: 'todoList',
-      store: 'GroupTodos'
+      store: 'GroupTodos',
+      title: 'Group Todos'
     }]
   }
 });

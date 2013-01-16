@@ -3,12 +3,12 @@ Ext.define( 'MobileClient.model.Todo', {
 
   config : {
     fields : ['id',
-              'assignmentGroup',
               'title',
               'module',
               'status',
               'priority',
               'assignee',
+              'assignmentGroup',
               'contactFullname']
   }
 } );

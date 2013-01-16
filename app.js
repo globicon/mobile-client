@@ -12,7 +12,7 @@ Ext.application({
     'Ext.MessageBox'
   ],
 
-  views: ['Signin'],
+  views: ['Signin','Main'],
   controllers : ['Signin','Todos'],
   models : ['Todo'],
   stores : ['MyTodos', 'GroupTodos'],
@@ -43,8 +43,30 @@ Ext.application({
       url : 'http://expresso.globicon.dk:2993/TEGFacadeJSON/Login'
     } );
 
+    Ext.Ajax.on({
+      beforerequest : function( conn, options, eOpts ) {
+        Ext.Viewport.setMasked({
+          xtype: 'loadmask',
+          message: 'Loading',
+          indicator: true
+        });
+      },
+      requestcomplete : function( conn, response, options, eOpts ) {
+        Ext.Viewport.setMasked( false );
+      },
+      requestexception: function( conn, response, options, eOpts ) {
+        Ext.Viewport.setMasked( false );
+        if ( response.status === 401 ) {
+          MobileClient.auth.clear();
+          this.redirectTo( 'signin' );
+        }
+      },
+      scope: this
+    });
+
     // Initialize the main view
     Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
+    Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
   },
 
   onUpdated: function() {

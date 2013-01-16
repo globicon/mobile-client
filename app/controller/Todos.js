@@ -2,13 +2,12 @@ Ext.define('MobileClient.controller.Todos', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'MobileClient.Authentication',
-    'MobileClient.view.Main'
+    'MobileClient.Authentication'
   ],
 
   config: {
     before : {
-      showMain : ['authenticate', 'ensureLoaded' ]
+      showMain : ['authenticate']
     },
     routes : {
       'todos' : 'showMain'
@@ -25,19 +24,9 @@ Ext.define('MobileClient.controller.Todos', {
       this.redirectTo( 'signin' );
   },
 
-  ensureLoaded : function( action ) {
-    if ( Ext.Viewport.items.length === 1 ) {
-      Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
-
-      // TODO, show loading
-      Ext.StoreMgr.get('MyTodos' ).load();
-      Ext.StoreMgr.get('GroupTodos' ).load();
-    }
-
-    action.resume();
-  },
-
   showMain : function() {
+    Ext.StoreMgr.get('MyTodos' ).load();
+    Ext.StoreMgr.get('GroupTodos' ).load();
     Ext.Viewport.setActiveItem( 1 );
   }
 });
