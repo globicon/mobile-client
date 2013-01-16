@@ -3,7 +3,8 @@ Ext.define('MobileClient.view.Main', {
   xtype: 'main',
   requires: [
     'MobileClient.view.MyTodoNav',
-    'MobileClient.view.GroupTodoNav'
+    'MobileClient.view.GroupTodoNav',
+    'MobileClient.view.Settings'
   ],
   config: {
     tabBarPosition: 'bottom',
@@ -22,6 +23,11 @@ Ext.define('MobileClient.view.Main', {
     {
       title: 'Search Todos',
       iconCls: 'search'
+    },
+    {
+      title : 'Account',
+      iconCls : 'settings',
+      xtype : 'settings'
     }
     ]
   }

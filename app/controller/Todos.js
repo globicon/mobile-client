@@ -25,8 +25,16 @@ Ext.define('MobileClient.controller.Todos', {
   },
 
   showMain : function() {
-    Ext.StoreMgr.get('MyTodos' ).load();
-    Ext.StoreMgr.get('GroupTodos' ).load();
+    var that = this;
+
+    Ext.StoreMgr.get('MyTodos').load();
+    Ext.StoreMgr.get('GroupTodos').load();
+
+    Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
     Ext.Viewport.setActiveItem( 1 );
+
+    MobileClient.auth.on( {
+      loggedOut : function() { that.redirectTo( 'signin'); }
+    } );
   }
 });

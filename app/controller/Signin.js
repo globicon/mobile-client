@@ -29,6 +29,8 @@ Ext.define('MobileClient.controller.Signin', {
       pass: values.pass,
       success : function( ) {
         Ext.select( '.alert-error' ).addCls( 'hide' );
+        // clear form as it reused on signout
+        form.setValues( { user : '', pass: '' } );
         ctrl.redirectTo( 'todos' );
       },
       failure : function() {

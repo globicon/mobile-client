@@ -1,7 +1,10 @@
 Ext.define( 'MobileClient.Authentication', {
 
+  mixins: ['Ext.mixin.Observable'],
+
   config : {
-    url : undefined
+    url : undefined,
+    logoutUrl : undefined
   },
 
   constructor : function( config ) {
@@ -9,6 +12,8 @@ Ext.define( 'MobileClient.Authentication', {
   },
 
   authenticate : function( config ) {
+    var that = this;
+
     Ext.Ajax.request( {
       url: this.getUrl(),
       method : 'GET', // TODO: change to POST
@@ -24,6 +29,7 @@ Ext.define( 'MobileClient.Authentication', {
         Cookies.set( 'user', config.user );
         Cookies.set( 'loginTime', new Date() );
         ( config.success || function() {} )( response );
+        that.fireEvent( 'authenticated' );
       },
 
       failure : function( response ) {
@@ -47,7 +53,17 @@ Ext.define( 'MobileClient.Authentication', {
   },
 
   logout : function() {
-    // TODO: call logout service
-    this.clear();
+    var that = this;
+
+    Ext.Ajax.request( {
+      url: this.getLogoutUrl(),
+      method : 'GET', // TODO: change to POST
+      disableCaching : false,
+      withCredentials: true,
+      success : function() {
+        that.fireEvent( 'loggedOut' );
+        that.clear();
+      }
+    } );
   }
 } );

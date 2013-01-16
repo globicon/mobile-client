@@ -93,6 +93,7 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
   background-color: #43B3AE;
 }
 
+
 /* Lists
  * --------------- */
 .list-item {
@@ -108,6 +109,10 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 
 .pull-left {
   float: left;
+}
+
+.centered {
+  text-align: center;
 }
 
 .hide {
