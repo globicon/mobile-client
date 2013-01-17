@@ -8,6 +8,11 @@ Ext.define('MobileClient.view.Main', {
   ],
   config: {
     tabBarPosition: 'bottom',
+    layout: {
+      animation: {
+        type: 'fade'
+      }
+    },
 
     items: [
     {

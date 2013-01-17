@@ -93,12 +93,30 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
   background-color: #43B3AE;
 }
 
-
 /* Lists
  * --------------- */
-.list-item {
+.list-content {
   overflow: hidden;
   zoom: 1;
+}
+
+.x-list-item-body {
+  margin-right: 6px;
+}
+
+.x-list-item .x-list-disclosure {
+  overflow: hidden;
+  -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGBwQ7Dme80Q4AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKBJREFUOMvtU7ENAyEQM0i0DJMMxggnNoCKhpWyBxVINBQUlyrRJwKeKF0Ul9bZ8vl0wO8ixshExGdzYkSGEDilBKUUeu+w1oqZgRyRrTUAQO8dSimskkydnXNcSgGAZRKx2s97zznnpYlcGRhjnsOzdeTGQa5Hk60SHyAiaK1vH5/xIOZa6wv/3oH4RjxcgYguu+JVAt4R46TArV/4A7gDIZZWTRQC+PUAAAAASUVORK5CYII=') no-repeat;
+  -webkit-mask-size: 1.2em;
+  background-color: #FFFFFF;
+  background-image: -webkit-linear-gradient(#939393,#939393);
+  background-image: linear-gradient(#939393,#939393);
+  position: absolute;
+  right: 0px;
+  top: 28px;
+  width: 1em;
+  height: 1.2em;
+  bottom: 30%;
 }
 
 /* Utils

@@ -33,7 +33,7 @@ Ext.define( 'MobileClient.view.Settings', {
           var authInfo = MobileClient.auth.getAuthInfo();
           return '<p class="centered">' +
                  '<h2>' + authInfo.user + '</h2>' +
-                 '<div>Signed in at ' + Ext.Date.format(authInfo.date, 'F j, Y, g:i a') + '</div>' +
+                 '<div>Signed in ' + Ext.Date.format(authInfo.date, 'F j, Y, G:i') + '</div>' +
                  '</p>';
         };
 

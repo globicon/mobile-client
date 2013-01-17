@@ -5,6 +5,7 @@ Ext.define( 'MobileClient.view.TodoList', {
   config : {
     scrollable: true,
     styleHtmlContent: true,
+    onItemDisclosure: true,
 
     itemTpl : [
       '<small class="pull-right">{status} - P{priority}</small>',
@@ -15,7 +16,7 @@ Ext.define( 'MobileClient.view.TodoList', {
       '  <tpl elseif="module == \'interaction\'">',
       '    <div class="rect rect-gray pull-left">int</div>',
       '</tpl>',
-      '<div class="list-item">',
+      '<div class="list-content">',
       '  <div><strong>{title}</strong></div>',
       '  <div><small>{id} - {contactFullname}</small></div>',
       '    <tpl if="assignee != \'N/A\'">',

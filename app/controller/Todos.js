@@ -12,9 +12,14 @@ Ext.define('MobileClient.controller.Todos', {
     routes : {
       'todos' : 'showMain'
     },
-    refs: {
-      mainPanel: 'main',
-      todonav: 'todonav'
+    refs : {
+      'mainView' : 'main'
+    },
+    control : {
+      'todoList' : {
+        disclose : 'showTodo',
+        select : 'showTodo'
+      }
     }
   },
 
@@ -22,6 +27,14 @@ Ext.define('MobileClient.controller.Todos', {
     MobileClient.auth.isAuthenticated() ?
       action.resume() :
       this.redirectTo( 'signin' );
+  },
+
+  showTodo : function( list, todo ) {
+    var activeNav = this.getMainView().getActiveItem();
+    activeNav.push({
+        title: 'Second',
+        html: todo.data.title
+    });
   },
 
   showMain : function() {

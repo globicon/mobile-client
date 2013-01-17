@@ -8,7 +8,8 @@ Ext.define( 'MobileClient.view.MyTodoNav', {
   config : {
     items : [ {
       xtype: 'todoList',
-      store: 'MyTodos'
+      store: 'MyTodos',
+      title: 'My Todos'
     } ]
   }
 });
