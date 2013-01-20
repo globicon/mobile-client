@@ -32,8 +32,8 @@ Ext.define('MobileClient.controller.Todos', {
   showTodo : function( list, todo ) {
     var activeNav = this.getMainView().getActiveItem();
     activeNav.push({
-        title: 'Second',
-        html: todo.data.title
+      title: 'Second',
+      html: todo.data.title
     });
   },
 

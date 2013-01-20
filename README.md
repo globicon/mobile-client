@@ -20,3 +20,26 @@ Initial application scaffolding done with the following command
 sencha -sdk ~/Downloads/sencha-touch-2.1.0-commercial generate app MobileClient .
 ```
 
+The Sencha Cmd is used to test and build the application read more about the
+Sencha Cmd on http://docs.sencha.com/touch/2-0/#!/guide/command
+
+## Development
+TODO
+
+## Building
+To build a version that can be deployed on a webserver
+
+```bash
+sencha app build production
+```
+
+This will generate a folder in `build/MobileClient/production/` this folder should be
+deployed on a webserver.
+
+To build a package the app as a native application
+
+```bash
+sencha app build native
+```
+
+Read more about native packaging on http://docs.sencha.com/touch/2-0/#!/guide/native_packaging
