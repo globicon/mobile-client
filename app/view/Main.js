@@ -2,28 +2,35 @@ Ext.define('MobileClient.view.Main', {
   extend: 'Ext.tab.Panel',
   xtype: 'main',
   requires: [
-    'MobileClient.view.MyTodoNav',
-    'MobileClient.view.GroupTodoNav',
+    'MobileClient.view.TodoNav',
     'MobileClient.view.Settings'
   ],
   config: {
     tabBarPosition: 'bottom',
     layout: {
-      animation: {
-        type: 'fade'
-      }
+      animation: false
     },
 
     items: [
     {
       title: 'My Todos',
       iconCls: 'user',
-      xtype : 'myTodoNav'
+      xtype : 'todonav',
+      items : [ {
+        xtype: 'todoList',
+        store: 'MyTodos',
+        title: 'My Todos'
+      }]
     },
     {
       title: 'Group Todos',
       iconCls: 'team1',
-      xtype : 'groupTodoNav'
+      xtype : 'todonav',
+      items : [{
+        xtype: 'todoList',
+        store : 'MyTodos',
+        title : 'Group Todo'
+      }]
     },
     {
       title: 'Search Todos',
