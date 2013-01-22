@@ -42,6 +42,7 @@ Ext.define('MobileClient.controller.Todos', {
 
     Ext.StoreMgr.get('MyTodos').load();
     Ext.StoreMgr.get('GroupTodos').load();
+    Ext.StoreMgr.get('Approvals').load();
 
     Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
     Ext.Viewport.setActiveItem( 1 );

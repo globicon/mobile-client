@@ -15,7 +15,7 @@ Ext.application({
   views: ['Signin','Main'],
   controllers : ['Signin','Todos'],
   models : ['Todo'],
-  stores : ['MyTodos', 'GroupTodos'],
+  stores : ['MyTodos', 'GroupTodos', 'Approvals'],
 
   icon: {
     '57': 'resources/icons/Icon.png',

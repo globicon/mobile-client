@@ -33,6 +33,16 @@ Ext.define('MobileClient.view.Main', {
       }]
     },
     {
+      title : 'My Approvals',
+      iconCls : 'check1',
+      xtype: 'todonav',
+       items : [{
+        xtype: 'todoList',
+        store : 'Approvals',
+        title : 'My Approvals'
+      }]
+    },
+    {
       title: 'Search Todos',
       iconCls: 'search'
     },
