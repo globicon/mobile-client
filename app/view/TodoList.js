@@ -1,11 +1,17 @@
 Ext.define( 'MobileClient.view.TodoList', {
   extend: 'Ext.List',
+  requires : ['Ext.plugin.PullRefresh'],
+
   xtype: 'todoList',
 
   config : {
     scrollable: true,
     styleHtmlContent: true,
     onItemDisclosure: true,
+
+    plugins: [{
+      xclass: 'Ext.plugin.PullRefresh'
+    }],
 
     itemTpl : [
       '<small class="pull-right">{status} - P{priority}</small>',
