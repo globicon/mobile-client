@@ -2,7 +2,8 @@ Ext.define('MobileClient.controller.Todos', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'MobileClient.Authentication'
+    'MobileClient.Authentication',
+    'MobileClient.view.Details'
   ],
 
   config: {
@@ -31,10 +32,15 @@ Ext.define('MobileClient.controller.Todos', {
 
   showTodo : function( list, todo ) {
     var activeNav = this.getMainView().getActiveItem();
-    activeNav.push({
-      title: 'Second',
-      html: todo.data.title
-    });
+
+    var model = Ext.create( 'MobileClient.model.Incident', { id : todo.getId() } );
+
+    activeNav.push( Ext.create( 'MobileClient.view.Details', {
+      model : model,
+      title : model.getId()
+    } ) );
+
+    model.load();
   },
 
   showMain : function() {
