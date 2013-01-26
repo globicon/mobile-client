@@ -1,31 +1,87 @@
-Ext.define( 'MobileClient.view.Details', {
-  extend: 'Ext.Panel',
+(function( Ext ) {
+  'use strict';
 
-  requires: ['Ext.DateExtras'],
+  var tpl = [
+    '<div>',
+    '<small class="pull-right">{status} - P{priority}</small>',
+    '  <tpl if="module == \'incident\'">',
+    '    <div class="rect rect-blue pull-left">IM</div>',
+    '  <tpl elseif="module == \'workorder\'">',
+    '    <div class="rect rect-green pull-left">WO</div>',
+    '  <tpl elseif="module == \'interaction\'">',
+    '    <div class="rect rect-gray pull-left">int</div>',
+    '</tpl>',
+    '<div class="list-content">',
+    '  <div><strong>{title}</strong></div>',
+    '  <div><small>{id} - {contactFullname}</small></div>',
+    '  <tpl if="assignee != \'N/A\'">',
+    '    <div><small>{assignmentGroup} - {assignee}</small></div>',
+    '  <tpl else>',
+    '    <div>&nbsp;</div>',
+    '  </tpl>',
+    '</div>',
+    '<p>{description}</p>',
+    '<hr/>',
+    '<address>',
+    '<strong>Contact</strong><br/>',
+    '<tpl if="contact">',
+    '{contactFullname} ({contact})<br/>',
+    '</tpl>',
+    '<tpl if="contactEmail">',
+    '{contactEmail}<br/>',
+    '</tpl>',
+    '<tpl if="contactPhone">',
+    'Phone: {contactPhone}<br/>',
+    '</tpl>',
+    '</address>',
+    '<hr/>',
+    '<address>',
+    '<strong>Assignment Operator</strong><br/>',
+    '<tpl if="assignmentOperator">',
+    '{assignmentOperatorFullname} ({assignmentOperator})<br/>',
+    '</tpl>',
+    '<tpl if="assignmentEmail">',
+    '{assignmentEmail}<br/>',
+    '</tpl>',
+    '<tpl if="assignmentPhone">',
+    'Phone: {assignmentPhone}<br/>',
+    '</tpl>',
+    '</address>',
+    '</div>'];
 
-  xtype: 'settings',
+  Ext.define( 'MobileClient.view.Details', {
+    extend: 'Ext.Panel',
 
-  config : {
-    model : null,
-    styleHtmlContent: true,
-    tpl : Ext.XTemplate( '<p>{description}</p>' ),
+    requires: ['Ext.DateExtras'],
 
-    items: [
-    {
-      xtype : 'panel',
-      html : 'Loading Details'
-    }]
-  },
+    xtype: 'settings',
 
-  initialize : function() {
-    var model = this.getModel(),
-        detailsPanel = this.items.get(0),
-        tpl = this.getTpl();
-    if ( model ) {
-      detailsPanel.setHtml( tpl.apply( model.getData() ) );
+    config : {
+      model : null,
+      fullscreen: true,
+      styleHtmlContent: true,
+      tpl : Ext.XTemplate( tpl.join('') ),
+
+      items: [
+      {
+        xtype : 'panel',
+        html : 'Loading Details'
+      },
+      ]
+    },
+
+    initialize : function() {
+      var model = this.getModel(),
+          detailsPanel = this.items.get(0),
+          tpl = this.getTpl();
+
+      if ( !model ) {
+        return;
+      }
+
       model.on( { 'loaded' : function() {
         detailsPanel.setHtml( tpl.apply( model.getData() ) );
       } } );
     }
-  }
-});
+  });
+} )( window.Ext );

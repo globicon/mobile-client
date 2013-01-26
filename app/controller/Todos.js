@@ -1,60 +1,70 @@
-Ext.define('MobileClient.controller.Todos', {
-  extend: 'Ext.app.Controller',
+( function( Ext, MobileClient ) {
+  'use strict';
 
-  requires: [
-    'MobileClient.Authentication',
-    'MobileClient.view.Details'
-  ],
+  Ext.define('MobileClient.controller.Todos', {
+    extend: 'Ext.app.Controller',
 
-  config: {
-    before : {
-      showMain : ['authenticate']
-    },
-    routes : {
-      'todos' : 'showMain'
-    },
-    refs : {
-      'mainView' : 'main'
-    },
-    control : {
-      'todoList' : {
-        disclose : 'showTodo',
-        select : 'showTodo'
+    requires: [
+      'MobileClient.Authentication',
+      'MobileClient.view.Details'
+    ],
+
+    config: {
+      before : {
+        showMain : ['authenticate']
+      },
+      routes : {
+        'todos' : 'showMain'
+      },
+      refs : {
+        'mainView' : 'main'
+      },
+      control : {
+        'todoList' : {
+          disclose : 'showTodo',
+          select : 'showTodo'
+        }
       }
-    }
-  },
+    },
 
-  authenticate : function( action ) {
-    MobileClient.auth.isAuthenticated() ?
-      action.resume() :
+    authenticate : function( action ) {
+      if ( MobileClient.auth.isAuthenticated() ) {
+        action.resume();
+        return;
+      }
       this.redirectTo( 'signin' );
-  },
+    },
 
-  showTodo : function( list, todo ) {
-    var activeNav = this.getMainView().getActiveItem();
+    showTodo : function( list, todo ) {
+      var activeNav = this.getMainView().getActiveItem();
 
-    var model = Ext.create( 'MobileClient.model.Incident', { id : todo.getId() } );
+      var model = Ext.create( 'MobileClient.model.Incident',
+                              { id : todo.getId(), copy : todo } );
 
-    activeNav.push( Ext.create( 'MobileClient.view.Details', {
-      model : model,
-      title : model.getId()
-    } ) );
+      activeNav.push( Ext.create( 'MobileClient.view.Details', {
+        model : model,
+        title : model.getId()
+      } ) );
 
-    model.load();
-  },
+      model.loadDetails();
 
-  showMain : function() {
-    var that = this;
+      // remove selection - making item ready to be selected again
+      list.deselectAll( true );
+    },
 
-    Ext.StoreMgr.get('MyTodos').load();
-    Ext.StoreMgr.get('GroupTodos').load();
-    Ext.StoreMgr.get('Approvals').load();
+    showMain : function() {
+      var that = this;
 
-    Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
-    Ext.Viewport.setActiveItem( 1 );
+      Ext.StoreMgr.get('MyTodos').load();
+      Ext.StoreMgr.get('GroupTodos').load();
+      Ext.StoreMgr.get('Approvals').load();
 
-    MobileClient.auth.on( {
-      loggedOut : function() { that.redirectTo( 'signin'); }
-    } );
-  }
-});
+      Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
+      Ext.Viewport.setActiveItem( 1 );
+
+      MobileClient.auth.on( {
+        loggedOut : function() { that.redirectTo( 'signin'); }
+      } );
+    }
+  } );
+} )( window.Ext, window.MobileClient );

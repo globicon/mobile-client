@@ -75,7 +75,6 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
   width: 64px;
   line-height: 64px;
   font-size: 22px;
-  margin-bottom: 10px;
   margin-right: 10px;
 }
 
@@ -118,6 +117,16 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
   width: 1em;
   height: 1.2em;
   bottom: 30%;
+}
+
+hr {
+  border-color: #fff;
+  color: #eee;
+  border-left: 0px;
+}
+
+address {
+  font-size: .8em;
 }
 
 /* Utils

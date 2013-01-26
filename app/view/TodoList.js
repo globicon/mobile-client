@@ -15,6 +15,7 @@ Ext.define( 'MobileClient.view.TodoList', {
     }],
 
     itemTpl : [
+      '<div style="margin-bottom:20px;">',
       '<small class="pull-right">{status} - P{priority}</small>',
       '  <tpl if="module == \'incident\'">',
       '    <div class="rect rect-blue pull-left">IM</div>',
@@ -26,9 +27,10 @@ Ext.define( 'MobileClient.view.TodoList', {
       '<div class="list-content">',
       '  <div><strong>{title}</strong></div>',
       '  <div><small>{id} - {contactFullname}</small></div>',
-      '    <tpl if="assignee != \'N/A\'">',
-      '    <div><small>{assignmentGroup} - {assignee}</div>',
-      '    </tpl>',
+      '  <tpl if="assignee != \'N/A\'">',
+      '    <div><small>{assignmentGroup} - {assignee}</small></div>',
+      '  </tpl>',
+      '</div>',
       '</div>'
     ].join('')
   }
