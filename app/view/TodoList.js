@@ -8,6 +8,7 @@ Ext.define( 'MobileClient.view.TodoList', {
     scrollable: true,
     styleHtmlContent: true,
     onItemDisclosure: true,
+    selectedCls : 'none',
 
     plugins: [{
       xclass: 'Ext.plugin.PullRefresh'

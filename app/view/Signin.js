@@ -40,7 +40,7 @@ Ext.define( 'MobileClient.view.Signin', {
     {
       xtype: 'button',
       text: 'Signin',
-      ui: 'confirm'
+      ui: 'action'
     }
     ]
   }
