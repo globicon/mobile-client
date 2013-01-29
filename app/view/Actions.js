@@ -2,25 +2,24 @@
   'use strict';
 
   Ext.define( 'MobileClient.view.Actions', {
-    extend: 'Ext.SegmentedButton',
+    extend: 'Ext.Container',
 
     xtype: 'actions',
 
     config : {
-      style: 'margin: 10px auto;',
-      layout: {
-        pack: 'center'
-      },
+      layout: 'hbox',
       items : [
       {
-        iconCls: 'reply',
-        iconMask: true,
+        xtype: 'button',
         text: 'Comment',
+        flex: 1,
+        margin: 4
       },
       {
-        iconCls: 'check1',
-        iconMask: true,
+        xtype: 'button',
         text: 'Resolve',
+        flex: 1,
+        margin: 4
       }]
     }
   });

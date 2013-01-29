@@ -1,5 +1,23 @@
 @import 'sencha-touch/default/all';
 
+$body-bg-color: #000;
+
+$button-radius: .2em;
+
+$base-color: #333;
+$base-gradient: 'matte';
+
+$tabs-dark: $base-color;
+$tabs-light: #555;
+
+$tabs-bottom-radius: .2em;
+$tabs-bottom-gradient: 'bevel';
+$tabs-bar-gradient: 'matte';
+$tabs-bottom-active-gradient: 'recessed';
+
+$toolbar-gradient: 'matte';
+$toolbar-base-color: #333;
+
 // You may remove any of the following modules that you
 // do not use in order to create a smaller css file.
 @include sencha-panel;
@@ -17,6 +35,21 @@
 @include sencha-form;
 @include sencha-msgbox;
 @include sencha-loading-spinner;
+
+/*.x-toolbar .x-toolbar-title {
+  color: saturate(lighten($active-color, 10%), 20%);
+  text-shadow: rgba(#fff, .8) 0 1px 20px;
+}
+
+.x-tab-active img {
+  background: white none !important;
+}*/
+
+.x-tabbar.x-docked-bottom .x-tab {
+  &.x-tab-active {
+    -webkit-box-shadow: inset rgba(#000, .8) 0 0 5px !important;
+  }
+}
 
 // Your custom code goes here...
 $warningText:             #c09853 !default;
@@ -115,9 +148,13 @@ $borderedBackground:      #fafafa;
 .bordered-bottom {
   -webkit-border-radius: 0 0 2px 2px!important;
   border-radius: 0 0 2px 2px !important;
-  border-top: 0;
   padding-top: 0;
   margin-top: 0 !important;
+  margin-bottom: 1em;
+
+  >* {
+    padding: 1em 0 1em 0;
+  }
 }
 
 .tight {

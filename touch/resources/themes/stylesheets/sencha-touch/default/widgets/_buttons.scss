@@ -121,7 +121,6 @@ $include-button-highlights: $include-highlights !default;
     white-space: nowrap;
     text-overflow: ellipsis;
     text-align: center;
-    font-weight: bold;
     line-height: 1.2em;
     display: block;
     overflow: hidden;
@@ -162,7 +161,7 @@ $include-button-highlights: $include-highlights !default;
 
   // Back/Forward buttons
   $shadow-width: .045em; // Space between tip and its shadow
-  $overlap-width: .2em; // how far the mask is clipped
+  $overlap-width: .08em; // how far the mask is clipped
 
   // $mask-height: $button-height + $button-stroke-weight * 2; // Ugh, this is non-specific... borders?
   $mask-height: $button-height;

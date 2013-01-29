@@ -47,6 +47,7 @@
     '    Phone: {assignmentPhone}<br/>',
     '  </tpl>',
     ' </address>',
+    ' <br/>',
     '</div>'];
 
   Ext.define( 'MobileClient.view.Summary', {

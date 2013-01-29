@@ -81,18 +81,3 @@ Ext.application({
       } );
   }
 });
-
-var setupPCScrollbar = function(container){
-    var isMobile = (navigator.appVersion.toLowerCase().indexOf("mobile") > -1 || navigator.appVersion.toLowerCase().indexOf("ipad") > -1);
-    if(!isMobile){
-        if(container.isXType('selectfield'))container = container.down('list');// Add support for selectbuttons
-        if(!Ext.isFunction(container.getScrollable) || !container.getScrollable() || !Ext.isFunction(container.getScrollable().getScroller))return console.warn("Attempting to apply pc scroller to non-container item");
-        container.getScrollable().getScroller().setDisabled(true);
-        var scrollContainers = Ext.DomQuery.select('.x-scroll-container', container.element.dom);
-        var scrollBars = Ext.DomQuery.select('.x-scroll-indicator', container.element.dom);
-        for(var i=0;i<scrollContainers.length;i++)
-            scrollContainers[i].style.overflow = "auto";
-        for(var i=0;i<scrollBars.length;i++)
-            scrollBars[i].style.zIndex = "-1";
-    }
-}

@@ -1,18 +1,23 @@
-Ext.define( 'MobileClient.view.TodoNav', {
-  extend: 'Ext.navigation.View',
-  xtype: 'todonav',
+(function( Ext ) {
+  'use strict';
 
-  requires: [
-    'MobileClient.view.TodoList'
-  ],
+  Ext.define( 'MobileClient.view.TodoNav', {
+    extend: 'Ext.navigation.View',
+    xtype: 'todonav',
 
-  config : {
-    navigationBar: {
-      items: [{
-        xtype: 'button',
-        text: 'New',
-        align: 'right'
-      }]
+    requires: [
+      'MobileClient.view.TodoList'
+    ],
+
+    config : {
+      navigationBar: {
+        ui: 'light',
+        items: [{
+          xtype: 'button',
+          text: 'New',
+          align: 'right'
+        }]
+      }
     }
-  }
-});
+  });
+} )( window.Ext );
