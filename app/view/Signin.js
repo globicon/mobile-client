@@ -1,47 +1,51 @@
-Ext.define( 'MobileClient.view.Signin', {
-  extend: 'Ext.form.Panel',
+(function( Ext ) {
+  'use strict';
 
-  xtype: 'signin-panel',
+  Ext.define( 'MobileClient.view.Signin', {
+    extend: 'Ext.form.Panel',
 
-  title: 'Signin',
+    xtype: 'signin-panel',
 
-  requires: ['Ext.form.FieldSet', 'Ext.field.Password'],
+    title: 'Signin',
 
-  config: {
-    fullscreen: true,
-    styleHtmlContent: true,
+    requires: ['Ext.form.FieldSet', 'Ext.field.Password'],
 
-    items: [
-    {
-      xtype: 'fieldset',
-      title: 'Please Signin',
-      layout: 'vbox',
+    config: {
+      fullscreen: true,
+      styleHtmlContent: true,
 
       items: [
       {
-        name: 'user',
-        xtype: 'textfield',
-        label: 'Username',
-        labelWidth: '32%',
-        labelWrap: true
+        xtype: 'fieldset',
+        title: 'Please Signin',
+        layout: 'vbox',
+
+        items: [
+        {
+          name: 'user',
+          xtype: 'textfield',
+          label: 'Username',
+          labelWidth: '32%',
+          labelWrap: true
+        },
+        {
+          name: 'pass',
+          xtype: 'passwordfield',
+          label: 'Password',
+          labelWidth: '32%',
+          labelWrap: true
+        }
+        ]
       },
       {
-        name: 'pass',
-        xtype: 'passwordfield',
-        label: 'Password',
-        labelWidth: '32%',
-        labelWrap: true
+        html : '<div class="alert alert-error hide">Invalid username/password combination</div>'
+      },
+      {
+        xtype: 'button',
+        text: 'Signin',
+        ui: 'action'
       }
       ]
-    },
-    {
-      html : '<div class="alert alert-error hide">Invalid username/password combination</div>'
-    },
-    {
-      xtype: 'button',
-      text: 'Signin',
-      ui: 'action'
     }
-    ]
-  }
-});
+  });
+})( window.Ext );

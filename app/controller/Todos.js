@@ -21,8 +21,8 @@
       },
       control : {
         'todoList' : {
-          disclose : 'showTodo',
-          select : 'showTodo'
+          disclose : 'showDetails',
+          select : 'showDetails'
         }
       }
     },
@@ -35,18 +35,15 @@
       this.redirectTo( 'signin' );
     },
 
-    showTodo : function( list, todo ) {
+    showDetails : function( list, todo ) {
       var activeNav = this.getMainView().getActiveItem();
 
-      var model = Ext.create( 'MobileClient.model.Incident',
-                              { id : todo.getId(), copy : todo } );
-
       activeNav.push( Ext.create( 'MobileClient.view.Details', {
-        model : model,
-        title : model.getId()
+        model : todo,
+        title : todo.getId()
       } ) );
 
-      model.loadDetails();
+      todo.loadDetails();
 
       // remove selection - making item ready to be selected again
       list.deselectAll( true );

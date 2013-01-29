@@ -1,86 +1,52 @@
 (function( Ext ) {
   'use strict';
 
-  var tpl = [
-    '<div>',
-    '<small class="pull-right">{status} - P{priority}</small>',
-    '  <tpl if="module == \'incident\'">',
-    '    <div class="rect rect-blue pull-left">IM</div>',
-    '  <tpl elseif="module == \'workorder\'">',
-    '    <div class="rect rect-green pull-left">WO</div>',
-    '  <tpl elseif="module == \'interaction\'">',
-    '    <div class="rect rect-gray pull-left">int</div>',
-    '</tpl>',
-    '<div class="list-content">',
-    '  <div><strong>{title}</strong></div>',
-    '  <div><small>{id} - {contactFullname}</small></div>',
-    '  <tpl if="assignee != \'N/A\'">',
-    '    <div><small>{assignmentGroup} - {assignee}</small></div>',
-    '  <tpl else>',
-    '    <div>&nbsp;</div>',
-    '  </tpl>',
-    '</div>',
-    '<p>{description}</p>',
-    '<hr/>',
-    '<address>',
-    '<strong>Contact</strong><br/>',
-    '<tpl if="contact">',
-    '{contactFullname} ({contact})<br/>',
-    '</tpl>',
-    '<tpl if="contactEmail">',
-    '{contactEmail}<br/>',
-    '</tpl>',
-    '<tpl if="contactPhone">',
-    'Phone: {contactPhone}<br/>',
-    '</tpl>',
-    '</address>',
-    '<hr/>',
-    '<address>',
-    '<strong>Assignment Operator</strong><br/>',
-    '<tpl if="assignmentOperator">',
-    '{assignmentOperatorFullname} ({assignmentOperator})<br/>',
-    '</tpl>',
-    '<tpl if="assignmentEmail">',
-    '{assignmentEmail}<br/>',
-    '</tpl>',
-    '<tpl if="assignmentPhone">',
-    'Phone: {assignmentPhone}<br/>',
-    '</tpl>',
-    '</address>',
-    '</div>'];
-
   Ext.define( 'MobileClient.view.Details', {
-    extend: 'Ext.Panel',
+    extend: 'Ext.Container',
 
-    requires: ['Ext.DateExtras'],
+    requires: [
+      'MobileClient.view.Summary',
+      'MobileClient.view.Actions',
+      'MobileClient.view.History'
+    ],
 
-    xtype: 'settings',
+    xtype: 'details',
 
     config : {
       model : null,
       fullscreen: true,
+      scrollable: true,
       styleHtmlContent: true,
-      tpl : Ext.XTemplate( tpl.join('') ),
+      layout: 'vbox',
 
       items: [
       {
-        xtype : 'panel',
-        html : 'Loading Details'
+        xtype: 'summary',
+        id: 'summary'
       },
+      {
+        xtype: 'actions',
+        id: 'actions',
+        hidden: true
+      },
+      {
+        xtype : 'history',
+        id : 'history' }
       ]
     },
 
     initialize : function() {
       var model = this.getModel(),
-          detailsPanel = this.items.get(0),
-          tpl = this.getTpl();
+          that = this;
 
       if ( !model ) {
         return;
       }
 
       model.on( { 'loaded' : function() {
-        detailsPanel.setHtml( tpl.apply( model.getData() ) );
+        that.items.get( 'summary' ).setData( model.getData() );
+        that.items.get( 'history' ).setData( model.getHistoryData() );
+        that.items.get( 'actions' ).show();
       } } );
     }
   });
