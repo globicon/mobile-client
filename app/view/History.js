@@ -2,15 +2,15 @@
   'use strict';
 
   var tpl = [
+    '<div class="list-title">History</div>',
     '<tpl for=".">',
-    '<div>',
+    '<div class="list-item-bordered">',
     '  <small class="pull-right">Origin {origin}</small>',
     '  <strong>{type}</strong>',
     '  <div>{update}</div>',
     '  <small>',
     '  {time:date("F j, Y, G:i:s")}',
     '  </small>',
-    '  <hr/>',
     '</div>',
     '</tpl>'
   ];

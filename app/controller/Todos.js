@@ -40,7 +40,7 @@
 
       activeNav.push( Ext.create( 'MobileClient.view.Details', {
         model : todo,
-        title : todo.getId()
+        title : todo.getId(),
       } ) );
 
       todo.loadDetails();

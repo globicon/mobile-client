@@ -320,7 +320,6 @@ $include-button-highlights: $include-highlights !default;
     @include pictos-iconmask('maps');
     @include pictos-iconmask('locate');
     @include pictos-iconmask('home');
-    @include pictos-iconmask('pencil');
   }
 
   @if $include-button-uis {

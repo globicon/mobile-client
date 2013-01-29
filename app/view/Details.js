@@ -18,20 +18,27 @@
       scrollable: true,
       styleHtmlContent: true,
       layout: 'vbox',
+      cls: 'tight',
 
       items: [
       {
         xtype: 'summary',
-        id: 'summary'
+        itemId: 'summary',
+        hidden: true,
+        cls: 'bordered bordered-top',
       },
       {
         xtype: 'actions',
-        id: 'actions',
-        hidden: true
+        itemId: 'actions',
+        hidden: true,
+        cls: 'bordered bordered-bottom',
       },
       {
         xtype : 'history',
-        id : 'history' }
+        itemId : 'history',
+        hidden: true,
+        cls: 'list bordered'
+      }
       ]
     },
 
@@ -44,9 +51,11 @@
       }
 
       model.on( { 'loaded' : function() {
-        that.items.get( 'summary' ).setData( model.getData() );
-        that.items.get( 'history' ).setData( model.getHistoryData() );
-        that.items.get( 'actions' ).show();
+        that.getComponent( 'summary' ).setData( model.getData() );
+        that.getComponent( 'history' ).setData( model.getHistoryData() );
+        that.getComponent( 'summary' ).show();
+        that.getComponent( 'history' ).show();
+        that.getComponent( 'actions' ).show();
       } } );
     }
   });
