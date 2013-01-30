@@ -26,7 +26,7 @@
      *          "remote": true              // (Optional)
      *                                      // - Defaults to undefined (falsey) to signal a local file which will be copied
      *                                      // - Specify true if this file is a remote file which will not to be copied
-     *          "update": "delta"           // (Optional)
+     *          "update": "update"           // (Optional)
      *                                      //  - If not specified, this file will only be loaded once, and
      *                                      //    cached inside localStorage until this value is changed.
      *                                      //  - "delta" to enable over-the-air delta update for this file
@@ -44,7 +44,7 @@
         {
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
-            "update": "delta"
+            "update": "update"
         }
     ],
 
@@ -67,7 +67,7 @@
     "css": [
         {
             "path": "resources/css/app.css",
-            "update": "delta"
+            "update": "update"
         }
     ],
 

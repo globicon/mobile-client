@@ -13,39 +13,48 @@
     config: {
       fullscreen: true,
       styleHtmlContent: true,
+      cls: 'tight',
 
       items: [
       {
-        xtype: 'fieldset',
-        title: 'Please Signin',
-        layout: 'vbox',
+        xtype: 'container',
+        cls: 'bordered',
 
         items: [
         {
-          name: 'user',
-          xtype: 'textfield',
-          label: 'Username',
-          labelWidth: '32%',
-          labelWrap: true
+          xtype: 'fieldset',
+          title: 'Please Signin',
+          layout: 'vbox',
+
+          items: [
+          {
+            name: 'user',
+            label: ' ',
+            labelWidth: '34px',
+            labelCls: 'icon-user',
+            xtype: 'textfield',
+            clearIcon: false,
+            placeHolder: 'Username'
+          },
+          {
+            name: 'pass',
+            label: ' ',
+            labelWidth: '34px',
+            labelCls: 'icon-lock',
+            xtype: 'passwordfield',
+            clearIcon: false,
+            placeHolder: 'Password'
+          }]
         },
         {
-          name: 'pass',
-          xtype: 'passwordfield',
-          label: 'Password',
-          labelWidth: '32%',
-          labelWrap: true
-        }
-        ]
-      },
-      {
-        html : '<div class="alert alert-error hide">Invalid username/password combination</div>'
-      },
-      {
-        xtype: 'button',
-        text: 'Signin',
-        ui: 'action'
-      }
-      ]
+          html : '<div class="alert alert-error hide">Invalid username/password combination</div>'
+        },
+        {
+          xtype: 'button',
+          text: 'Signin',
+          ui: 'action',
+        }]
+      }]
     }
   });
 })( window.Ext );

@@ -1,83 +1,87 @@
-//<debug>
-Ext.Loader.setPath({
-  'Ext': 'touch/src',
-  'MobileClient': 'app'
-});
-//</debug>
+(function( Ext, window ) {
+  'use strict';
 
-Ext.application({
-  name: 'MobileClient',
+  //<debug>
+  Ext.Loader.setPath({
+    'Ext': 'touch/src',
+    'MobileClient': 'app'
+  });
+  //</debug>
 
-  requires: [
-    'Ext.MessageBox'
-  ],
+  Ext.application({
+    name: 'MobileClient',
 
-  views: ['Signin','Main'],
-  controllers : ['Signin','Todos'],
-  models : ['Todo','Incident'],
-  stores : ['MyTodos', 'GroupTodos', 'Approvals'],
+    requires: [
+      'Ext.MessageBox'
+    ],
 
-  icon: {
-    '57': 'resources/icons/Icon.png',
-    '72': 'resources/icons/Icon~ipad.png',
-    '114': 'resources/icons/Icon@2x.png',
-    '144': 'resources/icons/Icon~ipad@2x.png'
-  },
+    views: ['Signin','Main'],
+    controllers : ['Signin','Todos'],
+    models : ['Todo','Incident'],
+    stores : ['MyTodos', 'GroupTodos', 'Approvals'],
 
-  isIconPrecomposed: true,
+    icon: {
+      '57': 'resources/icons/Icon.png',
+      '72': 'resources/icons/Icon~ipad.png',
+      '114': 'resources/icons/Icon@2x.png',
+      '144': 'resources/icons/Icon~ipad@2x.png'
+    },
 
-  startupImage: {
-    '320x460': 'resources/startup/320x460.jpg',
-    '640x920': 'resources/startup/640x920.png',
-    '768x1004': 'resources/startup/768x1004.png',
-    '748x1024': 'resources/startup/748x1024.png',
-    '1536x2008': 'resources/startup/1536x2008.png',
-    '1496x2048': 'resources/startup/1496x2048.png'
-  },
+    isIconPrecomposed: true,
 
-  launch: function() {
-    // Destroy the #appLoadingIndicator element
-    Ext.fly('appLoadingIndicator').destroy();
+    startupImage: {
+      '320x460': 'resources/startup/320x460.jpg',
+      '640x920': 'resources/startup/640x920.png',
+      '768x1004': 'resources/startup/768x1004.png',
+      '748x1024': 'resources/startup/748x1024.png',
+      '1536x2008': 'resources/startup/1536x2008.png',
+      '1496x2048': 'resources/startup/1496x2048.png'
+    },
 
-    MobileClient.auth = Ext.create( 'MobileClient.Authentication', {
-      url : 'http://expresso.globicon.dk:2993/TEGFacadeJSON/Login',
-      logoutUrl : 'http://expresso.globicon.dk:8580/TEGFacadeJSON/Logout'
-    } );
+    launch: function() {
+      // Destroy the #appLoadingIndicator element
+      //Ext.fly('appLoadingIndicator').destroy();
 
-    Ext.Ajax.on({
-      beforerequest : function( conn, options, eOpts ) {
-        Ext.Viewport.setMasked({
-          xtype: 'loadmask',
-          message: 'Loading',
-          indicator: true
-        });
-      },
-      requestcomplete : function( conn, response, options, eOpts ) {
-        Ext.Viewport.setMasked( false );
-      },
-      requestexception: function( conn, response, options, eOpts ) {
-        Ext.Viewport.setMasked( false );
-        if ( response.status === 401 ) {
-          MobileClient.auth.clear();
-          this.redirectTo( 'signin' );
-        }
-      },
-      scope: this
-    });
-
-    // Initialize the main view
-    Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
-    Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
-  },
-
-  onUpdated: function() {
-    Ext.Msg.confirm(
-      'Application Update',
-      'This application has just successfully been updated to the latest version. Reload now?',
-      function(buttonId) {
-        if (buttonId === 'yes') {
-          window.location.reload();
-        }
+      window.MobileClient.auth = Ext.create( 'MobileClient.Authentication', {
+        url : 'http://expresso.globicon.dk:2993/TEGFacadeJSON/Login',
+        logoutUrl : 'http://expresso.globicon.dk:8580/TEGFacadeJSON/Logout'
       } );
-  }
-});
+
+      Ext.Ajax.on({
+        beforerequest : function( conn, options, eOpts ) {
+          Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: 'Loading',
+            indicator: true
+          });
+        },
+        requestcomplete : function( conn, response, options, eOpts ) {
+          Ext.Viewport.setMasked( false );
+        },
+        requestexception: function( conn, response, options, eOpts ) {
+          Ext.Viewport.setMasked( false );
+          if ( response.status === 401 ) {
+            window.MobileClient.auth.clear();
+            this.redirectTo( 'signin' );
+          }
+        },
+        scope: this
+      });
+
+      // Initialize the main view
+      Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
+      Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
+    },
+
+    // onUpdated: function() {
+    //   Ext.Msg.confirm(
+    //     'Application Update',
+    //     'This application has just successfully been updated to the latest version. Reload now?',
+    //     function(buttonId) {
+    //       if (buttonId === 'yes') {
+    //         window.location.reload();
+    //       }
+    //     } );
+    // }
+  });
+})(window.Ext, window);
