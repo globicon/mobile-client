@@ -20,6 +20,7 @@
         xtype : 'container',
         cls: 'bordered',
         itemId: 'content',
+
         items: [
         {
           xtype : 'container',
