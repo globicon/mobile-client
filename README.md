@@ -24,8 +24,6 @@ This will run a small development webserver and open a browser pointing to that 
 
 With that you should be able to run the application of your local machine in your local browser. 
 
-IMAGE
-
 To start coding all you need is a text editor e.g. http://www.sublimetext.com/. 
 
 ## Deployment
