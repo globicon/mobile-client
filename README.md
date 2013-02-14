@@ -26,6 +26,29 @@ With that you should be able to run the application of your local machine in you
 
 To start coding all you need is a text editor e.g. http://www.sublimetext.com/. 
 
+Whenever you save a file yeoman will refresh your browser for you.
+
+## Development
+The application is build using [Angularjs](http://angularjs.org/), it is worth reading through some of the documentation and watchinhg some videos about angular before starting.
+
+The code for the application is in the `app` directory. 
+
+The `app/index.html` folder is the entry point of the application, it sets up the initial page layout and loads angular and the application logi. 
+
+The `app/views` folder contains the view templates used to generate the UI for the application.
+
+The `app/styles` contains the css styles used for the application. The application uses the [twitter bootstrap](http://twitter.github.com/bootstrap/) framework for styling the application. Most changes should happen in the `app/styles/main.scss` (scss file a [sass](http://sass-lang.com/) file, sass is a css preprocessor, proving features such as variable names and nesting to cs. Yeoman will compile the sass files in css file whenever you save).
+
+The `app/scripts` contains the javascript code for the application. 
+
+* `app/scripts/vendor` contains the angular library (and should contain any other third party library needed). 
+
+* `app/scripts/app.js` contains the initial setup of the application, registres routes and setups angular filters and directives used in the application.
+
+* `app/scripts/resources.js` contains the code for communicating with the REST API. 
+
+* `app/scripts/controllers.js` contains the controller layer of the Angular MVC application. The controllers act as a binding layer between the views and the resources (Models). The controllers will call the rest api make the data available for the views to render and react to user interactions from the views. The is one controller per view. 
+
 ## Deployment
 To create a deployment package run
 
