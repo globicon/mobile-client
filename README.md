@@ -12,7 +12,9 @@ git clone https://github.com/globicon/mobile-client.git
 To learn more about working with git read through [docs and watch videos](http://git-scm.com/doc)
 
 ## Local development environment
-The application is build using [yeoman.io](http://yeoman.io/) which is a set of tools helping developers to build web applications. On a mac follow the instructions on the installation instruction of the [yeoman website](http://yeoman.io/installation.html) for downloading and installing yeoman. On Windows follow these [instructions](http://decodize.com/css/installing-yeoman-front-end-development-stack-windows/), use Method 2.
+The application is build using [yeoman.io](http://yeoman.io/) which is a set of tools helping developers to build web applications. This is build with yeoman version 0.9.* and some upgrade steps are required in order to use version 1.0.
+
+On a mac follow the instructions on the installation instruction of the [yeoman website](http://yeoman.io/installation.html) for downloading and installing yeoman. On Windows follow these [instructions](http://decodize.com/css/installing-yeoman-front-end-development-stack-windows/), use Method 2.
 
 With yeoman install you can run the application by running.
 
