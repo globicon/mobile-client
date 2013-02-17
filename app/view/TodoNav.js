@@ -15,7 +15,10 @@
         items: [{
           xtype: 'button',
           text: 'New',
-          align: 'right'
+          align: 'right',
+          handler: function() {
+            this.up( 'todonav' ).fireEvent( 'new' );
+          }
         }]
       }
     }

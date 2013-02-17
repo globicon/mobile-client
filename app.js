@@ -71,6 +71,7 @@
       // Initialize the main view
       Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
       Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
+      Ext.Viewport.add( { xclass: 'MobileClient.view.New' } );
     },
 
     // onUpdated: function() {

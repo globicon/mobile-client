@@ -6,7 +6,8 @@
 
     requires: [
       'MobileClient.Authentication',
-      'MobileClient.view.Details'
+      'MobileClient.view.Details',
+      'MobileClient.view.New'
     ],
 
     config: {
@@ -14,7 +15,8 @@
         showMain : ['authenticate']
       },
       routes : {
-        'todos' : 'showMain'
+        'todos' : 'showMain',
+        'new' : 'showNew'
       },
       refs : {
         'mainView' : 'main'
@@ -23,8 +25,22 @@
         'todoList' : {
           disclose : 'showDetails',
           select : 'showDetails'
+        },
+        'todonav' : {
+          'new' : function() {
+            this.redirectTo( 'new' );
+          }
+        },
+        'new-panel' : {
+          'cancel' : function() {
+            this.redirectTo( 'todos' );
+          }
         }
       }
+    },
+
+    showNew : function() {
+      Ext.Viewport.animateActiveItem( 'new-panel', { type: 'slide', direction: 'up' } );
     },
 
     authenticate : function( action ) {

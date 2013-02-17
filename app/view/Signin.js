@@ -8,7 +8,7 @@
 
     title: 'Signin',
 
-    requires: ['Ext.form.FieldSet', 'Ext.field.Password'],
+    requires: ['Ext.form.FieldSet', 'Ext.field.Password', 'Ext.Img'],
 
     config: {
       fullscreen: true,
