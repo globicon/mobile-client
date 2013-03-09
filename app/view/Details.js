@@ -20,8 +20,7 @@
       layout: 'vbox',
       cls: 'tight',
 
-      items: [
-      {
+      items: [{
         xtype: 'summary',
         itemId: 'summary',
         hidden: true,
@@ -38,8 +37,7 @@
         itemId : 'history',
         hidden: true,
         cls: 'list bordered'
-      }
-      ]
+      }]
     },
 
     initialize : function() {
@@ -51,8 +49,9 @@
       }
 
       model.on( { 'loaded' : function() {
-        that.getComponent( 'summary' ).setData( model.getData() );
-        that.getComponent( 'history' ).setData( model.getHistoryData() );
+        var rawModel = model.getData( true /*include associated*/ );
+        that.getComponent( 'summary' ).setData( rawModel );
+        that.getComponent( 'history' ).setData( rawModel.history );
         that.getComponent( 'summary' ).show();
         that.getComponent( 'history' ).show();
         that.getComponent( 'actions' ).show();

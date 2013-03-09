@@ -129,6 +129,11 @@ $borderedBackground:      #fafafa;
   background-color: #43B3AE;
 }
 
+.rect-orange {
+  color: #eee;
+  background-color: desaturate( #F89406, 20% );
+}
+
 .bordered {
   -webkit-border-radius: 2px !important;
   border-radius: 2px !important;

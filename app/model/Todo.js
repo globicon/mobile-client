@@ -1,47 +1,44 @@
 (function( Ext ) {
   'use strict';
 
+  var urls = {
+    incident: 'ViewIncident',
+    task: 'ViewChangeTask',
+    workorder: 'ViewWorkorder',
+    interaction: 'ViewInteraction'
+  };
+
   Ext.define( 'MobileClient.model.Todo', {
     extend: 'Ext.data.Model',
     mixins: ['Ext.mixin.Observable'],
 
+    requires: [ 'MobileClient.model.History' ],
+
     config: {
       fields: ['id',
-                'title',
-                'description',
-                'module',
-                'status',
-                'priority',
-                'assignee',
-                'contact',
-                'contactPhone',
-                'contactFullname',
-                'contactOperatorEmail',
-                'assignmentGroup',
-                'assignmentOperator',
-                'assignmentOperatorPhone',
-                'assignmentOperatorFullname',
-                'assignmentOperatorEmail',
-                { name: 'history',
-                  convert: function( value ) {
-                    var history = [];
-                    if ( value ) {
-                      history = value.map( function( v ) {
-                        return Ext.create( 'MobileClient.model.History', v );
-                      });
-                    }
-                    return history;
-                  }} ]
-    },
-
-    getHistoryData: function() {
-      return this.get( 'history' ).map( function( m ) { return m.getData(); } );
+               'title',
+               'description',
+               'module',
+               'status',
+               'priority',
+               'assignee',
+               'contact',
+               'contactPhone',
+               'contactFullname',
+               'contactOperatorEmail',
+               'assignmentGroup',
+               'assignmentOperator',
+               'assignmentOperatorPhone',
+               'assignmentOperatorFullname',
+               'assignmentOperatorEmail'],
+      hasMany: [ { model: 'MobileClient.model.History', name: 'history' } ]
     },
 
     loadDetails : function( ) {
       var that = this;
       Ext.Ajax.request( {
-        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ViewIncident',
+        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/' +
+          (urls[this.get('module')] || urls.incident),
         method: 'GET',
         disableCaching: false,
         withCredentials: true,
@@ -57,9 +54,9 @@
           Object.keys( respData.attributes ).forEach( function( key ) {
             attrs[key] = respData.attributes[key];
           } );
-          attrs.history = respData.history;
 
           that.setData( attrs );
+          that.history().add( respData.history );
 
           that.fireEvent( 'loaded' );
         }

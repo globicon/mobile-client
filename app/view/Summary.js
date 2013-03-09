@@ -9,7 +9,9 @@
     '<tpl elseif="module == \'workorder\'">',
     '  <div class="rect rect-green pull-left">WO</div>',
     '<tpl elseif="module == \'interaction\'">',
-    '  <div class="rect rect-gray pull-left">int</div>',
+    '  <div class="rect rect-gray pull-left">INT</div>',
+    '<tpl elseif="module == \'task\'">',
+    '  <div class="rect rect-orange pull-left">T</div>',
     '</tpl>',
     '<div class="list-content">',
     '  <div><strong>{title}</strong></div>',
@@ -20,7 +22,7 @@
     '    <div>&nbsp;</div>',
     '  </tpl>',
     '</div>',
-    '<p>{description}</p>',
+    '<p>{[values.description.replace( /\\n/g, "<br>" )]}</p>',
     '<hr/>',
     '<address>',
     '  <strong>Contact</strong><br/>',
@@ -40,15 +42,16 @@
     '  <tpl if="assignmentOperator">',
     '    {assignmentOperatorFullname} ({assignmentOperator})<br/>',
     '  </tpl>',
-    '  <tpl if="assignmentEmail">',
-    '    {assignmentEmail}<br/>',
+    '  <tpl if="assignmentOperatorEmail">',
+    '    {assignmentOperatorEmail}<br/>',
     '  </tpl>',
-    '  <tpl if="assignmentPhone">',
-    '    Phone: {assignmentPhone}<br/>',
+    '  <tpl if="assignmentOperatorPhone">',
+    '    Phone: {assignmentOperatorPhone}<br/>',
     '  </tpl>',
     ' </address>',
     ' <br/>',
-    '</div>'];
+    '</div>'
+  ];
 
   Ext.define( 'MobileClient.view.Summary', {
     extend: 'Ext.Container',
