@@ -1,11 +1,11 @@
-Ext.define( 'MobileClient.store.Approvals', {
+Ext.define( 'MobileClient.store.Templates', {
   extend : 'MobileClient.store.LoadAwareStore',
 
   config : {
-    model : 'MobileClient.model.Todo',
+    model : 'MobileClient.model.Template',
     proxy : {
       type : 'ajax',
-      url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyCasesForApproval',
+      url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/GeneralData?action=templateList',
       reader: {
         type: 'json',
         record : 'row',

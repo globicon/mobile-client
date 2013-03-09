@@ -22,7 +22,7 @@
 
     config : {
       tpl : Ext.XTemplate( tpl.join( '' ) )
-    },
+    }
   } );
 } )( window.Ext );
 

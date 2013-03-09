@@ -31,7 +31,7 @@
                       });
                     }
                     return history;
-                  }} ],
+                  }} ]
     },
 
     getHistoryData: function() {
@@ -42,8 +42,8 @@
       var that = this;
       Ext.Ajax.request( {
         url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ViewIncident',
-        method : 'GET', // TODO: change to POST
-        disableCaching : false,
+        method: 'GET',
+        disableCaching: false,
         withCredentials: true,
 
         params: {
@@ -66,17 +66,5 @@
       } );
     }
   } );
-
-  Ext.define( 'MobileClient.model.History', {
-    extend: 'Ext.data.Model',
-
-    config: {
-      fields: [ 'update', 'title', 'origin', 'type',
-               { name: 'time',
-                 convert: function( value ) {
-                  return new Date( parseInt( value, 10 ) );
-                 }}]
-    }
-  });
 
 } )( window.Ext );

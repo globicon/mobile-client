@@ -39,8 +39,6 @@
       }
     },
 
-    loaded : false,
-
     showNew : function() {
       Ext.Viewport.animateActiveItem( 'new-panel', { type: 'slide', direction: 'up' } );
     },
@@ -70,14 +68,13 @@
     showMain : function() {
       var that = this;
 
+      Ext.StoreMgr.get( 'MyTodos' ).ensureLoaded();
+      Ext.StoreMgr.get( 'GroupTodos' ).ensureLoaded();
+      Ext.StoreMgr.get( 'Approvals' ).ensureLoaded();
+
       if ( !this.loaded ) {
-        Ext.StoreMgr.get('MyTodos').load();
-        Ext.StoreMgr.get('GroupTodos').load();
-        Ext.StoreMgr.get('Approvals').load();
         Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
         Ext.Viewport.setActiveItem( 'main' );
-
-        this.loaded = true;
       }
       else {
         Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'down' } );
@@ -85,10 +82,9 @@
 
       MobileClient.auth.on( {
         loggedOut : function() {
-          that.loaded = false;
-          Ext.StoreMgr.get('MyTodos').removeAll();
-          Ext.StoreMgr.get('GroupTodos').removeAll();
-          Ext.StoreMgr.get('Approvals').removeAll();
+          Ext.each( Ext.StoreMgr.all, function( store ) {
+            store.removeAll();
+          } );
           that.redirectTo( 'signin');
         }
       } );

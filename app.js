@@ -16,9 +16,9 @@
     ],
 
     views: ['Signin','Main'],
-    controllers : ['Signin','Todos'],
-    models : ['Todo','Incident'],
-    stores : ['MyTodos', 'GroupTodos', 'Approvals'],
+    controllers : ['Signin', 'Todos'],
+    models : ['Todo', 'Incident', 'Template', 'Interaction'],
+    stores : ['MyTodos', 'GroupTodos', 'Approvals', 'Templates', 'LoadAwareStore'],
 
     icon: {
       '57': 'resources/icons/Icon.png',
@@ -72,7 +72,7 @@
       Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
       Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
       Ext.Viewport.add( { xclass: 'MobileClient.view.New' } );
-    },
+    }
 
     // onUpdated: function() {
     //   Ext.Msg.confirm(

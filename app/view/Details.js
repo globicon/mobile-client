@@ -25,13 +25,13 @@
         xtype: 'summary',
         itemId: 'summary',
         hidden: true,
-        cls: 'bordered bordered-top',
+        cls: 'bordered bordered-top'
       },
       {
         xtype: 'actions',
         itemId: 'actions',
         hidden: true,
-        cls: 'bordered bordered-bottom',
+        cls: 'bordered bordered-bottom'
       },
       {
         xtype : 'history',

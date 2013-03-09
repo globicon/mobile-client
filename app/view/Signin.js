@@ -42,7 +42,8 @@
             labelCls: 'icon-user',
             xtype: 'textfield',
             clearIcon: false,
-            placeHolder: 'Username'
+            placeHolder: 'Username',
+            autoCorrect: false
           },
           {
             name: 'pass',
@@ -60,7 +61,7 @@
         {
           xtype: 'button',
           text: 'Signin',
-          ui: 'action',
+          ui: 'action'
         }]
       }]
     }

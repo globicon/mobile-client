@@ -1,5 +1,5 @@
 Ext.define( 'MobileClient.store.MyTodos', {
-  extend : 'Ext.data.Store',
+  extend : 'MobileClient.store.LoadAwareStore',
 
   config : {
     model : 'MobileClient.model.Todo',

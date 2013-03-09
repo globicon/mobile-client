@@ -1,5 +1,5 @@
 Ext.define( 'MobileClient.store.GroupTodos', {
-  extend : 'Ext.data.Store',
+  extend : 'MobileClient.store.LoadAwareStore',
 
   config : {
     model : 'MobileClient.model.Todo',
