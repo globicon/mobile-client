@@ -39,6 +39,8 @@
       }
     },
 
+    loaded : false,
+
     showNew : function() {
       Ext.Viewport.animateActiveItem( 'new-panel', { type: 'slide', direction: 'up' } );
     },
@@ -56,7 +58,7 @@
 
       activeNav.push( Ext.create( 'MobileClient.view.Details', {
         model : todo,
-        title : todo.getId(),
+        title : todo.getId()
       } ) );
 
       todo.loadDetails();
@@ -68,15 +70,27 @@
     showMain : function() {
       var that = this;
 
-      Ext.StoreMgr.get('MyTodos').load();
-      Ext.StoreMgr.get('GroupTodos').load();
-      Ext.StoreMgr.get('Approvals').load();
+      if ( !this.loaded ) {
+        Ext.StoreMgr.get('MyTodos').load();
+        Ext.StoreMgr.get('GroupTodos').load();
+        Ext.StoreMgr.get('Approvals').load();
+        Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
+        Ext.Viewport.setActiveItem( 'main' );
 
-      Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
-      Ext.Viewport.setActiveItem( 1 );
+        this.loaded = true;
+      }
+      else {
+        Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'down' } );
+      }
 
       MobileClient.auth.on( {
-        loggedOut : function() { that.redirectTo( 'signin'); }
+        loggedOut : function() {
+          that.loaded = false;
+          Ext.StoreMgr.get('MyTodos').removeAll();
+          Ext.StoreMgr.get('GroupTodos').removeAll();
+          Ext.StoreMgr.get('Approvals').removeAll();
+          that.redirectTo( 'signin');
+        }
       } );
     }
   } );

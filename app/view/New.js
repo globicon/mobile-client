@@ -6,15 +6,14 @@
 
     xtype: 'new-panel',
 
-    requires: ['Ext.form.FieldSet'],
+    requires: ['Ext.form.FieldSet', 'Ext.field.Select'],
 
     config: {
       fullscreen: true,
       styleHtmlContent: true,
       cls: 'tight',
 
-      items: [
-      {
+      items: [{
         xtype : 'toolbar',
         docked: 'top',
         title: 'Create New',
@@ -38,13 +37,11 @@
       {
         xtype: 'panel',
 
-        items: [
-        {
+        items: [{
           xtype: 'fieldset',
           layout: 'vbox',
 
-          items: [
-          {
+          items: [{
             name: 'contact',
             label: 'Contact',
             xtype: 'textfield'
@@ -60,9 +57,9 @@
             label: 'Template',
             xtype: 'selectfield',
             options: [
-                {text: 'First Option',  value: 'first'},
-                {text: 'Second Option', value: 'second'},
-                {text: 'Third Option',  value: 'third'}
+              {text: 'First Option',  value: 'first'},
+              {text: 'Second Option', value: 'second'},
+              {text: 'Third Option',  value: 'third'}
             ]
           },
           {
