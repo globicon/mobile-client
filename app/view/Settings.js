@@ -12,17 +12,11 @@
       styleHtmlContent: true,
 
       items: [{
-        docked: 'top',
-        xtype: 'toolbar',
-        title: 'Account'
-      },
-      {
         xtype : 'container',
         cls: 'bordered',
         itemId: 'content',
 
-        items: [
-        {
+        items: [{
           xtype : 'container',
           html : 'Not Signed In',
           itemId: 'userInfo'

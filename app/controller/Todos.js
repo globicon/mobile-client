@@ -16,6 +16,7 @@
       },
       routes : {
         'todos' : 'showMain',
+        'todo/:id' : 'showDetails',
         'new' : 'showNew'
       },
       refs : {
@@ -23,24 +24,33 @@
       },
       control : {
         'todoList' : {
-          disclose : 'showDetails',
-          select : 'showDetails'
+          select : function( list, todo ) {
+            this.redirectTo( 'todo/' + todo.getId() );
+          }
         },
-        'todonav' : {
+        'main' : {
           'new' : function() {
             this.redirectTo( 'new' );
           }
         },
         'new-panel' : {
           'cancel' : function() {
-            this.redirectTo( 'todos' );
+            window.location.hash = 'todos';
+            Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'down' } );
+          }
+        },
+        'details' : {
+          'back' : function() {
+            window.location.hash = 'todos';
+            Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'right' } );
           }
         }
       }
     },
 
     showNew : function() {
-      Ext.Viewport.animateActiveItem( 'new-panel', { type: 'slide', direction: 'up' } );
+      var newView = Ext.create( 'MobileClient.view.New' );
+      Ext.Viewport.animateActiveItem( newView, { type: 'slide', direction: 'up' } );
     },
 
     authenticate : function( action ) {
@@ -51,34 +61,29 @@
       this.redirectTo( 'signin' );
     },
 
-    showDetails : function( list, todo ) {
-      var activeNav = this.getMainView().getActiveItem();
-
-      activeNav.push( Ext.create( 'MobileClient.view.Details', {
-        model : todo,
-        title : todo.getId()
-      } ) );
+    showDetails : function( id ) {
+      var todo = Ext.create( 'MobileClient.model.Todo', { id: id } );
+      var detailsView = Ext.create( 'MobileClient.view.Details', {
+        model: todo,
+        title: id
+      } );
 
       todo.loadDetails();
 
+      Ext.Viewport.animateActiveItem( detailsView, { type: 'slide', direction: 'left' } );
+
       // remove selection - making item ready to be selected again
-      list.deselectAll( true );
+      Ext.Viewport.items.get( 1 ).getActiveItem().deselectAll( true );
     },
 
-    showMain : function() {
+    showMain : function( ) {
       var that = this;
 
       Ext.StoreMgr.get( 'MyTodos' ).ensureLoaded();
       Ext.StoreMgr.get( 'GroupTodos' ).ensureLoaded();
       Ext.StoreMgr.get( 'Approvals' ).ensureLoaded();
 
-      if ( !this.loaded ) {
-        Ext.Viewport.items.get( 1 ).setActiveItem( 0 );
-        Ext.Viewport.setActiveItem( 'main' );
-      }
-      else {
-        Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'down' } );
-      }
+      Ext.Viewport.setActiveItem( 'main' );
 
       MobileClient.auth.on( {
         loggedOut : function() {

@@ -21,6 +21,20 @@
       cls: 'tight',
 
       items: [{
+        xtype : 'toolbar',
+        docked: 'top',
+        title: 'Details',
+        ui: 'light',
+        items : [{
+          xtype: 'button',
+          ui: 'back',
+          text: 'Back',
+          handler: function() {
+            this.up( 'details' ).fireEvent( 'back' );
+          }
+        }]
+      },
+      {
         xtype: 'summary',
         itemId: 'summary',
         hidden: true,

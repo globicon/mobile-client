@@ -58,7 +58,7 @@
               } );
             }
             else {
-              Ext.each( errors.items, function( rec, i ){
+              Ext.each( errors.items, function( rec ){
                 errorMsg += rec.getMessage() + '<br>';
               } );
               fieldset.setInstructions( errorMsg );
@@ -110,27 +110,23 @@
 
     initialize: function() {
       var that = this;
-      /* TODO: figure out if it is better to recreate object when shown */
-      this.on( { show: function() {
-        // Ensure template store is loaded prior to initializing model.
-        // Ensure template store is only loaded once.
-        var templateStore = Ext.StoreMgr.get( 'Templates' );
-        if ( templateStore.isLoaded() ) {
+      // Ensure template store is loaded prior to initializing model.
+      // Ensure template store is only loaded once.
+      var templateStore = Ext.StoreMgr.get( 'Templates' );
+      if ( templateStore.isLoaded() ) {
+        that.initializeModel();
+      }
+      else { // if not loaded - load it and initialize model when loaded
+        templateStore.on( 'load', function loadHandler() {
           that.initializeModel();
-        }
-        else { // if not loaded - load it and initialize model when loaded
-          templateStore.on( 'load', function loadHandler() {
-            that.initializeModel();
-            templateStore.un( 'load', loadHandler );
-          } );
-          templateStore.load();
-        }
-      } } );
+          templateStore.un( 'load', loadHandler );
+        } );
+        templateStore.load();
+      }
     },
 
     initializeModel: function() {
       this.setRecord( Ext.create( 'MobileClient.model.Interaction', {} ) );
-      this.down( 'fieldset' ).setInstructions( '' );
     }
   });
 })( window.Ext );

@@ -62,6 +62,9 @@
           Ext.Viewport.setMasked( false );
           if ( response.status === 401 ) {
             window.MobileClient.auth.clear();
+            Ext.each( Ext.StoreMgr.all, function( store ) {
+              store.removeAll();
+            } );
             this.redirectTo( 'signin' );
           }
         },
@@ -71,7 +74,6 @@
       // Initialize the main view
       Ext.Viewport.add( { xclass: 'MobileClient.view.Signin' } );
       Ext.Viewport.add( { xclass: 'MobileClient.view.Main' } );
-      Ext.Viewport.add( { xclass: 'MobileClient.view.New' } );
     }
 
     // onUpdated: function() {

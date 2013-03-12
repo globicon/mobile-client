@@ -15,15 +15,13 @@
       styleHtmlContent: true,
       cls: 'tight',
 
-      items: [
-      {
+      items: [{
         xtype: 'panel',
         cls: 'bordered container-centered',
         width: '90%',
         height: '100%',
 
-        items: [
-        {
+        items: [{
           xtype: 'image',
           src: 'resources/icons/logo-with-text.png',
           width: '100%',
@@ -34,8 +32,7 @@
           title: 'Please Signin',
           layout: 'vbox',
 
-          items: [
-          {
+          items: [{
             name: 'user',
             label: ' ',
             labelWidth: '34px',
