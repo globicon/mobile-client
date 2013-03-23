@@ -48,17 +48,17 @@
       } );
 
       Ext.Ajax.on({
-        beforerequest : function( conn, options, eOpts ) {
+        beforerequest : function() {
           Ext.Viewport.setMasked({
             xtype: 'loadmask',
             message: 'Loading',
             indicator: true
           });
         },
-        requestcomplete : function( conn, response, options, eOpts ) {
+        requestcomplete : function() {
           Ext.Viewport.setMasked( false );
         },
-        requestexception: function( conn, response, options, eOpts ) {
+        requestexception: function( conn, response ) {
           Ext.Viewport.setMasked( false );
           if ( response.status === 401 ) {
             window.MobileClient.auth.clear();

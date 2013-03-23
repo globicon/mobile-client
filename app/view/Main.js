@@ -5,7 +5,7 @@
     extend: 'Ext.tab.Panel',
     xtype: 'main',
     requires: [
-      'MobileClient.view.TodoNav',
+      'MobileClient.view.TodoList',
       'MobileClient.view.Settings'
     ],
     config: {
@@ -59,7 +59,7 @@
       }],
 
       listeners: {
-        activeitemchange : function( container, value, oldValue, eOpts ) {
+        activeitemchange : function( container, value ) {
           var toolbar = this.getComponent( 'toolbar' );
           toolbar.setTitle( value.title );
         }
