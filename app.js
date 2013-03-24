@@ -17,8 +17,8 @@
 
     views: ['Signin','Main'],
     controllers : ['Signin', 'Todos'],
-    models : ['Todo', 'Incident', 'Template', 'Interaction'],
-    stores : ['MyTodos', 'GroupTodos', 'Approvals', 'Templates', 'LoadAwareStore'],
+    models : ['Todo', 'Incident', 'KeyValue', 'Interaction'],
+    stores : ['MyTodos', 'GroupTodos', 'Approvals', 'GeneralData', 'LoadAwareStore'],
 
     icon: {
       '57': 'resources/icons/Icon.png',

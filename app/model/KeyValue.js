@@ -1,7 +1,7 @@
 (function( Ext ) {
   'use strict';
 
-  Ext.define( 'MobileClient.model.Template', {
+  Ext.define( 'MobileClient.model.KeyValue', {
     extend: 'Ext.data.Model',
     config: {
       fields: [

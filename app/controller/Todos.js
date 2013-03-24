@@ -36,13 +36,19 @@
         'new-panel' : {
           'cancel' : function() {
             window.location.hash = 'todos';
-            Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'down' } );
+            Ext.Viewport.animateActiveItem( 'main', {
+              type: 'slide',
+              direction: 'down'
+            } );
           }
         },
         'details' : {
           'back' : function() {
             window.location.hash = 'todos';
-            Ext.Viewport.animateActiveItem( 'main', { type: 'slide', direction: 'right' } );
+            Ext.Viewport.animateActiveItem( 'main', {
+              type: 'slide',
+              direction: 'right'
+            } );
           }
         }
       }
@@ -50,7 +56,10 @@
 
     showNew : function() {
       var newView = Ext.create( 'MobileClient.view.New' );
-      Ext.Viewport.animateActiveItem( newView, { type: 'slide', direction: 'up' } );
+      Ext.Viewport.animateActiveItem( newView, {
+        type: 'slide',
+        direction: 'up'
+      } );
     },
 
     authenticate : function( action ) {
@@ -70,7 +79,10 @@
 
       todo.loadDetails();
 
-      Ext.Viewport.animateActiveItem( detailsView, { type: 'slide', direction: 'left' } );
+      Ext.Viewport.animateActiveItem( detailsView, {
+        type: 'slide',
+        direction: 'left'
+      } );
 
       // remove selection - making item ready to be selected again
       Ext.Viewport.items.get( 1 ).getActiveItem().deselectAll( true );

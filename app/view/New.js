@@ -12,7 +12,6 @@
     ],
 
     config: {
-      templateOptions: [],
       fullscreen: true,
       styleHtmlContent: true,
       cls: 'tight',
@@ -92,7 +91,7 @@
             name: 'template',
             label: 'Template',
             xtype: 'selectfield',
-            store: 'Templates',
+            itemId: 'templates',
             valueField: 'key',
             displayField: 'value'
           },
@@ -110,9 +109,18 @@
 
     initialize: function() {
       var that = this;
-      // Ensure template store is loaded prior to initializing model.
+      // Ensure template store created and loaded prior to initializing model.
       // Ensure template store is only loaded once.
-      var templateStore = Ext.StoreMgr.get( 'Templates' );
+      var templateStore = Ext.StoreMgr.containsKey( 'Templates' ) ?
+        Ext.StoreMgr.get( 'Templates' ) :
+        Ext.create( 'MobileClient.store.GeneralData', {
+          storeId: 'Templates',
+          action: 'templateList'
+        } );
+
+      // associate store with select box
+      this.query( '#templates' )[0].setStore( templateStore );
+
       if ( templateStore.isLoaded() ) {
         that.initializeModel();
       }

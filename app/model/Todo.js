@@ -56,6 +56,7 @@
           } );
 
           that.setData( attrs );
+          that.history().removeAll();
           that.history().add( respData.history );
 
           that.fireEvent( 'loaded' );
