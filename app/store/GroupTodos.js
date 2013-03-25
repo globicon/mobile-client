@@ -5,7 +5,7 @@ Ext.define( 'MobileClient.store.GroupTodos', {
     model : 'MobileClient.model.Todo',
     proxy : {
       type : 'ajax',
-      url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyGroupTodo',
+      url: options.urls.groupTodos,
       reader: {
         type: 'json',
         record : 'row',

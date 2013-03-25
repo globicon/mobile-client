@@ -6,7 +6,8 @@
 
     requires: [
       'MobileClient.view.Summary',
-      'MobileClient.view.History'
+      'MobileClient.view.History',
+      'MobileClient.view.Update'
     ],
 
     xtype: 'details',

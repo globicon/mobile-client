@@ -8,7 +8,9 @@
 
     requires: [
       'Ext.form.FieldSet',
-      'Ext.field.Select'
+      'Ext.field.Select',
+      'MobileClient.model.Update',
+      'MobileClient.model.Resolution'
     ],
 
     config: {
@@ -51,7 +53,6 @@
             fieldset.setInstructions( '' );
 
             form.updateRecord( model );
-            console.log( model.getData() );
 
             errors = model.validate();
             if ( errors.isValid( ) ) {
@@ -141,9 +142,9 @@
 
     initializeModel: function() {
       var urls = {
-        incident: 'UpdateIncident',
-        workorder: 'UpdateWorkOrder',
-        task: 'UpdateChangeTask'
+        incident: options.urls.updateIncident,
+        workorder: options.urls.updateWorkorder,
+        task: options.urls.updateTask
       };
       var models = {
         update: 'Update',
@@ -152,7 +153,7 @@
       var model = Ext.create( 'MobileClient.model.' + models[this.get('kind')] );
       model.setProxy( {
         type: 'ajax',
-        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/' + urls[this.get('module')]
+        url: urls[this.get('module')]
       } );
       this.setRecord( model );
       model.set( 'id', this.get( 'todoId') );

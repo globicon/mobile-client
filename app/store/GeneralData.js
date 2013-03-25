@@ -9,7 +9,7 @@
       model : 'MobileClient.model.KeyValue',
       proxy : {
         type : 'ajax',
-        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/GeneralData',
+        url: options.urls.generalData,
         reader: {
           type: 'json',
           record : 'row',

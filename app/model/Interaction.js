@@ -18,7 +18,7 @@
       ],
       proxy: {
         type: 'ajax',
-        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/NewInteraction'
+        url: options.urls.newInteraction
       }
     }
   });

@@ -5,7 +5,7 @@ Ext.define( 'MobileClient.store.Approvals', {
     model : 'MobileClient.model.Todo',
     proxy : {
       type : 'ajax',
-      url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyCasesForApproval',
+      url: options.urls.approvals,
       reader: {
         type: 'json',
         record : 'row',

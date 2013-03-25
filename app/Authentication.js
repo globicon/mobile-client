@@ -1,69 +1,73 @@
-Ext.define( 'MobileClient.Authentication', {
+(function( Ext ){
+  'use strict';
 
-  mixins: ['Ext.mixin.Observable'],
+  Ext.define( 'MobileClient.Authentication', {
 
-  config : {
-    url : undefined,
-    logoutUrl : undefined
-  },
+    mixins: ['Ext.mixin.Observable'],
 
-  constructor : function( config ) {
-    this.initConfig( config );
-  },
+    config : {
+      url : undefined,
+      logoutUrl : undefined
+    },
 
-  authenticate : function( config ) {
-    var that = this;
+    constructor : function( config ) {
+      this.initConfig( config );
+    },
 
-    Ext.Ajax.request( {
-      url: this.getUrl(),
-      method : 'GET', // TODO: change to POST
-      disableCaching : false,
-      withCredentials: true,
+    authenticate : function( config ) {
+      var that = this;
 
-      params: {
-        user: config.user,
-        pw: config.pass
-      },
+      Ext.Ajax.request( {
+        url: this.getUrl(),
+        method : 'GET', // TODO: change to POST
+        disableCaching : false,
+        withCredentials: true,
 
-      success: function( response ) {
-        Cookies.set( 'user', config.user );
-        Cookies.set( 'loginTime', new Date() );
-        ( config.success || function() {} )( response );
-        that.fireEvent( 'authenticated' );
-      },
+        params: {
+          user: config.user,
+          pw: config.pass
+        },
 
-      failure : function( response ) {
-        ( config.failure || function() {} )( response );
-      }
-    } );
-  },
+        success: function( response ) {
+          Cookies.set( 'user', config.user );
+          Cookies.set( 'loginTime', new Date() );
+          ( config.success || function() {} )( response );
+          that.fireEvent( 'authenticated' );
+        },
 
-  getAuthInfo : function() {
-    return { user: Cookies.get( 'user' ),
-             date : new Date( Cookies.get( 'loginTime' ) ) };
-  },
+        failure : function( response ) {
+          ( config.failure || function() {} )( response );
+        }
+      } );
+    },
 
-  isAuthenticated : function() {
-    return Cookies.get( 'user' );
-  },
+    getAuthInfo : function() {
+      return { user: Cookies.get( 'user' ),
+               date : new Date( Cookies.get( 'loginTime' ) ) };
+    },
 
-  clear : function() {
-    Cookies.set( 'user' );
-    Cookies.set( 'loginTime' );
-  },
+    isAuthenticated : function() {
+      return Cookies.get( 'user' );
+    },
 
-  logout : function() {
-    var that = this;
+    clear : function() {
+      Cookies.set( 'user' );
+      Cookies.set( 'loginTime' );
+    },
 
-    Ext.Ajax.request( {
-      url: this.getLogoutUrl(),
-      method : 'GET', // TODO: change to POST
-      disableCaching : false,
-      withCredentials: true,
-      success : function() {
-        that.fireEvent( 'loggedOut' );
-        that.clear();
-      }
-    } );
-  }
-} );
+    logout : function() {
+      var that = this;
+
+      Ext.Ajax.request( {
+        url: this.getLogoutUrl(),
+        method : 'GET', // TODO: change to POST
+        disableCaching : false,
+        withCredentials: true,
+        success : function() {
+          that.fireEvent( 'loggedOut' );
+          that.clear();
+        }
+      } );
+    }
+  } );
+})( window.Ext );

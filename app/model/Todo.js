@@ -1,13 +1,6 @@
 (function( Ext ) {
   'use strict';
 
-  var urls = {
-    incident: 'ViewIncident',
-    task: 'ViewChangeTask',
-    workorder: 'ViewWorkorder',
-    interaction: 'ViewInteraction'
-  };
-
   Ext.define( 'MobileClient.model.Todo', {
     extend: 'Ext.data.Model',
     mixins: ['Ext.mixin.Observable'],
@@ -37,8 +30,7 @@
     loadDetails : function( ) {
       var that = this;
       Ext.Ajax.request( {
-        url: 'http://expresso.globicon.dk:2993/TEGFacadeJSON/' +
-          (urls[this.get('module')] || urls.incident),
+        url: options.urls[this.get('module')] || options.urls.incident,
         method: 'GET',
         disableCaching: false,
         withCredentials: true,

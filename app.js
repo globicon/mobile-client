@@ -43,8 +43,8 @@
       //Ext.fly('appLoadingIndicator').destroy();
 
       window.MobileClient.auth = Ext.create( 'MobileClient.Authentication', {
-        url : 'http://expresso.globicon.dk:2993/TEGFacadeJSON/Login',
-        logoutUrl : 'http://expresso.globicon.dk:8580/TEGFacadeJSON/Logout'
+        url : options.urls.login,
+        logoutUrl : options.urls.logout
       } );
 
       Ext.Ajax.on({
