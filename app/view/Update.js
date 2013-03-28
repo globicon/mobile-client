@@ -10,7 +10,8 @@
       'Ext.form.FieldSet',
       'Ext.field.Select',
       'MobileClient.model.Update',
-      'MobileClient.model.Resolution'
+      'MobileClient.model.Resolution',
+      'MobileClient.model.UpdateChangeTask',
     ],
 
     config: {
@@ -90,8 +91,13 @@
             xtype: 'textareafield',
             itemId: 'comment',
             required: true,
-            autoCorrect: false,
-            autoFocus: true
+          },
+          {
+            name: 'text',
+            label: 'Comment',
+            xtype: 'textareafield',
+            itemId: 'text',
+            required: true,
           },
           {
             name: 'visibleToCustomer',
@@ -144,18 +150,24 @@
       var urls = {
         incident: options.urls.updateIncident,
         workorder: options.urls.updateWorkorder,
-        task: options.urls.updateTask
+        task: options.urls.updateTask,
       };
       var models = {
         update: 'Update',
-        resolve: 'Resolution'
+        resolve: 'Resolution',
+        approve: 'UpdateChangeTask',
+        deny: 'UpdateChangeTask'
       };
-      var model = Ext.create( 'MobileClient.model.' + models[this.get('kind')] );
+      var kind = this.get( 'kind' );
+      var model = Ext.create( 'MobileClient.model.' + models[kind] );
       model.setProxy( {
         type: 'ajax',
         url: urls[this.get('module')]
       } );
       this.setRecord( model );
+      if ( kind === 'approve' || kind === 'deny' ) {
+        model.set( 'action', kind );
+      }
       model.set( 'id', this.get( 'todoId') );
     },
 
@@ -167,13 +179,16 @@
       this.query( '#toolbar' )[0].set( 'title', displayKind + ' ' + todoId );
       this.query( '#updateBtn' )[0].set( 'text', displayKind );
 
-      if ( kind === 'update' || kind === 'close' ||
-           kind === 'approve' || kind === 'deny' ) {
+      if ( kind === 'update' ) {
         this.query( '#resolution' )[0].hide();
+        this.query( '#text' )[0].hide();
       }
-      if ( kind === kind === 'close' ||
-           kind === 'approve' || kind === 'deny' ) {
+      if ( kind === 'approve' || kind === 'deny' ) {
+        this.query( '#resolution' )[0].hide();
         this.query( '#visibleToCustomer' )[0].hide();
+        this.query( '#comment' )[0].set( 'required', false );
+        this.query( '#comment' )[0].hide();
+        this.query( '#text' )[0].set( 'required', true );
       }
       if ( kind === 'resolve' ) {
         this.query( '#comment' )[0].set( 'name', 'resolution' );

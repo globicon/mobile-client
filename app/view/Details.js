@@ -63,15 +63,6 @@
         {
           xtype: 'spacer'
         },
-        { // Close Button
-          itemId: 'closeBtn',
-          xtype: 'button',
-          text: 'Close',
-          align: 'right',
-          handler: function() {
-            this.up( 'details' ).showUpdatePnl( 'close' );
-          }
-        },
         { // Approve Button
           itemId: 'approveBtn',
           xtype: 'button',
@@ -152,17 +143,16 @@
           btns = [actionPnl.getComponent( 'updateBtn' ),
                   actionPnl.getComponent( 'approveBtn' ),
                   actionPnl.getComponent( 'denyBtn' ),
-                  actionPnl.getComponent( 'resolveBtn' ),
-                  actionPnl.getComponent( 'closeBtn' )],
-          UPDATE = 0, APPROVE = 1, DENY = 2, RESOLVE = 3, CLOSE = 4;
+                  actionPnl.getComponent( 'resolveBtn' )],
+          UPDATE = 0, APPROVE = 1, DENY = 2, RESOLVE = 3;
 
       // first hide action button to simplify showing dependent module
       Ext.each( btns, function( btn ) { btn.hide(); } );
       // show based on module
       Ext.each({
         incident: [btns[UPDATE], btns[RESOLVE]],
-        task: [btns[UPDATE], btns[CLOSE], btns[APPROVE], btns[DENY]],
-        workorder: [btns[UPDATE], btns[CLOSE], btns[APPROVE], btns[DENY]],
+        task: [btns[UPDATE], btns[APPROVE], btns[DENY]],
+        workorder: [btns[UPDATE]],
         interaction: []
       }[module] || [], function( btn ) { btn.show(); } );
     },
