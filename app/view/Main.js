@@ -40,7 +40,7 @@
         title: 'Group Todos',
         iconCls: 'team1',
         xtype : 'todoList',
-        store : 'MyTodos'
+        store : 'GroupTodos'
       },
       {
         title: 'My Approvals',
