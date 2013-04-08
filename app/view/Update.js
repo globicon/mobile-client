@@ -191,6 +191,7 @@
         this.query( '#text' )[0].set( 'required', true );
       }
       if ( kind === 'resolve' ) {
+        this.query( '#text' )[0].hide();
         this.query( '#comment' )[0].set( 'name', 'resolution' );
         this.query( '#resolution' )[0].set( 'required', true );
       }
