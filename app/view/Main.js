@@ -6,6 +6,7 @@
     xtype: 'main',
     requires: [
       'MobileClient.view.TodoList',
+      'MobileClient.view.Search',
       'MobileClient.view.Settings'
     ],
     config: {
@@ -50,7 +51,8 @@
       },
       {
         title: 'Search',
-        iconCls: 'search'
+        iconCls: 'search',
+        xtype: 'search'
       },
       {
         title : 'Account',

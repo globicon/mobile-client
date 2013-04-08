@@ -25,5 +25,3 @@
     }
   } );
 } )( window.Ext );
-
-//| date:'dd/MM/yyyy HH:mm:ss'

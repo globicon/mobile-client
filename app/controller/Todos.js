@@ -83,9 +83,12 @@
         type: 'slide',
         direction: 'left'
       } );
-
       // remove selection - making item ready to be selected again
-      Ext.Viewport.items.get( 1 ).getActiveItem().deselectAll( true );
+      var activeItem = Ext.Viewport.items.get( 1 ).getActiveItem();
+      if ( activeItem.xtype !== 'todoList' ) {
+        activeItem = activeItem.query('todoList')[0];
+      }
+      activeItem.deselectAll( true );
     },
 
     showMain : function( ) {
