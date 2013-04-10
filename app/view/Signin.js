@@ -18,14 +18,14 @@
       items: [{
         xtype: 'panel',
         cls: 'bordered container-centered',
-        width: '90%',
+        width: '100%',
         height: '100%',
 
         items: [{
           xtype: 'image',
           src: 'resources/icons/logo-with-text.png',
           width: '100%',
-          height: 400
+          height: 200
         },
         {
           xtype: 'fieldset',

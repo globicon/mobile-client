@@ -31,7 +31,7 @@ $toolbar-base-color: #333;
 @include sencha-list;
 @include sencha-list-pullrefresh;
 @include sencha-layout;
-@include sencha-carousel;
+//@include sencha-carousel;
 @include sencha-form;
 @include sencha-msgbox;
 @include sencha-loading-spinner;
@@ -164,6 +164,7 @@ $borderedBackground:      #fafafa;
 
 .tight {
   padding: 8px !important;
+  margin: -.9em;
 }
 
 .container-centered {
@@ -191,7 +192,7 @@ $borderedBackground:      #fafafa;
   padding: 8px;
 }
 
-
+// prettier list icons
 .x-list-item .x-list-disclosure {
   overflow: hidden;
   -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGBwQ7Dme80Q4AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKBJREFUOMvtU7ENAyEQM0i0DJMMxggnNoCKhpWyBxVINBQUlyrRJwKeKF0Ul9bZ8vl0wO8ixshExGdzYkSGEDilBKUUeu+w1oqZgRyRrTUAQO8dSimskkydnXNcSgGAZRKx2s97zznnpYlcGRhjnsOzdeTGQa5Hk60SHyAiaK1vH5/xIOZa6wv/3oH4RjxcgYguu+JVAt4R46TArV/4A7gDIZZWTRQC+PUAAAAASUVORK5CYII=') no-repeat;
