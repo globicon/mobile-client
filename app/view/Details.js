@@ -80,7 +80,7 @@
           handler: function() {
             this.up( 'details' ).showUpdatePnl( 'deny' );
           }
-        },
+        }
         ]
       },
       // Summary Panel

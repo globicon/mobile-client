@@ -13,7 +13,7 @@
     config: {
       fullscreen: true,
       styleHtmlContent: true,
-      cls: 'tight',
+      cls: 'tight tighter',
 
       items: [{
         xtype: 'panel',

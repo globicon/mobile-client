@@ -9,7 +9,7 @@
     '<tpl elseif="module == \'workorder\'">',
     '  <div class="rect rect-green pull-left">WO</div>',
     '<tpl elseif="module == \'interaction\'">',
-    '  <div class="rect rect-gray pull-left">INT</div>',
+    '  <div class="rect rect-gray pull-left">SD</div>',
     '<tpl elseif="module == \'task\'">',
     '  <div class="rect rect-orange pull-left">T</div>',
     '</tpl>',
