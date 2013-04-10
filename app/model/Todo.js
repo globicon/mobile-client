@@ -18,7 +18,7 @@
                'contact',
                'contactPhone',
                'contactFullname',
-               'contactOperatorEmail',
+               'contactEmail',
                'assignmentGroup',
                'assignmentOperator',
                'assignmentOperatorPhone',

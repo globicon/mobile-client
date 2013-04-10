@@ -34,7 +34,7 @@
           handler: function() {
             this.up( 'details' ).fireEvent( 'back' );
           }
-        }],
+        }]
       },
       // bottom toolbar
       {
