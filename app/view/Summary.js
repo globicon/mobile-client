@@ -48,8 +48,20 @@
     '  <tpl if="assignmentOperatorPhone">',
     '    Phone: <a href="tel:{assignmentOperatorPhone}">{assignmentOperatorPhone}</a><br/>',
     '  </tpl>',
-    ' </address>',
-    ' <br/>',
+    '</address>',
+    '<br/>',
+    '</div>',
+    '<tpl if="parentChangeDescription">',
+    '<div><span class="pull-right">{parentChangeId}</span><strong>Parent Change Information</strong></div>',
+    '<small>{[values.parentChangeDescription.replace( /\\n/g, "<br>" )]}</small>',
+    '<address>',
+    '<tpl if="parentChangeCIs">CIs: {[values.parentChangeCIs.replace( /\\n/g, "," )]}<br/></tpl>',
+    '<tpl if="parentChangeRisk">Risk: {parentChangeRisk}<br/></tpl>',
+    '<tpl if="parentChangePhase">Phase: {parentChangePhase}<br/></tpl>',
+    '<tpl if="parentChangePlannedStartDate">Start Date: {parentChangePlannedStartDate:date("F j, Y, G:i:s")}<br/></tpl>',
+    '<tpl if="parentChangePlannedEndDate">End Date: {parentChangePlannedEndDate:date("F j, Y, G:i:s")}</tpl>',
+    '</address>',
+    '</tpl>',
     '</div>'
   ];
 

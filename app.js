@@ -18,7 +18,7 @@
     views: ['Signin','Main'],
     controllers : ['Signin', 'Todos'],
     models : ['Todo', 'Incident', 'KeyValue', 'Interaction'],
-    stores : ['MyTodos', 'GroupTodos', 'Approvals', 'GeneralData', 'LoadAwareStore'],
+    stores : ['MyTodos', 'GroupTodos', 'Approvals', 'Interactions', 'GeneralData', 'LoadAwareStore'],
 
     icon: {
       '57': 'resources/icons/Icon.png',
@@ -62,9 +62,7 @@
           Ext.Viewport.setMasked( false );
           if ( response.status === 401 ) {
             window.MobileClient.auth.clear();
-            Ext.each( Ext.StoreMgr.all, function( store ) {
-              store.removeAll();
-            } );
+            Ext.StoreMgr.clear();
             this.redirectTo( 'signin' );
           }
         },

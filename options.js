@@ -7,6 +7,7 @@
       myTodos:            'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyTodo'      ,
       groupTodos:         'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyGroupTodo' ,
       approvals:          'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyCasesForApproval' ,
+      interactions:       'http://expresso.globicon.dk:2993/TEGFacadeJSON/ListMyInteractions',
       incident:           'http://expresso.globicon.dk:2993/TEGFacadeJSON/ViewIncident'    ,
       workorder:          'http://expresso.globicon.dk:2993/TEGFacadeJSON/ViewWorkorder'   ,
       interaction:        'http://expresso.globicon.dk:2993/TEGFacadeJSON/ViewInteraction' ,

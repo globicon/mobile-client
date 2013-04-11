@@ -24,7 +24,30 @@
                'assignmentOperator',
                'assignmentOperatorPhone',
                'assignmentOperatorFullname',
-               'assignmentOperatorEmail'],
+               'assignmentOperatorEmail',
+               'parentChangeDescription',
+               'parentChangeCIs',
+               {
+                  name: 'parentChangePlannedStartDate',
+                  convert: function( value ) {
+                    if ( value && value !== 'N/A' ) {
+                      return new Date( parseInt( value, 10 ) );
+                    }
+                    return '';
+                 }
+               },
+               'parentChangeRisk',
+               'parentChangePhase',
+               {
+                  name: 'parentChangePlannedEndDate',
+                  convert: function( value ) {
+                    if ( value && value !== 'N/A' ) {
+                      return new Date( parseInt( value, 10 ) );
+                    }
+                    return '';
+                 }
+               },
+               'parentChangeId'],
       hasMany: [ { model: 'MobileClient.model.History', name: 'history' } ]
     },
 

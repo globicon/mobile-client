@@ -109,20 +109,27 @@
       activeItem.deselectAll( true );
     },
 
+    ensureStore : function( id ) {
+      var store = Ext.StoreMgr.containsKey( id ) ?
+        Ext.StoreMgr.get( id ) :
+        Ext.create( 'MobileClient.store.' + id );
+
+      store.ensureLoaded();
+    },
+
     showMain : function( ) {
       var that = this;
 
-      Ext.StoreMgr.get( 'MyTodos' ).ensureLoaded();
-      Ext.StoreMgr.get( 'GroupTodos' ).ensureLoaded();
-      Ext.StoreMgr.get( 'Approvals' ).ensureLoaded();
+      this.ensureStore( 'MyTodos' );
+      this.ensureStore( 'GroupTodos' );
+      this.ensureStore( 'Approvals' );
+      this.ensureStore( 'Interactions' );
 
       Ext.Viewport.setActiveItem( 'main' );
 
       MobileClient.auth.on( {
         loggedOut : function() {
-          Ext.each( Ext.StoreMgr.all, function( store ) {
-            store.removeAll();
-          } );
+          Ext.StoreMgr.clear();
           that.redirectTo( 'signin');
         }
       } );

@@ -32,6 +32,12 @@
         }]
       },
       {
+        title: 'My Cases',
+        iconCls: 'user_fave',
+        xtype: 'todoList',
+        store: 'Interactions'
+      },
+      {
         title: 'My Todos',
         iconCls: 'user',
         xtype: 'todoList',

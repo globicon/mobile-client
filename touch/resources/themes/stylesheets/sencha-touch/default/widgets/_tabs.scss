@@ -226,6 +226,7 @@ $tabs-top-icon-size: $tabs-top-height - .6em;
     @include pictos-iconmask('team');
     @include pictos-iconmask('team1');
     @include pictos-iconmask('check1');
+    @include pictos-iconmask('user_fave');
   }
 }
 
