@@ -6,6 +6,7 @@
 
     config : {
       action: null,
+      extraParams: null,
       model : 'MobileClient.model.KeyValue',
       proxy : {
         type : 'ajax',
@@ -20,9 +21,13 @@
 
     initialize : function( ) {
       var proxy = this.getProxy(),
-          url = proxy.getUrl();
+          url = proxy.getUrl(),
+          extraParams = this.getExtraParams();
 
-      proxy.setUrl( url + '?action=' + this.get('action') );
+      if ( extraParams ) {
+        proxy.setExtraParams( extraParams );
+      }
+      proxy.setUrl( url + '?action=' + this.get( 'action' ) );
     }
   } );
 })( window.Ext );

@@ -1,4 +1,4 @@
-(function( Ext ) {
+(function( Ext, MobileClient ) {
   'use strict';
 
   Ext.define( 'MobileClient.view.New', {
@@ -75,10 +75,11 @@
           items: [{
             name: 'contact',
             label: 'Contact',
-            xtype: 'textfield',
+            itemId: 'contact',
+            xtype: 'selectfield',
             required: true,
-            autoCorrect: false,
-            autoFocus: true
+            valueField: 'key',
+            displayField: 'value'
           },
           {
             name: 'description',
@@ -108,7 +109,6 @@
     },
 
     initialize: function() {
-      var that = this;
       // Ensure template store created and loaded prior to initializing model.
       // Ensure template store is only loaded once.
       var templateStore = Ext.StoreMgr.containsKey( 'Templates' ) ?
@@ -117,24 +117,48 @@
           storeId: 'Templates',
           action: 'templateList'
         } );
+      var userStore = Ext.StoreMgr.containsKey( 'Users' ) ?
+        Ext.StoreMgr.get( 'Users' ) :
+        Ext.create( 'MobileClient.store.GeneralData', {
+          storeId: 'Users',
+          action: 'myColleagues',
+          extraParams: { user: MobileClient.auth.getAuthInfo().user }
+        } );
 
       // associate store with select box
       this.query( '#templates' )[0].setStore( templateStore );
+      this.query( '#contact' )[0].setStore( userStore );
 
-      if ( templateStore.isLoaded() ) {
-        that.initializeModel();
+      this.ensureStoresAreLoaded( templateStore, userStore );
+    },
+
+    ensureStoresAreLoaded : function( templateStore, userStore ) {
+      var that = this;
+      if ( templateStore.isLoaded() && userStore.isLoaded() ) {
+        this.initializeModel();
       }
       else { // if not loaded - load it and initialize model when loaded
         templateStore.on( 'load', function loadHandler() {
-          that.initializeModel();
-          templateStore.un( 'load', loadHandler );
+          if ( userStore.isLoaded() ) {
+            that.initializeModel();
+            templateStore.un( 'load', loadHandler );
+          }
         } );
+        userStore.on( 'load', function loadHandler() {
+          if ( templateStore.isLoaded() ) {
+            that.initializeModel();
+            userStore.un( 'load', loadHandler );
+          }
+        });
         templateStore.load();
+        userStore.load();
       }
     },
 
     initializeModel: function() {
-      this.setRecord( Ext.create( 'MobileClient.model.Interaction', {} ) );
+      this.setRecord( Ext.create( 'MobileClient.model.Interaction', {
+        contact: MobileClient.auth.getAuthInfo().user
+      } ) );
     }
   });
-})( window.Ext );
+})( window.Ext, window.MobileClient );
