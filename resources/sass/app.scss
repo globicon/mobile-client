@@ -71,6 +71,11 @@ $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
 $borderColor:             #ccc;
 $borderedBackground:      #fafafa;
 
+$green: #0D5F3B;
+$green-lighter: #6BAA5E;
+$blue: #839CB5;
+$yellow: #DCAD08;
+
 /* Alerts
  * ----------- */
 .alert {
@@ -114,24 +119,24 @@ $borderedBackground:      #fafafa;
   margin-right: 10px;
 }
 
-.rect-gray {
-  color: #999;
-  background-color: #eee;
+.rect-green-lighter {
+  color: #eee;
+  background-color: $green-lighter;
 }
 
 .rect-blue {
   color: #eee;
-  background-color: #839CB5;
+  background-color: $blue;
 }
 
 .rect-green {
   color: #eee;
-  background-color: #43B3AE;
+  background-color: $green;
 }
 
-.rect-orange {
+.rect-yellow {
   color: #eee;
-  background-color: desaturate( #F89406, 20% );
+  background-color: $yellow;
 }
 
 .bordered {

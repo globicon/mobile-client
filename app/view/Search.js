@@ -43,7 +43,6 @@
                   proxy = store.getProxy(),
                   values = this.up( 'formpanel' ).getValues();
 
-
               proxy.setExtraParams( {} );
               proxy.setExtraParams( {
                 assignmentGroup: values.assignmentGroup,
