@@ -70,13 +70,31 @@
       this.redirectTo( 'signin' );
     },
 
+    getModuleFromId : function( id ) {
+      var startsWith = function( str ) { return id.indexOf(str) === 0; },
+          prefixes = [{ prefix: 'IM', module: 'incident' },
+                      { prefix: 'WO', module: 'workorder' },
+                      { prefix: 'SD', module: 'interaction' },
+                      { prefix: 'T', module: 'task' }];
+
+      for ( var i = 0; i < prefixes.length; i++ ) {
+        if ( startsWith( prefixes[i].prefix ) ) {
+          return prefixes[i].module;
+        }
+
+      }
+      return 'incident';
+    },
+
     showDetails : function( id ) {
-      var todo = Ext.create( 'MobileClient.model.Todo', { id: id } );
+      var todo = Ext.create( 'MobileClient.model.Todo', {
+        id: id,
+        module: this.getModuleFromId( id )
+      } );
       var detailsView = Ext.create( 'MobileClient.view.Details', {
         model: todo,
         title: id
       } );
-
       todo.loadDetails();
 
       Ext.Viewport.animateActiveItem( detailsView, {
