@@ -11,7 +11,7 @@
       'Ext.field.Select',
       'MobileClient.model.Update',
       'MobileClient.model.Resolution',
-      'MobileClient.model.UpdateChangeTask',
+      'MobileClient.model.UpdateChangeTask'
     ],
 
     config: {
@@ -89,15 +89,22 @@
             name: 'update',
             label: 'Comment',
             xtype: 'textareafield',
-            itemId: 'comment',
-            required: true,
+            itemId: 'update',
+            required: true
+          },
+          {
+            name: 'resolution',
+            label: 'Comment',
+            xtype: 'textareafield',
+            itemId: 'resolution',
+            required: true
           },
           {
             name: 'text',
             label: 'Comment',
             xtype: 'textareafield',
             itemId: 'text',
-            required: true,
+            required: true
           },
           {
             name: 'visibleToCustomer',
@@ -109,7 +116,7 @@
             name: 'closureCode',
             label: 'Resolution',
             xtype: 'selectfield',
-            itemId: 'resolution',
+            itemId: 'closureCode',
             valueField: 'key',
             displayField: 'value'
           }
@@ -132,7 +139,7 @@
       this.initializeUI();
 
       // associate store with select box
-      this.query( '#resolution' )[0].setStore( resolutionStore );
+      this.query( '#closureCode' )[0].setStore( resolutionStore );
 
       if ( resolutionStore.isLoaded() ) {
         that.initializeModel();
@@ -150,13 +157,15 @@
       var urls = {
         incident: options.urls.updateIncident,
         workorder: options.urls.updateWorkorder,
-        task: options.urls.updateTask,
+        task: options.urls.updateTask
       };
       var models = {
-        update: 'Update',
+        update: 'UpdateChangeTask',
+        updateIncident: 'Update',
         resolve: 'Resolution',
         approve: 'UpdateChangeTask',
-        deny: 'UpdateChangeTask'
+        deny: 'UpdateChangeTask',
+        close: 'UpdateChangeTask'
       };
       var kind = this.get( 'kind' );
       var model = Ext.create( 'MobileClient.model.' + models[kind] );
@@ -165,36 +174,36 @@
         url: urls[this.get('module')]
       } );
       this.setRecord( model );
-      if ( kind === 'approve' || kind === 'deny' ) {
+      if ( kind !== 'updateIncident' && kind !== 'resolution' ) {
         model.set( 'action', kind );
       }
-      model.set( 'id', this.get( 'todoId') );
+      model.set( 'id', this.get( 'todoId' ) );
     },
 
     initializeUI : function() {
       var kind = this.get( 'kind' ),
           todoId = this.get( 'todoId' ),
-          displayKind = kind.charAt(0).toUpperCase() + kind.slice(1);
+          displayKind = kind.charAt(0).toUpperCase() + (/[a-z]+/).exec( kind )[0].slice(1),
+          fields = [ this.query( '#update' )[0],
+                     this.query( '#resolution' )[0],
+                     this.query( '#text' )[0],
+                     this.query( '#visibleToCustomer' )[0],
+                     this.query( '#closureCode' )[0] ],
+          UPDATE = 0, RESOLUTION = 1, TEXT = 2, VISIBLE_TO_CUSTOMER = 3, CLOSURE_CODE = 4;
+
+      Ext.each( fields, function( f ) { f.hide(); } );
 
       this.query( '#toolbar' )[0].set( 'title', displayKind + ' ' + todoId );
       this.query( '#updateBtn' )[0].set( 'text', displayKind );
 
-      if ( kind === 'update' ) {
-        this.query( '#resolution' )[0].hide();
-        this.query( '#text' )[0].hide();
-      }
-      if ( kind === 'approve' || kind === 'deny' ) {
-        this.query( '#resolution' )[0].hide();
-        this.query( '#visibleToCustomer' )[0].hide();
-        this.query( '#comment' )[0].set( 'required', false );
-        this.query( '#comment' )[0].hide();
-        this.query( '#text' )[0].set( 'required', true );
-      }
-      if ( kind === 'resolve' ) {
-        this.query( '#text' )[0].hide();
-        this.query( '#comment' )[0].set( 'name', 'resolution' );
-        this.query( '#resolution' )[0].set( 'required', true );
-      }
+      Ext.each( {
+        updateIncident: [UPDATE, VISIBLE_TO_CUSTOMER],
+        resolve: [RESOLUTION, VISIBLE_TO_CUSTOMER, CLOSURE_CODE],
+        update: [TEXT],
+        approve: [TEXT],
+        deny: [TEXT],
+        close: [TEXT]
+      }[kind], function( key ) { fields[key].show(); } );
     }
   });
 })( window.Ext );

@@ -51,6 +51,24 @@
             this.up( 'details' ).showUpdatePnl( 'update' );
           }
         },
+        {
+          // Update Button
+          itemId: 'updateIncidentBtn',
+          xtype: 'button',
+          text: 'Update',
+          handler: function() {
+            this.up( 'details' ).showUpdatePnl( 'updateIncident' );
+          }
+        },
+        {
+          // Update Button
+          itemId: 'closeBtn',
+          xtype: 'button',
+          text: 'Close',
+          handler: function() {
+            this.up( 'details' ).showUpdatePnl( 'close' );
+          }
+        },
         { // Resolve Button
           itemId: 'resolveBtn',
           xtype: 'button',
@@ -138,23 +156,28 @@
     },
 
     // show and hide the buttons in the action bar, based on model.module
-    updateActionPnl : function( module ) {
+    updateActionPnl : function( module, type ) {
       var actionPnl = this.getComponent( 'actionPnl' ),
           btns = [actionPnl.getComponent( 'updateBtn' ),
                   actionPnl.getComponent( 'approveBtn' ),
                   actionPnl.getComponent( 'denyBtn' ),
-                  actionPnl.getComponent( 'resolveBtn' )],
-          UPDATE = 0, APPROVE = 1, DENY = 2, RESOLVE = 3;
+                  actionPnl.getComponent( 'resolveBtn' ),
+                  actionPnl.getComponent( 'closeBtn' ),
+                  actionPnl.getComponent( 'updateIncidentBtn' )],
+          UPDATE = 0, APPROVE = 1, DENY = 2, RESOLVE = 3, CLOSE = 4, UPDATE_INC = 5;
 
       // first hide action button to simplify showing dependent module
       Ext.each( btns, function( btn ) { btn.hide(); } );
       // show based on module
       Ext.each({
-        incident: [btns[UPDATE], btns[RESOLVE]],
-        task: [btns[UPDATE], btns[APPROVE], btns[DENY]],
-        workorder: [btns[UPDATE]],
+        incident: [btns[UPDATE_INC], btns[RESOLVE]],
+        implementationTask: [btns[CLOSE], btns[APPROVE], btns[DENY]],
+        approvalTask: [btns[APPROVE], btns[DENY]],
+        reviewTask: [btns[CLOSE], btns[APPROVE], btns[DENY]],
+        implementationWorkorder: [btns[UPDATE], btns[CLOSE]],
+        approvalWorkorder: [btns[APPROVE], btns[DENY]],
         interaction: []
-      }[module] || [], function( btn ) { btn.show(); } );
+      }[type || module] || [], function( btn ) { btn.show(); } );
     },
 
     initialize : function() {
@@ -165,7 +188,7 @@
         return;
       }
       this.query( '#toolbar' )[0].set( 'title', model.get( 'id' ) );
-      this.updateActionPnl( model.get( 'module' ) );
+      this.updateActionPnl( model.get( 'module' ), model.get( 'type' ) );
 
       model.on( { 'loaded' : function() {
         var rawModel = model.getData( true /*include associated*/ ),
@@ -176,7 +199,7 @@
         historyPnl.setData( rawModel.history );
         summaryPnl.show();
         historyPnl.show();
-        that.updateActionPnl( model.get( 'module' ) );
+        that.updateActionPnl( model.get( 'module' ), model.get( 'type' ) );
       } } );
     }
   } );

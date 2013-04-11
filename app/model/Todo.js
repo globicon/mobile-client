@@ -12,6 +12,7 @@
                'title',
                'description',
                'module',
+               'type',
                'status',
                'priority',
                'assignee',
