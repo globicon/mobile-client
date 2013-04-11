@@ -60,7 +60,7 @@
 
     config : {
       model : null,
-      tpl : Ext.XTemplate( tpl.join('') ),
+      tpl : Ext.XTemplate( tpl.join('') )
     }
   });
 } )( window.Ext );

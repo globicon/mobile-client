@@ -2,7 +2,9 @@
   'use strict';
 
   var tpl = [
-    '<div class="list-title">History</div>',
+    '<tpl if="length &gt; 0">',
+    '  <div class="list-title">History</div>',
+    '</tpl>',
     '<tpl for=".">',
     '<div class="list-item-bordered">',
     '  <small class="pull-right">Origin {origin}</small>',
