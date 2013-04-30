@@ -3,7 +3,7 @@
 
   Ext.define( 'MobileClient.view.TodoList', {
     extend: 'Ext.List',
-    requires : ['Ext.plugin.PullRefresh'],
+    requires : ['MobileClient.plugin.PullRefreshAll'],
 
     xtype: 'todoList',
 
@@ -14,7 +14,12 @@
       selectedCls : 'none',
 
       plugins: [{
-        xclass: 'Ext.plugin.PullRefresh'
+        xclass: 'MobileClient.plugin.PullRefreshAll',
+        listeners : {
+          latestfetched : function( eOpts ) {
+            console.log( this );
+          }
+        }
       }],
 
       itemTpl : [
