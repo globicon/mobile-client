@@ -66,11 +66,11 @@
         }]
       },
       {
-        xtype: 'panel',
+        xtype: 'formpanel',
+        height: 800,
 
         items: [{
           xtype: 'fieldset',
-          layout: 'vbox',
 
           items: [{
             name: 'contact',

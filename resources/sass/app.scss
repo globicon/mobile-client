@@ -1,49 +1,36 @@
-@import 'sencha-touch/default/all';
-
-$body-bg-color: #000;
-
 $button-radius: .2em;
 
 $base-color: #333;
+$active-color: #3079ed;
+
 $base-gradient: 'matte';
 
-$tabs-dark: $base-color;
+$tabs-light-active: #4d90fe;
+$tabs-dark-active-color: #4d90fe;
 $tabs-light: #555;
 
 $tabs-bottom-radius: .2em;
 $tabs-bottom-gradient: 'bevel';
 $tabs-bar-gradient: 'matte';
-$tabs-bottom-active-gradient: 'recessed';
+$tabs-bottom-active-gradient: 'matte';
 
 $toolbar-gradient: 'matte';
 $toolbar-base-color: #333;
 
-// You may remove any of the following modules that you
-// do not use in order to create a smaller css file.
-@include sencha-panel;
-@include sencha-buttons;
-@include sencha-sheet;
-@include sencha-picker;
-@include sencha-tabs;
-@include sencha-toolbar;
-@include sencha-toolbar-forms;
-@include sencha-indexbar;
-@include sencha-list;
-@include sencha-list-pullrefresh;
-@include sencha-layout;
-//@include sencha-carousel;
-@include sencha-form;
-@include sencha-msgbox;
-@include sencha-loading-spinner;
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
 
-/*.x-toolbar .x-toolbar-title {
+@include icon('check2');
+@include icon('star');
+
+x-toolbar .x-toolbar-title {
   color: saturate(lighten($active-color, 10%), 20%);
   text-shadow: rgba(#fff, .8) 0 1px 20px;
 }
 
 .x-tab-active img {
   background: white none !important;
-}*/
+}
 
 .x-tabbar.x-docked-bottom .x-tab {
   &.x-tab-active {
@@ -201,7 +188,7 @@ $yellow: #DCAD08;
 }
 
 // prettier list icons
-.x-list-item .x-list-disclosure {
+.x-list .x-list-item .x-list-disclosure {
   overflow: hidden;
   -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGBwQ7Dme80Q4AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKBJREFUOMvtU7ENAyEQM0i0DJMMxggnNoCKhpWyBxVINBQUlyrRJwKeKF0Ul9bZ8vl0wO8ixshExGdzYkSGEDilBKUUeu+w1oqZgRyRrTUAQO8dSimskkydnXNcSgGAZRKx2s97zznnpYlcGRhjnsOzdeTGQa5Hk60SHyAiaK1vH5/xIOZa6wv/3oH4RjxcgYguu+JVAt4R46TArV/4A7gDIZZWTRQC+PUAAAAASUVORK5CYII=') no-repeat;
   -webkit-mask-size: 1.2em;
@@ -214,6 +201,10 @@ $yellow: #DCAD08;
   width: 1em;
   height: 1.2em;
   bottom: 30%;
+}
+
+.x-list-item .x-list-disclosure:before {
+  content: '';
 }
 
 hr {
@@ -249,7 +240,7 @@ address {
   display: block;
 }
 
-/* Fontello */
+//Fontello
 @charset "UTF-8";
 
 @font-face {
@@ -271,15 +262,15 @@ address {
   margin-right: 0.2em;
   text-align: center;
   opacity: 0.8;
-/* fix buttons height, for twitter bootstrap */
+/* fix buttons height, for twitter bootstrap*/
   line-height: 1em;
 /* Animation center compensation - magrins should be symmetric */
 /* remove if not needed */
   margin-left: 0.2em;
 /* you can be more comfortable with increased icons size */
 /* font-size: 120%; */
-/* Uncomment for 3D effect */
-/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+/* Uncomment for 3D effect
+/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);*/
 }
 
 .icon-user:before { content: '👤'; } /* '\1f464' */

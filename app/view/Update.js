@@ -83,7 +83,6 @@
 
         items: [{
           xtype: 'fieldset',
-          layout: 'vbox',
 
           items: [{
             name: 'update',

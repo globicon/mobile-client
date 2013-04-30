@@ -30,7 +30,6 @@
         {
           xtype: 'fieldset',
           title: 'Please Signin',
-          layout: 'vbox',
 
           items: [{
             name: 'user',

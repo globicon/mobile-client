@@ -33,7 +33,7 @@
       },
       {
         title: 'My Cases',
-        iconCls: 'user_fave',
+        iconCls: 'star',
         xtype: 'todoList',
         store: 'Interactions'
       },
@@ -45,13 +45,13 @@
       },
       {
         title: 'Group Todos',
-        iconCls: 'team1',
+        iconCls: 'team',
         xtype : 'todoList',
         store : 'GroupTodos'
       },
       {
         title: 'My Approvals',
-        iconCls: 'check1',
+        iconCls: 'check2',
         xtype: 'todoList',
         store: 'Approvals'
       },
