@@ -1,0 +1,8 @@
+// Can be generated with http://yuml.me/diagram/class/draw
+[Todo|id;title;description;module;status;priority;assignee;contact;contactPhone;contactFullname;contactOperatorEmail;history;assignmentGroup;assignmentOperator;assignmentOperatorPhone;assignmentOperatorFullname;assignmentOperatorEmail|addComment(comment&#65104;visibleToCustomer)],
+[Todo]^-[Incident||resolve(code&#65104;comment)],
+[Todo]^-[Workorder||close(code)],
+[Todo]^-[Interaction||$new(contact&#65104;description&#65104;template&#65104;solution)],
+[Todo]^-[Task||]
+[Task]^-[ApprovalTask||accept(comment);deny(comment)],
+[Task]^-[ImplementationTask||close(comment&#65104;code)]

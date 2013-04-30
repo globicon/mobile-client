@@ -1,0 +1,55 @@
+{
+  "name": "MobileClient",
+  "indexHtmlPath": "index.html",
+  "url": null,
+  "js": [
+    {
+      "path": "touch/sencha-touch.js"
+    },
+    {
+      "path": "assets/cookies.js"
+    },
+    {
+      "path": "options.js",
+      "bundle": true,
+      "update": "update"
+    },
+    {
+      "path": "app.js",
+      "bundle": true,
+      "update": "update"
+    }
+  ],
+  "css": [
+    {
+      "path": "resources/css/app.css",
+      "update": "update"
+    }
+  ],
+  "appCache": {
+    "cache": [
+      "index.html"
+    ],
+    "network": [
+      "*"
+    ],
+    "fallback": []
+  },
+  "resources": [
+    "resources/images",
+    "resources/icons",
+    "resources/startup",
+    "resources/font"
+  ],
+  "ignore": [
+    ".svn$"
+  ],
+  "archivePath": "archive",
+  "buildOptions": {
+    "product": "touch",
+    "minVersion": 3,
+    "debug": false,
+    "logger": "false"
+  },
+  "id": "3e6b5077-2e19-476b-9a15-8a0ee72d98f1"
+}

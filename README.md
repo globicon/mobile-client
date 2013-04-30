@@ -9,56 +9,53 @@ Once setup clone this repository to your local hard drive with this
 git clone https://github.com/globicon/mobile-client.git
 ````
 
-To learn more about working with git read through [docs and watch videos](http://git-scm.com/doc)
+## Developer Requirements and Initial Setup
+The Application is build with [Sencha Touch 2.2.0](http://www.sencha.com/products/touch/download/), the framework is included in the repository, in
+`touch` folder.
 
-## Local development environment
-The application is build using [yeoman.io](http://yeoman.io/) which is a set of tools helping developers to build web applications. This is build with yeoman version 0.9.* and some upgrade steps are required in order to use version 1.0.
-
-On a mac follow the instructions on the installation instruction of the [yeoman website](http://yeoman.io/installation.html) for downloading and installing yeoman. On Windows follow these [instructions](http://decodize.com/css/installing-yeoman-front-end-development-stack-windows/), use Method 2.
-
-With yeoman install you can run the application by running.
-
-```bash
-yeoman server
-``` 
-
-This will run a small development webserver and open a browser pointing to that webserver. Because this application uses [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) to talk to webservices on another domain, you need to run [Chrome with the --disable-web-security flag](http://stackoverflow.com/questions/3102819/chrome-disable-same-origin-policy). If not you'll will not be able to call the remote REST API.
-
-With that you should be able to run the application of your local machine in your local browser. 
-
-To start coding all you need is a text editor e.g. http://www.sublimetext.com/. 
-
-Whenever you save a file yeoman will refresh your browser for you.
+The Sencha Cmd is used to test and build the application read more about the
+Sencha Cmd on http://www.sencha.com/products/sencha-cmd/download/sencha-cmd-3.1.1
+**Download** this to build and test the application.
 
 ## Development
-The application is build using [Angularjs](http://angularjs.org/), it is worth reading through some of the documentation and watchinhg some videos about angular before starting.
+To modify the mobile client application you need a local webserver that can be used
+during application development. Your local webserver should be setup to serve the
+`mobile-client` folder.
 
-The code for the application is in the `app` directory. 
+You also need a webbrowser, because the application will call a cross domain API,
+you need to launch chrome with the `--disable-web-security` option when hosting the
+application on localhost. Other browsers have a similar option.
 
-The `app/index.html` folder is the entry point of the application, it sets up the initial page layout and loads angular and the application logi. 
+When you web server running you should be able to access the application on
+http://localhost:<port>/mobile-client/ and do you debugging here.
 
-The `app/views` folder contains the view templates used to generate the UI for the application.
+To change styles of the application you need [compass](http://compass-style.org/).
+With compass installed, make changes to the `resources/sass/app.scss` file and
+run `compass compile` in the `resources/sass` folder, to recompile the styles.
 
-The `app/styles` contains the css styles used for the application. The application uses the [twitter bootstrap](http://twitter.github.com/bootstrap/) framework for styling the application. Most changes should happen in the `app/styles/main.scss` (scss file a [sass](http://sass-lang.com/) file, sass is a css preprocessor, proving features such as variable names and nesting to cs. Yeoman will compile the sass files in css file whenever you save).
+## Building
+Ensure that the [Sencha Cmd](http://www.sencha.com/products/sencha-cmd/download/sencha-cmd-3.1.1) is installed and is on path.
 
-The `app/scripts` contains the javascript code for the application. 
+To build a version that can be deployed on a webserver.
+```bash
+sencha app build production
+```
 
-* `app/scripts/vendor` contains the angular library (and should contain any other third party library needed). 
+This will generate a folder in `build/MobileClient/production/` this folder should be
+deployed on a webserver.
 
-* `app/scripts/app.js` contains the initial setup of the application, registres routes and setups angular filters and directives used in the application.
-
-* `app/scripts/resources.js` contains the code for communicating with the REST API. 
-
-* `app/scripts/controllers.js` contains the controller layer of the Angular MVC application. The controllers act as a binding layer between the views and the resources (Models). The controllers will call the rest api make the data available for the views to render and react to user interactions from the views. The is one controller per view. 
-
-## Deployment
-To create a deployment package run
+To build a version that can be deployed on a webserver and be used for testing run
 
 ```bash
-yeoman build
-````
+sencha app build testing
+```
+This will generate a folder in `build/MobileClient/testing/` this folder should be
+deployed on a webserver.
 
-This will create a folder called `dist` that can be deployed on a webserver.
+To build a package the app as a native application
 
+```bash
+sencha app build native
+```
 
-
+Read more about native packaging on http://docs.sencha.com/touch/2-0/#!/guide/native_packaging

@@ -3,3 +3,8 @@ dist
 dist.zip
 .sass-cache
 .DS_Store
+build
+old
+.sencha
+.sencha_backup
+*.png

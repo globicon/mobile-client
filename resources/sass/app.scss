@@ -1,0 +1,277 @@
+$button-radius: .2em;
+
+$base-color: #333;
+$active-color: #3079ed;
+
+$base-gradient: 'matte';
+
+$tabs-light-active: #4d90fe;
+$tabs-dark-active-color: #4d90fe;
+$tabs-light: #555;
+
+$tabs-bottom-radius: .2em;
+$tabs-bottom-gradient: 'bevel';
+$tabs-bar-gradient: 'matte';
+$tabs-bottom-active-gradient: 'matte';
+
+$toolbar-gradient: 'matte';
+$toolbar-base-color: #333;
+
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+@include icon('check2');
+@include icon('star');
+
+x-toolbar .x-toolbar-title {
+  color: saturate(lighten($active-color, 10%), 20%);
+  text-shadow: rgba(#fff, .8) 0 1px 20px;
+}
+
+.x-tab-active img {
+  background: white none !important;
+}
+
+.x-tabbar.x-docked-bottom .x-tab {
+  &.x-tab-active {
+    -webkit-box-shadow: inset rgba(#000, .8) 0 0 5px !important;
+  }
+}
+
+// Your custom code goes here...
+$warningText:             #c09853 !default;
+$warningBackground:       #fcf8e3 !default;
+$warningBorder:           darken(adjust-hue($warningBackground, -10), 3%) !default;
+
+$errorText:               #b94a48 !default;
+$errorBackground:         #f2dede !default;
+$errorBorder:             darken(adjust-hue($errorBackground, -10), 3%) !default;
+
+$successText:             #468847 !default;
+$successBackground:       #dff0d8 !default;
+$successBorder:           darken(adjust-hue($successBackground, -10), 5%) !default;
+
+$infoText:                #3a87ad !default;
+$infoBackground:          #d9edf7 !default;
+$infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
+
+$borderColor:             #ccc;
+$borderedBackground:      #fafafa;
+
+$green: #0D5F3B;
+$green-lighter: #6BAA5E;
+$blue: #839CB5;
+$yellow: #DCAD08;
+
+/* Alerts
+ * ----------- */
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  background-color: $warningBackground;
+  border: 1px solid $warningBorder;
+  @include border-radius(4px);
+  color: $warningText;
+}
+
+.alert-success {
+  background-color: $successBackground;
+  border-color: $successBorder;
+  color: $successText;
+}
+.alert-danger,
+.alert-error {
+  background-color: $errorBackground;
+  border-color: $errorBorder;
+  color: $errorText;
+}
+.alert-info {
+  background-color: $infoBackground;
+  border-color: $infoBorder;
+  color: $infoText;
+}
+
+/* Shapes
+ * --------------- */
+.rect {
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 64px;
+  width: 64px;
+  line-height: 64px;
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.rect-green-lighter {
+  color: #eee;
+  background-color: $green-lighter;
+}
+
+.rect-blue {
+  color: #eee;
+  background-color: $blue;
+}
+
+.rect-green {
+  color: #eee;
+  background-color: $green;
+}
+
+.rect-yellow {
+  color: #eee;
+  background-color: $yellow;
+}
+
+.bordered {
+  -webkit-border-radius: 2px !important;
+  border-radius: 2px !important;
+  border: 1px solid $borderColor;
+  background-color: $borderedBackground;
+  padding: 8px;
+}
+
+.bordered-top {
+  -webkit-border-radius: 2px 2px 0 0 !important;
+  border-radius: 2px 2px 0 0 !important;
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0 !important;
+}
+
+.bordered-bottom {
+  -webkit-border-radius: 0 0 2px 2px!important;
+  border-radius: 0 0 2px 2px !important;
+  padding-top: 0;
+  margin-top: 0 !important;
+  margin-bottom: 1em;
+
+  >* {
+    padding: 1em 0 1em 0;
+  }
+}
+
+.tight {
+  padding: 8px !important;
+}
+
+.tighter {
+  margin: -.9em;
+}
+
+.container-centered {
+  margin: 0 auto;
+}
+
+/* Lists
+ * --------------- */
+.list {
+  padding: 0px !important;
+}
+
+.list-title {
+  font-size: 1.5em;
+  padding: 8px;
+}
+
+.list-content {
+  overflow: hidden;
+  zoom: 1;
+}
+
+.list-item-bordered{
+  border-top: 1px solid $borderColor;
+  padding: 8px;
+}
+
+// prettier list icons
+.x-list .x-list-item .x-list-disclosure {
+  overflow: hidden;
+  -webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGBwQ7Dme80Q4AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKBJREFUOMvtU7ENAyEQM0i0DJMMxggnNoCKhpWyBxVINBQUlyrRJwKeKF0Ul9bZ8vl0wO8ixshExGdzYkSGEDilBKUUeu+w1oqZgRyRrTUAQO8dSimskkydnXNcSgGAZRKx2s97zznnpYlcGRhjnsOzdeTGQa5Hk60SHyAiaK1vH5/xIOZa6wv/3oH4RjxcgYguu+JVAt4R46TArV/4A7gDIZZWTRQC+PUAAAAASUVORK5CYII=') no-repeat;
+  -webkit-mask-size: 1.2em;
+  background-color: #FFFFFF;
+  background-image: -webkit-linear-gradient(#939393,#939393);
+  background-image: linear-gradient(#939393,#939393);
+  position: absolute;
+  right: 0px;
+  top: 28px;
+  width: 1em;
+  height: 1.2em;
+  bottom: 30%;
+}
+
+.x-list-item .x-list-disclosure:before {
+  content: '';
+}
+
+hr {
+  border-color: $borderColor;
+  border-width: 0px;
+  border-top-width: 1px;
+  border-style: solid;
+}
+
+address {
+  font-size: .8em;
+}
+
+/* Utils
+ * ---------------- */
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.centered {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+//Fontello
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'fontello';
+  src: url("../font/fontello.eot");
+  src: url("../font/fontello.eot?#iefix") format('embedded-opentype'), url("../font/fontello.woff") format('woff'), url("../font/fontello.ttf") format('truetype'), url("../font/fontello.svg#fontello") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  opacity: 0.8;
+/* fix buttons height, for twitter bootstrap*/
+  line-height: 1em;
+/* Animation center compensation - magrins should be symmetric */
+/* remove if not needed */
+  margin-left: 0.2em;
+/* you can be more comfortable with increased icons size */
+/* font-size: 120%; */
+/* Uncomment for 3D effect
+/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);*/
+}
+
+.icon-user:before { content: '👤'; } /* '\1f464' */
+.icon-lock:before { content: '🔒'; } /* '\1f512' */
