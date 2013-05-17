@@ -51,12 +51,16 @@
                 callback: function( record ) {
                   if ( record.data.rc !== 0 ) {
                     // TODO: DO SOMETHING TO SHOW ERROR
+                    fieldset.setInstructions( record.data.rcMsg );
                   }
-                  fieldset.setInstructions( record.data.rcMsg );
+                  else {
+                    form.fireEvent( 'created', model.data );
+                  }
                 }
               } );
             }
             else {
+
               Ext.each( errors.items, function( rec ){
                 errorMsg += rec.getMessage() + '<br>';
               } );

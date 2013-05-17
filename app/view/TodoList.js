@@ -14,12 +14,7 @@
       selectedCls : 'none',
 
       plugins: [{
-        xclass: 'MobileClient.plugin.PullRefreshAll',
-        listeners : {
-          latestfetched : function( eOpts ) {
-            console.log( this );
-          }
-        }
+        xclass: 'MobileClient.plugin.PullRefreshAll'
       }],
 
       itemTpl : [

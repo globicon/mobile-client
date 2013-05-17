@@ -1,6 +1,14 @@
 ( function( Ext, MobileClient ) {
   'use strict';
 
+  function slideToTodos( direction ) {
+    window.location.hash = 'todos';
+    Ext.Viewport.animateActiveItem( 'main', {
+      type: 'slide',
+      direction: direction || 'down'
+    } );
+  }
+
   Ext.define('MobileClient.controller.Todos', {
     extend: 'Ext.app.Controller',
 
@@ -35,20 +43,38 @@
         },
         'new-panel' : {
           'cancel' : function() {
-            window.location.hash = 'todos';
-            Ext.Viewport.animateActiveItem( 'main', {
-              type: 'slide',
-              direction: 'down'
+            slideToTodos( );
+          },
+          'created' : function( interaction ) {
+
+            var desc = interaction.description.substring( 0, 20 );
+            if ( interaction.description.length > desc.length ) {
+              desc += '...';
+            }
+
+            Ext.Msg.show( {
+              title: 'Interaction created',
+              message: 'Interaction "' + desc + '" ' +
+                'with id ' + interaction.id + ' was successfully created.',
+              buttons: [
+                { text:'Show Details', itemId: 'details' },
+                { text:'OK', itemId: 'ok', ui: 'action' }
+                ],
+              icon: Ext.MessageBox.QUESTION,
+              fn: function( button ) {
+                if ( button === 'details' ) {
+                  this.showDetails( interaction.id );
+                }
+              },
+              scope: this
             } );
+
+            slideToTodos();
           }
         },
         'details' : {
           'back' : function() {
-            window.location.hash = 'todos';
-            Ext.Viewport.animateActiveItem( 'main', {
-              type: 'slide',
-              direction: 'right'
-            } );
+            slideToTodos( 'right' );
           }
         }
       }
@@ -81,7 +107,6 @@
         if ( startsWith( prefixes[i].prefix ) ) {
           return prefixes[i].module;
         }
-
       }
       return 'incident';
     },
@@ -111,8 +136,8 @@
 
     ensureStore : function( id ) {
       var store = Ext.StoreMgr.containsKey( id ) ?
-        Ext.StoreMgr.get( id ) :
-        Ext.create( 'MobileClient.store.' + id );
+          Ext.StoreMgr.get( id ) :
+          Ext.create( 'MobileClient.store.' + id );
 
       store.ensureLoaded();
     },
