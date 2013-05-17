@@ -20,12 +20,21 @@
         xtype: 'toolbar',
         title: 'My Todos',
         ui: 'light',
-        layout: {
-          pack: 'right'
+        items: [
+        {
+          xtype: 'button',
+          iconCls : 'settings',
+          handler: function() {
+            this.up( 'main' ).fireEvent( 'settings' );
+          }
         },
-        items: [{
+        {
+          xtype: 'spacer'
+        },
+        {
           xtype: 'button',
           text: 'New',
+          align: 'right',
           handler: function() {
             this.up( 'main' ).fireEvent( 'new' );
           }
@@ -59,11 +68,6 @@
         title: 'Search',
         iconCls: 'search',
         xtype: 'search'
-      },
-      {
-        title : 'Account',
-        iconCls : 'settings',
-        xtype : 'settings'
       }],
 
       listeners: {

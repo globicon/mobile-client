@@ -6,12 +6,25 @@
 
     requires: ['Ext.DateExtras'],
 
-    xtype: 'settings',
+    xtype: 'settings-panel',
 
     config : {
       styleHtmlContent: true,
 
       items: [{
+        xtype : 'toolbar',
+        docked: 'top',
+        title: 'Account',
+        ui: 'light',
+        items : [{
+          xtype: 'button',
+          text: 'Cancel',
+          handler: function() {
+            this.up( 'settings-panel' ).fireEvent( 'cancel' );
+          }
+        }]
+      },
+      {
         xtype : 'container',
         cls: 'bordered',
         itemId: 'content',

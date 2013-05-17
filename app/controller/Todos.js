@@ -25,7 +25,8 @@
       routes : {
         'todos' : 'showMain',
         'todo/:id' : 'showDetails',
-        'new' : 'showNew'
+        'new' : 'showNew',
+        'settings' : 'showSettings'
       },
       refs : {
         'mainView' : 'main'
@@ -39,6 +40,14 @@
         'main' : {
           'new' : function() {
             this.redirectTo( 'new' );
+          },
+          'settings' : function() {
+            this.redirectTo( 'settings' );
+          }
+        },
+        'settings-panel' : {
+          'cancel' : function() {
+            slideToTodos( );
           }
         },
         'new-panel' : {
@@ -83,6 +92,14 @@
     showNew : function() {
       var newView = Ext.create( 'MobileClient.view.New' );
       Ext.Viewport.animateActiveItem( newView, {
+        type: 'slide',
+        direction: 'up'
+      } );
+    },
+
+    showSettings : function() {
+      var settingsView = Ext.create( 'MobileClient.view.Settings' );
+      Ext.Viewport.animateActiveItem( settingsView, {
         type: 'slide',
         direction: 'up'
       } );
