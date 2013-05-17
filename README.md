@@ -13,6 +13,12 @@ git clone https://github.com/globicon/mobile-client.git
 The Application is build with [Sencha Touch 2.2.0](http://www.sencha.com/products/touch/download/), the framework is included in the repository, in
 `touch` folder.
 
+To compile sass files ensure ruby and compass is installed. On windows do to http://rubyinstaller.org/downloads/ 
+and download and install Ruby 1.9.3-p429. Makre sure ruby executables are put on path when installing.
+When installed open a console and type `gem install compass` to install compass. Compass is used to compile 
+sass files to css files. 
+
+
 The Sencha Cmd is used to test and build the application read more about the
 Sencha Cmd on http://www.sencha.com/products/sencha-cmd/download/sencha-cmd-3.1.1
 **Download** this to build and test the application.
