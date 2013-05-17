@@ -11,7 +11,11 @@
     '  <strong>{type}</strong>',
     '  <div>{update}</div>',
     '  <small>',
+    '  <tpl if="operator">',
+    '  {time:date("F j, Y, G:i:s")} by {operator}',
+    '  <tpl else>',
     '  {time:date("F j, Y, G:i:s")}',
+    '  </tpl>',
     '  </small>',
     '</div>',
     '</tpl>'

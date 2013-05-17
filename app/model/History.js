@@ -5,7 +5,7 @@
     extend: 'Ext.data.Model',
 
     config: {
-      fields: [ 'update', 'title', 'origin', 'type',
+      fields: [ 'update', 'title', 'origin', 'type', 'operator',
                { name: 'time',
                  convert: function( value ) {
                   return new Date( parseInt( value, 10 ) );
