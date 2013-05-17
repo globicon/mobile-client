@@ -37,7 +37,7 @@
             labelWidth: '34px',
             labelCls: 'icon-user',
             xtype: 'textfield',
-            clearIcon: false,
+            clearIcon: true,
             placeHolder: 'Username',
             autoCorrect: false
           },
@@ -47,7 +47,7 @@
             labelWidth: '34px',
             labelCls: 'icon-lock',
             xtype: 'passwordfield',
-            clearIcon: false,
+            clearIcon: true,
             placeHolder: 'Password'
           }]
         },

@@ -15,6 +15,13 @@ Ext.define('MobileClient.controller.Signin', {
     control: {
       'signin-panel button': {
         tap: 'signin'
+      },
+      'signin-panel passwordfield' : {
+        keyup: function( field, e ) {
+          if ( e.event.keyCode === 13 ) { // enterkey
+            this.signin();
+          }
+        }
       }
     }
   },
