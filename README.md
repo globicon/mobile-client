@@ -12,10 +12,17 @@ git clone https://github.com/globicon/mobile-client.git
 To learn more about working with git read through [docs and watch videos](http://git-scm.com/doc)
 
 ## Local development environment
-Install
+
+Requirements
+
   * http://nodejs.org/
   * http://www.ruby-lang.org/en/
   * http://compass-style.org/install
+
+Download and instal latest version of nodejs. 
+
+To compile sass files ensure ruby and compass is installed. 
+On windows go to http://rubyinstaller.org/downloads/ and download and install Ruby 1.9.3-p429. Make sure ruby executables are put on path when installing. When installed open a console and type gem install compass to install compass. Compass is used to compile sass files to css files.
 
 
 ## Development
