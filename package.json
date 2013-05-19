@@ -16,6 +16,7 @@
     "grunt-usemin": "~0.1.10",
     "grunt-concurrent": "~0.1.0",
     "matchdep": "~0.1.1",
+    "grunt-cli": "~0.1.8"
   },
   "engines": {
     "node": ">=0.8.0"

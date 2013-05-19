@@ -68,7 +68,8 @@
                 params : params || {}
               }).success(function(data) {
                 var records = (data || { } ).records || [];
-                deferred.resolve( records.map(function(r) { return r.row; }));
+                //deferred.resolve( records.map(function(r) { return r.row; }));
+                deferred.resolve( [] );
               });
 
         return deferred.promise;

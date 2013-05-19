@@ -19,11 +19,16 @@ Requirements
   * http://www.ruby-lang.org/en/
   * http://compass-style.org/install
 
-Download and instal latest version of nodejs. 
+Download and instal latest version of nodejs.
 
-To compile sass files ensure ruby and compass is installed. 
-On windows go to http://rubyinstaller.org/downloads/ and download and install Ruby 1.9.3-p429. Make sure ruby executables are put on path when installing. When installed open a console and type gem install compass to install compass. Compass is used to compile sass files to css files.
+To compile sass files ensure ruby and compass is installed.
+On windows go to http://rubyinstaller.org/downloads/ and download and install Ruby 1.9.3-p429. Make sure ruby executables are put on path when installing. When installed open a console and type
 
+```
+gem install compass
+```
+
+to install compass. Compass is used to compile sass files to css files.
 
 ## Development
 The application is build using [Angularjs](http://angularjs.org/), it is worth reading through some of the documentation and watching some videos about angular before starting.
@@ -50,7 +55,7 @@ The `app/scripts` contains the javascript code for the application.
 To create a deployment package run
 
 ```bash
-grunt
+build.bat
 ````
 
 This will create a folder called `dist` that can be deployed on a webserver.
