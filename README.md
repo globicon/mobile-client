@@ -30,6 +30,15 @@ gem install compass
 
 to install compass. Compass is used to compile sass files to css files.
 
+## Building
+To create a build a deployment package run
+
+```bash
+build.bat
+````
+
+This will create a folder called `dist` that can be deployed on a webserver.
+
 ## Development
 The application is build using [Angularjs](http://angularjs.org/), it is worth reading through some of the documentation and watching some videos about angular before starting.
 
@@ -50,15 +59,6 @@ The `app/scripts` contains the javascript code for the application.
 * `app/scripts/resources.js` contains the code for communicating with the REST API.
 
 * `app/scripts/controllers.js` contains the controller layer of the Angular MVC application. The controllers act as a binding layer between the views and the resources (Models). The controllers will call the rest api make the data available for the views to render and react to user interactions from the views. The is one controller per view.
-
-## Deployment
-To create a deployment package run
-
-```bash
-build.bat
-````
-
-This will create a folder called `dist` that can be deployed on a webserver.
 
 
 
